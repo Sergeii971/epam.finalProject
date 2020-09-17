@@ -5,6 +5,11 @@ public class User {
     private String password;
     private boolean isAdmin;
 
+    public User(String login, boolean isAdmin) {
+        this.login = login;
+        this.isAdmin = isAdmin;
+    }
+
     public User(String login, String password, boolean isAdmin) {
         this.login = login;
         this.password = password;

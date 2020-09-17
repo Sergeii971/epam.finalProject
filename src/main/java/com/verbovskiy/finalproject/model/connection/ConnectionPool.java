@@ -1,6 +1,9 @@
 package com.verbovskiy.finalproject.model.connection;
 
 import com.verbovskiy.finalproject.exception.ConnectionDatabaseException;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,22 +19,14 @@ public class ConnectionPool {
     private static final String PASSWORD = "root";
     private static final String URL = "jdbc:mysql://localhost/finalProject?useUnicode=true&serverTimezone=UTC";
     private static final int POOL_SIZE = 30;
-    private static ConnectionPool instance;
-    private static volatile boolean instanceIsCreated;
+    private static ConnectionPool pool = new ConnectionPool();
+    private final Logger logger = LogManager.getLogger(ConnectionPool.class);
 
     private BlockingQueue<ProxyConnection> freeConnections;
     private Queue<ProxyConnection> givenAwayConnections;
 
     public static ConnectionPool getInstance() {
-        if (!instanceIsCreated) {
-            synchronized (ConnectionPool.class) {
-                if (!instanceIsCreated) {
-                    instance = new ConnectionPool();
-                    instanceIsCreated = true;
-                }
-            }
-        }
-        return instance;
+        return pool;
     }
 
     ConnectionPool() {
@@ -43,7 +38,7 @@ public class ConnectionPool {
                 freeConnections.offer(new ProxyConnection(DriverManager.getConnection(URL, LOGIN, PASSWORD)));
             }
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Error while connection pool creating " + e);
+            logger.log(Level.ERROR,"Error while connection pool creating " + e);
         }
     }
 
@@ -53,7 +48,7 @@ public class ConnectionPool {
             connection = freeConnections.take();
             givenAwayConnections.offer(connection);
         } catch (InterruptedException e) {
-            System.out.println("Error while getting connection" + e);
+            logger.log(Level.ERROR, "Error while getting connection" + e);
 
         }
         return connection;
