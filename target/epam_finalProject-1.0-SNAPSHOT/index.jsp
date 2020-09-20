@@ -3,6 +3,6 @@
 <head>
 </head>
 <body>
-<jsp:forward page="jsp/authorization.jsp"/>
+<jsp:forward page="jsp/authorization1.jsp"/>
 </body>
 </html>

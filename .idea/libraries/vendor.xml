@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="vendor">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vendor" />
+    </SOURCES>
+  </library>
+</component>

@@ -18,13 +18,13 @@ public class AuthorizationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
-        String userLogin = request.getParameter(LOGIN_PARAMETER);
-        String userPassword = request.getParameter(PASSWORD_PARAMETER);
+        String accountLogin = request.getParameter(LOGIN_PARAMETER);
+        String accountPassword = request.getParameter(PASSWORD_PARAMETER);
         String page = PageName.ERROR.getPath();
 
         try {
-            if (userService.verifyUser(userLogin, userPassword)) {
-                if (userService.isAdmin(userLogin)) {
+            if ((userService.verifyAccount(accountLogin, accountPassword)) && (!userService.isBlocked(accountLogin))) {
+                if (userService.isAdmin(accountLogin)) {
                     page = PageName.ADMIN_INTERFACE.getPath();
                 } else {
                     page = PageName.USER_INTERFACE.getPath();

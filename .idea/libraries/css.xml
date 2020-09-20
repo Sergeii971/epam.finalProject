@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="css">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/css" />
+    </SOURCES>
+  </library>
+</component>

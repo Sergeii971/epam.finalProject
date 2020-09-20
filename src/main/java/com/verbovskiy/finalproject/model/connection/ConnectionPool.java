@@ -17,7 +17,7 @@ public class ConnectionPool {
     private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "root";
-    private static final String URL = "jdbc:mysql://localhost/finalProject?useUnicode=true&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/onlinestore?useUnicode=true&serverTimezone=UTC";
     private static final int POOL_SIZE = 30;
     private static ConnectionPool pool = new ConnectionPool();
     private final Logger logger = LogManager.getLogger(ConnectionPool.class);
