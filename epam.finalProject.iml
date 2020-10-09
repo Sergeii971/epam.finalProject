@@ -54,10 +54,5 @@
     <orderEntry type="library" name="Maven: javax:javaee-api:8.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.6.2" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
-    <orderEntry type="library" name="css" level="project" />
-    <orderEntry type="library" name="vendor" level="project" />
-    <orderEntry type="library" name="fonts" level="project" />
-    <orderEntry type="library" name="images" level="project" />
-    <orderEntry type="library" name="js" level="project" />
   </component>
 </module>

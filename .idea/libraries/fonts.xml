@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="fonts">
-    <CLASSES />
-    <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/fonts" />
-    </SOURCES>
-  </library>
-</component>

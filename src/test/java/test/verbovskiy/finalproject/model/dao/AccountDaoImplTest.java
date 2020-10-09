@@ -1,8 +1,8 @@
 package test.verbovskiy.finalproject.model.dao;
 
 import com.verbovskiy.finalproject.exception.DaoException;
-import com.verbovskiy.finalproject.model.dao.AccountDao;
-import com.verbovskiy.finalproject.model.dao.impl.AccountDaoImpl;
+import com.verbovskiy.finalproject.model.dao.account.AccountDao;
+import com.verbovskiy.finalproject.model.dao.account.impl.AccountDaoImpl;
 import com.verbovskiy.finalproject.model.entity.Account;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

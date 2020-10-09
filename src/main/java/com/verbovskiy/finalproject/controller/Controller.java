@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/controller")
+@WebServlet(urlPatterns = "/controller", name = "servlet")
 public class Controller extends HttpServlet {
     private static final String COMMAND_PARAMETER = "command";
 

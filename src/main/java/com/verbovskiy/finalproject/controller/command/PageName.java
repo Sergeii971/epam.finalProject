@@ -5,7 +5,8 @@ public enum  PageName {
     REGISTRATION("/jsp/register.jsp"),
     ERROR("/jsp/error.jsp"),
     USER_INTERFACE("jsp/userInterface.jsp"),
-    ADMIN_INTERFACE("jsp/adminInterface.jsp");
+    ADMIN_INTERFACE("jsp/adminInterface.jsp"),
+    CONFIRMATION("jsp/userEmailConfirmation.jsp");
 
     private String path;
 

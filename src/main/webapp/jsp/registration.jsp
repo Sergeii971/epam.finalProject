@@ -1,23 +1,62 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
-<style>
-    <%@ include file="/jsp/css/authorization.css" %>
-</style>
-<html>
+<!DOCTYPE html>
+<html >
 <head>
     <meta charset="UTF-8">
-    <title>22</title>
+    <title>DailyUI Challenge 001</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+
+    <link rel="stylesheet" href="../css/registration.css">
+
+
 </head>
-<body>
-<div id="login-form">
-    <h1>АВТОРИЗАЦИЯ</h1>
-    <fieldset>
-        <form action="controller" method="post">
-            <input type="hidden" name="command" value="authorization" />
-            <input type="email" required value="Логин" name="login">
-            <input type="password" required value="Пароль" name="password">
-            <input type="submit" value="ВОЙТИ">
-        </form>
-    </fieldset>
+
+<body class="reg">
+<div class="container">
+    <div class="content">
+
+    <header>
+        <h1>
+            <a href="#">
+                <img src="${pageContext.request.contextPath}/image/logo-1.png" alt="Authentic Collection">
+            </a>
+        </h1>
+    </header>
+
+    <h1 class="text-center">Register</h1>
+    <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
+        <input type="hidden" name="command" value="ADD_USER">
+        <label class="col-one-half">
+            <span class="label-text">Name</span>
+            <input type="text" name="name">
+        </label>
+        <label class="col-one-half">
+            <span class="label-text">Surname</span>
+            <input type="text" name="surname">
+        </label>
+        <label>
+            <span class="label-text">Email</span>
+            <input type="text" name="email">
+        </label>
+        <label class="password">
+            <span class="label-text">Password</span>
+            <button class="toggle-visibility"  title="toggle password visibility" tabindex="-1">
+                <span class="glyphicon glyphicon-eye-close"></span>
+            </button>
+            <input type="password" name="password">
+        </label>
+        <div class="text-center">
+           <button class="submit" type="submit" name="register">Sign Me Up</button>
+        </div>
+
+    </form>
+    </div>
+
 </div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<%--<script src="../js/registration.js"></script>--%>
+
 </body>
 </html>

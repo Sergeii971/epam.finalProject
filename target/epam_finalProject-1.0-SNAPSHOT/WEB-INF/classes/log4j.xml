@@ -15,7 +15,7 @@
                    value="%d{dd.MM.yyyy HH:mm:ss} [%t] %-5p %c - %m%n"/>
         </layout>
     </appender>
-    <logger name="com.verbovskiy.task9">
+    <logger name="com.verbovskiy.finalproject">
         <level value="debug" />
     </logger>
     <root>

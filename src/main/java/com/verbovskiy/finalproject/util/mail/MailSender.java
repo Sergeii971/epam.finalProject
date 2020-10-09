@@ -8,6 +8,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Properties;
 
 public class MailSender {
@@ -16,13 +19,14 @@ public class MailSender {
     private String mailSubject;
     private String mailText;
     private Properties properties;
+    private static final String PROPERTY_NAME = "C:\\Users\\sergei\\IdeaProjects\\epam.finalProject\\config\\mail.properties";
 
-    public MailSender(String sendToEmail, String mailSubject, String mailText,
-                      Properties properties) {
+    public MailSender(String sendToEmail, String mailSubject, String mailText) throws IOException {
         this.sendToEmail = sendToEmail;
         this.mailSubject = mailSubject;
         this.mailText = mailText;
-        this.properties = properties;
+        properties = new Properties();
+        properties.load(new FileReader(PROPERTY_NAME));
     }
 
     public void send() throws SendMailException {

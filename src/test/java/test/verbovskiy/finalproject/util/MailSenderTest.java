@@ -25,7 +25,7 @@ public class MailSenderTest {
             String mailTo = "sergeiverbovskiy4@gmail.com";
             String subject = "Sample Mail";
             String body = "Hello java mail";
-            MailSender sender = new MailSender(mailTo, subject, body, properties);
+            MailSender sender = new MailSender(mailTo, subject, body);
             sender.send();
         } catch (IOException e) {
             e.printStackTrace();
