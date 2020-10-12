@@ -16,11 +16,11 @@ public class EmailConfirmationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String code = request.getParameter(CommandParameter.CONFIRM_PARAMETER);
+        String confirmationKey = request.getParameter(CommandParameter.CONFIRM_PARAMETER);
         UserService service = new UserService();
         String page = PageName.ERROR.getPath();
         try {
-            if (service.ConfirmUser(code)) {
+            if (service.ConfirmUser(confirmationKey)) {
                 page = PageName.USER_INTERFACE.getPath();
             } else {
 

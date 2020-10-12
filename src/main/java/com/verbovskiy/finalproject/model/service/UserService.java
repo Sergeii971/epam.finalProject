@@ -15,31 +15,22 @@ import com.verbovskiy.finalproject.util.encryption.Cryptographer;
 import java.util.List;
 
 public class UserService {
-    public void add(String login, String password, boolean isAdmin, boolean isBlocked,
+    public boolean add(String login, String password, boolean isAdmin, boolean isBlocked,
                     String email, String name, String surname) throws ServiceException {
+        boolean result = true;
         AccountValidator validator = new AccountValidator();
         AccountDao accountDao = new AccountDaoImpl();
         UserDao userDao = new UserDaoImpl();
-
-        if (!validator.validateLoginPassword(login, password)) {
-            throw new ServiceException("incorrect user data");
-        }
-        boolean flag = false;
         try {
+        if (!validator.validateLoginPassword(login, password) || (accountDao.findByLogin(login) != null)) {
+            result = false;
+        } else {
             Cryptographer cryptographer = new Cryptographer();
-            String encryptedPassword = cryptographer.encryptPassword(password);
-            accountDao.add(login, encryptedPassword, isAdmin, isBlocked);
-            flag = true;
-            userDao.add(login, email, name, surname);
-
+            String encryptedPassword = cryptographer.encrypt(password);
+            userDao.add(login, email, name, surname, encryptedPassword, isAdmin, isBlocked);
+        }
+        return result;
         } catch (EncryptionException | DaoException e) {
-            if (flag) {
-                try {
-                    accountDao.remove(login);
-                } catch (DaoException e1) {
-                    throw new ServiceException(e1.getMessage());
-                }
-            }
             throw new ServiceException(e.getMessage());
         }
     }
@@ -58,8 +49,8 @@ public class UserService {
                 throw new ServiceException("incorrect user data");
             }
             Account account = user.getAccount();
-            accountDao.remove(account.getLogin());
             userDao.remove(user.getEmail());
+            accountDao.remove(account.getLogin());
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
@@ -73,7 +64,7 @@ public class UserService {
             boolean result = true;
             AccountDao dao = new AccountDaoImpl();
             Cryptographer cryptographer = new Cryptographer();
-            String encryptedPassword = cryptographer.encryptPassword(password);
+            String encryptedPassword = cryptographer.encrypt(password);
             Account account = dao.findByLoginPassword(login, encryptedPassword);
             if (account == null) {
                 result = false;
@@ -116,22 +107,44 @@ public class UserService {
         }
     }
 
-    public boolean ConfirmUser(String email) throws ServiceException {
-        if ((email == null) || (email.isEmpty())) {
+    public boolean ConfirmUser(String confirmationKey) throws ServiceException {
+        if ((confirmationKey == null) || (confirmationKey.isEmpty())) {
             throw new ServiceException("incorrect user data");
         }
-        UserDao userDao = new UserDaoImpl();
         boolean result = true;
         try {
-            List<User> users = userDao.findAll();
-            if (users == null) {
-                throw new ServiceException("error while add user data to database");
+            String login = findUserLoginByConfirmationKey(confirmationKey);
+            if (login == null) {
+                result = false;
             } else {
-
+                AccountDao dao = new AccountDaoImpl();
+                dao.changeUserBlockStatus(login, true);
             }
             return result;
-        } catch (DaoException e) {
+        } catch (DaoException | EncryptionException e) {
             throw new ServiceException(e.getMessage());
+        }
+    }
+
+    private String findUserLoginByConfirmationKey(String confirmationKey) throws DaoException,
+            ServiceException, EncryptionException {
+        AccountDao dao = new AccountDaoImpl();
+        List<Account> accounts = dao.findAll();
+
+        if (accounts == null) {
+            throw new ServiceException("error while confirm user");
+        } else {
+            String login = null;
+            Cryptographer cryptographer = new Cryptographer();
+
+            for (Account account : accounts) {
+                String encryptedLogin = cryptographer.encrypt(account.getLogin());
+                if (encryptedLogin.equals(confirmationKey)) {
+                    login = account.getLogin();
+                    break;
+                }
+            }
+            return login;
         }
     }
 }

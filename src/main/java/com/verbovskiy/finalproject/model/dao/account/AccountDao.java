@@ -12,6 +12,8 @@ public interface AccountDao {
 
     List<Account> findAll() throws DaoException;
 
+    void changeUserBlockStatus(String login, boolean status) throws DaoException;
+
     Account findByLogin(String login) throws DaoException;
 
     Account findByLoginPassword(String login, String password) throws DaoException;

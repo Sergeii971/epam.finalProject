@@ -4,6 +4,7 @@ import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.CommandParameter;
 import com.verbovskiy.finalproject.controller.command.PageName;
 import com.verbovskiy.finalproject.exception.EncryptionException;
+import com.verbovskiy.finalproject.exception.SendMailException;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.service.UserService;
 import com.verbovskiy.finalproject.util.encryption.Cryptographer;
@@ -28,15 +29,23 @@ public class AddUserCommand implements ActionCommand {
         String name = request.getParameter(CommandParameter.NAME_PARAMETER);
         String surname = request.getParameter(CommandParameter.SURNAME_PARAMETER);
         String page = PageName.ERROR.getPath();
+        request.setAttribute(CommandParameter.EMAIL_PARAMETER, email);
+        request.setAttribute(CommandParameter.PASSWORD_PARAMETER, password);
+        request.setAttribute(CommandParameter.NAME_PARAMETER, name);
+        request.setAttribute(CommandParameter.SURNAME_PARAMETER, surname);
 
         try {
             Cryptographer cryptographer = new Cryptographer();
-            String encryptedEmail = cryptographer.encryptPassword(email);
-            MailSender sender = new MailSender(email, CommandParameter.MAIL_MASSAGE_SUBJECT,
-                    encryptedEmail);
-            service.add(email, password, isAdmin, isBlocked, email, name, surname);
-            page = PageName.CONFIRMATION.getPath();
-        } catch (ServiceException | EncryptionException | IOException e) {
+            String encryptedEmail = cryptographer.encrypt(email);
+            if(service.add(email, password, isAdmin, isBlocked, email, name, surname)) {
+                MailSender sender = new MailSender(email, CommandParameter.MAIL_MASSAGE_SUBJECT,
+                        encryptedEmail);
+                sender.send();
+                page = PageName.CONFIRMATION.getPath();
+            } else {
+                page = PageName.REGISTRATION.getPath();
+            }
+            } catch (ServiceException | EncryptionException | IOException | SendMailException e) {
             logger.log(Level.ERROR, e);
         }
         return page;

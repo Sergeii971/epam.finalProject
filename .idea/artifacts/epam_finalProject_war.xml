@@ -9,6 +9,7 @@
     </properties>
     <root id="archive" name="epam_finalProject-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="epam.finalProject:war exploded" />
+      <element id="library" level="project" name="jstl-1.2" />
     </root>
   </artifact>
 </component>

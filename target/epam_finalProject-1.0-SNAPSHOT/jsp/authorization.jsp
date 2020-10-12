@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
 <head>
     <title>Login V1</title>
@@ -19,6 +19,11 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/font/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
+    <script>
+        document.addEventListener('keydown', (event) => {
+            if (event.keyCode === 116) event.preventDefault();
+        })
+    </script>
 </head>
 <body>
 <div class="limiter">
@@ -35,7 +40,8 @@
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                    <input class="input100" type="text" name="login" placeholder="Email">
+                    <input class="input100" type="text" name="login" placeholder="Email"
+                          value = ${login}>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>

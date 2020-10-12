@@ -7,7 +7,7 @@
 
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 
-    <link rel="stylesheet" href="../css/registration.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registration.css">
 
 
 </head>
@@ -29,15 +29,15 @@
         <input type="hidden" name="command" value="ADD_USER">
         <label class="col-one-half">
             <span class="label-text">Name</span>
-            <input type="text" name="name">
+            <input type="text" name="name" value = ${name}>
         </label>
         <label class="col-one-half">
             <span class="label-text">Surname</span>
-            <input type="text" name="surname">
+            <input type="text" name="surname" value = ${surname}>
         </label>
         <label>
             <span class="label-text">Email</span>
-            <input type="text" name="email">
+            <input type="text" name="email" value = ${email}>
         </label>
         <label class="password">
             <span class="label-text">Password</span>

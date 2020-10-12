@@ -1,8 +1,8 @@
 package com.verbovskiy.finalproject.controller.command;
 
 public enum  PageName {
-    AUTHORIZATION("/jsp/authorization.jsp"),
-    REGISTRATION("/jsp/register.jsp"),
+    AUTHORIZATION("jsp/authorization.jsp"),
+    REGISTRATION("jsp/registration.jsp"),
     ERROR("/jsp/error.jsp"),
     USER_INTERFACE("jsp/userInterface.jsp"),
     ADMIN_INTERFACE("jsp/adminInterface.jsp"),

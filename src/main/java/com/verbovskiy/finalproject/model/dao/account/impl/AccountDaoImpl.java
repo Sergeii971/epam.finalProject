@@ -3,6 +3,7 @@ package com.verbovskiy.finalproject.model.dao.account.impl;
 import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.model.connection.ConnectionPool;
 import com.verbovskiy.finalproject.model.dao.account.AccountDao;
+import com.verbovskiy.finalproject.model.dao.query.DatabaseQuery;
 import com.verbovskiy.finalproject.model.entity.Account;
 
 import java.sql.Connection;
@@ -13,13 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDaoImpl implements AccountDao {
-    private static final String ADD_ACCOUNT = "INSERT INTO account(login, password, isAdmin, isBlocked) " +
-            "VALUES (?, ?, ?, ?)";
-    private static final String REMOVE_ACCOUNT = "DELETE FROM account " + "WHERE login = ?";
-    private static final String FIND_ALL_ACCOUNTS = "SELECT login, password, isAdmin, isBlocked" + " FROM account";
-    private static final String FIND_ACCOUNT_BY_LOGIN = FIND_ALL_ACCOUNTS + " WHERE login = ? ";
-    private static final String FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD = FIND_ALL_ACCOUNTS + " WHERE login = ? " +
-            "AND password = ?";
     private static final String LOGIN_COLUMN_NAME = "login";
     private static final String IS_ADMIN_COLUMN_NAME = "isAdmin";
     private static final String IS_BLOCKED_COLUMN_NAME = "isBlocked";
@@ -29,7 +23,7 @@ public class AccountDaoImpl implements AccountDao {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(ADD_ACCOUNT)) {
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.ADD_ACCOUNT)) {
             statement.setString(1, login);
             statement.setString(2, password);
             statement.setBoolean(3, isAdmin);
@@ -45,7 +39,7 @@ public class AccountDaoImpl implements AccountDao {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(REMOVE_ACCOUNT)) {
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.REMOVE_ACCOUNT)) {
             statement.setString(1, login);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -58,7 +52,7 @@ public class AccountDaoImpl implements AccountDao {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_ALL_ACCOUNTS)) {
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ALL_ACCOUNTS)) {
             List<Account> accounts = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
                 while (resultSet.next()) {
@@ -72,11 +66,25 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
+    public void changeUserBlockStatus(String login, boolean status) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.CHANGE_STATUS)) {
+            statement.setBoolean(1, status);
+            statement.setString(2, login);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Error during changing user block status in database", e);
+        }
+    }
+
+    @Override
     public Account findByLogin(String login) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_ACCOUNT_BY_LOGIN)) {
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ACCOUNT_BY_LOGIN)) {
             statement.setString(1, login);
             Account account = null;
             ResultSet resultSet = statement.executeQuery();
@@ -94,7 +102,7 @@ public class AccountDaoImpl implements AccountDao {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD)) {
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD)) {
             statement.setString(1, login);
             statement.setString(2, password);
             Account account = null;

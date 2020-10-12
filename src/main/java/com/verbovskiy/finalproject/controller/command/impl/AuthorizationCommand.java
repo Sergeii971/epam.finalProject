@@ -1,5 +1,6 @@
 package com.verbovskiy.finalproject.controller.command.impl;
 
+import com.verbovskiy.finalproject.controller.AttributeKey;
 import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.CommandParameter;
 import com.verbovskiy.finalproject.controller.command.PageName;
@@ -10,6 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class AuthorizationCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(AuthorizationCommand.class);
@@ -30,6 +32,8 @@ public class AuthorizationCommand implements ActionCommand {
                     page = PageName.USER_INTERFACE.getPath();
                 }
             } else {
+                request.setAttribute("login", accountLogin);
+                request.setAttribute(AttributeKey.SUCCESSFUL_AUTHORIZATION, false);
                 page = PageName.AUTHORIZATION.getPath();
             }
         } catch (ServiceException e) {
