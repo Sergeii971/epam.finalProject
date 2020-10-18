@@ -3,16 +3,17 @@ package com.verbovskiy.finalproject.model.service;
 import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.exception.EncryptionException;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.dao.account.AccountDao;
-import com.verbovskiy.finalproject.model.dao.account.impl.AccountDaoImpl;
-import com.verbovskiy.finalproject.model.dao.user.UserDao;
-import com.verbovskiy.finalproject.model.dao.user.impl.UserDaoImpl;
+import com.verbovskiy.finalproject.model.dao.AccountDao;
+import com.verbovskiy.finalproject.model.dao.impl.AccountDaoImpl;
+import com.verbovskiy.finalproject.model.dao.UserDao;
+import com.verbovskiy.finalproject.model.dao.impl.UserDaoImpl;
 import com.verbovskiy.finalproject.model.entity.Account;
 import com.verbovskiy.finalproject.model.entity.User;
 import com.verbovskiy.finalproject.model.validator.AccountValidator;
 import com.verbovskiy.finalproject.util.encryption.Cryptographer;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserService {
     public boolean add(String login, String password, boolean isAdmin, boolean isBlocked,
@@ -43,14 +44,11 @@ public class UserService {
         }
         try {
             UserDao userDao = new UserDaoImpl();
-            AccountDao accountDao = new AccountDaoImpl();
             User user = userDao.findByEmail(email);
             if (user == null) {
                 throw new ServiceException("incorrect user data");
             }
-            Account account = user.getAccount();
             userDao.remove(user.getEmail());
-            accountDao.remove(account.getLogin());
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
@@ -72,6 +70,15 @@ public class UserService {
             return result;
         } catch (EncryptionException | DaoException e) {
             throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public Optional<Account> findByLogin(String login) throws ServiceException {
+        AccountDao dao = new AccountDaoImpl();
+        try {
+              return Optional.of(dao.findByLogin(login));
+        } catch (DaoException e) {
+            throw new ServiceException("error while find information about user", e);
         }
     }
 
@@ -113,12 +120,12 @@ public class UserService {
         }
         boolean result = true;
         try {
-            String login = findUserLoginByConfirmationKey(confirmationKey);
-            if (login == null) {
+            Optional<String> login = findUserLoginByConfirmationKey(confirmationKey);
+            if (!login.isPresent()) {
                 result = false;
             } else {
                 AccountDao dao = new AccountDaoImpl();
-                dao.changeUserBlockStatus(login, true);
+                dao.changeUserBlockStatus(login.get(), true);
             }
             return result;
         } catch (DaoException | EncryptionException e) {
@@ -126,7 +133,7 @@ public class UserService {
         }
     }
 
-    private String findUserLoginByConfirmationKey(String confirmationKey) throws DaoException,
+    private Optional<String> findUserLoginByConfirmationKey(String confirmationKey) throws DaoException,
             ServiceException, EncryptionException {
         AccountDao dao = new AccountDaoImpl();
         List<Account> accounts = dao.findAll();
@@ -134,13 +141,13 @@ public class UserService {
         if (accounts == null) {
             throw new ServiceException("error while confirm user");
         } else {
-            String login = null;
+            Optional<String> login = Optional.empty();
             Cryptographer cryptographer = new Cryptographer();
 
             for (Account account : accounts) {
-                String encryptedLogin = cryptographer.encrypt(account.getLogin());
-                if (encryptedLogin.equals(confirmationKey)) {
-                    login = account.getLogin();
+                String encryptedAccountData = cryptographer.encrypt(account.toString());
+                if (encryptedAccountData.equals(confirmationKey)) {
+                    login = Optional.of(account.getLogin());
                     break;
                 }
             }

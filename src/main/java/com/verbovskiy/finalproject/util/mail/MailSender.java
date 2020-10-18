@@ -21,12 +21,16 @@ public class MailSender {
     private Properties properties;
     private static final String PROPERTY_NAME = "C:\\Users\\sergei\\IdeaProjects\\epam.finalProject\\config\\mail.properties";
 
-    public MailSender(String sendToEmail, String mailSubject, String mailText) throws IOException {
-        this.sendToEmail = sendToEmail;
-        this.mailSubject = mailSubject;
-        this.mailText = mailText;
-        properties = new Properties();
-        properties.load(new FileReader(PROPERTY_NAME));
+    public MailSender(String sendToEmail, String mailSubject, String mailText) throws SendMailException {
+        try {
+            this.sendToEmail = sendToEmail;
+            this.mailSubject = mailSubject;
+            this.mailText = mailText;
+            properties = new Properties();
+            properties.load(new FileReader(PROPERTY_NAME));
+        } catch (IOException e) {
+            throw new SendMailException(e);
+        }
     }
 
     public void send() throws SendMailException {

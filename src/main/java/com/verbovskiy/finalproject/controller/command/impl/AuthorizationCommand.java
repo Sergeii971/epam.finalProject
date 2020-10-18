@@ -18,6 +18,7 @@ public class AuthorizationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        request.setAttribute(CommandParameter.IS_ACTIVE, false);
         UserService userService = new UserService();
         String accountLogin = request.getParameter(CommandParameter.LOGIN_PARAMETER);
         String accountPassword = request.getParameter(CommandParameter.PASSWORD_PARAMETER);
@@ -26,13 +27,14 @@ public class AuthorizationCommand implements ActionCommand {
         try {
             if ((userService.verifyAccount(accountLogin, accountPassword))
                     && (!userService.isBlocked(accountLogin))) {
+                request.setAttribute(CommandParameter.IS_ACTIVE, true);
                 if (userService.isAdmin(accountLogin)) {
                     page = PageName.ADMIN_INTERFACE.getPath();
                 } else {
                     page = PageName.USER_INTERFACE.getPath();
                 }
             } else {
-                request.setAttribute("login", accountLogin);
+                request.setAttribute(CommandParameter.LOGIN_PARAMETER, accountLogin);
                 request.setAttribute(AttributeKey.SUCCESSFUL_AUTHORIZATION, false);
                 page = PageName.AUTHORIZATION.getPath();
             }

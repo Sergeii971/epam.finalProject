@@ -57,7 +57,6 @@ public class ConnectionPool {
             givenAwayConnections.offer(connection);
         } catch (InterruptedException e) {
             logger.log(Level.ERROR, "Error while getting connection" + e);
-
         }
         return connection;
     }

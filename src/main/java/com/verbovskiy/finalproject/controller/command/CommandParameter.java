@@ -5,6 +5,7 @@ public final class CommandParameter {
     public static final String PASSWORD_PARAMETER = "password";
     public static final String IS_ADMIN_PARAMETER = "isAdmin";
     public static final String IS_BLOCKED_PARAMETER = "isBlocked";
+    public static final String IS_ACTIVE = "isActive";
     public static final String EMAIL_PARAMETER = "email";
     public static final String NAME_PARAMETER = "name";
     public static final String SURNAME_PARAMETER = "surname";

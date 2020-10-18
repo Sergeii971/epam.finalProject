@@ -29,6 +29,6 @@ public class UserServiceTest {
     public void tierDown() throws ServiceException {
 //        service.remove("email");
 //       service.remove("email2");
-        service.remove("sergeiverbovskiy4@gmail.com");
+     //   service.remove("sergeiverbovskiy4@gmail.com");
     }
 }
