@@ -1,4 +1,5 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<c:import url="switchLocale.jsp"/>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="property.contentPage"/>
@@ -35,10 +36,6 @@
             <div class="login100-pic js-tilt" data-tilt>
                 <img src="${pageContext.request.contextPath}/image/img-01.png" alt="IMG">
             </div>
-<%--            <form action="controller" method="post" class="login100-form validate-form">--%>
-<%--                <input type="hidden" name="command" value="" />--%>
-<%--                <input type="submit" >--%>
-<%--            </form>--%>
 
             <form action="controller" method="post" class="login100-form validate-form">
                 <input type="hidden" name="command" value="authorization" />
@@ -48,7 +45,7 @@
 
                 <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                     <input class="input100" type="text" name="login" placeholder=<fmt:message key="login.login_placeholder"/>
-                          value = ${login}>
+                          value=${login}>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
