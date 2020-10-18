@@ -15,3 +15,8 @@
 </form>
 </body>
 </html>
+login.log_in=LOG IN
+login.login_placeholder=Email
+login.password_placeholder=Password
+title.locale_ru=RU
+title.locale_en=EN
