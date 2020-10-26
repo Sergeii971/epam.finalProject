@@ -15,6 +15,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class AddUserCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(AddUserCommand.class);
@@ -30,6 +31,7 @@ public class AddUserCommand implements ActionCommand {
         String name = request.getParameter(CommandParameter.NAME_PARAMETER);
         String surname = request.getParameter(CommandParameter.SURNAME_PARAMETER);
         String page = PageName.ERROR.getPath();
+        HttpSession session = request.getSession();
 
         try {
             if(service.add(email, password, isAdmin, isBlocked, email, name, surname)) {
@@ -40,10 +42,10 @@ public class AddUserCommand implements ActionCommand {
                 sender.send();
                 page = PageName.CONFIRMATION.getPath();
             } else {
-                request.setAttribute(CommandParameter.EMAIL_PARAMETER, email);
-                request.setAttribute(CommandParameter.PASSWORD_PARAMETER, password);
-                request.setAttribute(CommandParameter.NAME_PARAMETER, name);
-                request.setAttribute(CommandParameter.SURNAME_PARAMETER, surname);
+                session.setAttribute(CommandParameter.EMAIL_PARAMETER, email);
+                session.setAttribute(CommandParameter.PASSWORD_PARAMETER, password);
+                session.setAttribute(CommandParameter.NAME_PARAMETER, name);
+                session.setAttribute(CommandParameter.SURNAME_PARAMETER, surname);
                 page = PageName.REGISTRATION.getPath();
             }
         } catch (ServiceException | EncryptionException | SendMailException e) {

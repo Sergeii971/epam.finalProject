@@ -23,7 +23,7 @@ public class UserService {
         AccountDao accountDao = new AccountDaoImpl();
         UserDao userDao = new UserDaoImpl();
         try {
-        if (!validator.validateLoginPassword(login, password) || (accountDao.findByLogin(login) != null)) {
+        if (!validator.validateLoginPassword(login, password) || (accountDao.findByLogin(login).isPresent())) {
             result = false;
         } else {
             Cryptographer cryptographer = new Cryptographer();
@@ -44,11 +44,11 @@ public class UserService {
         }
         try {
             UserDao userDao = new UserDaoImpl();
-            User user = userDao.findByEmail(email);
-            if (user == null) {
+            Optional<User> user = userDao.findByEmail(email);
+            if (!user.isPresent()) {
                 throw new ServiceException("incorrect user data");
             }
-            userDao.remove(user.getEmail());
+            userDao.remove(user.get().getEmail());
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
@@ -63,8 +63,9 @@ public class UserService {
             AccountDao dao = new AccountDaoImpl();
             Cryptographer cryptographer = new Cryptographer();
             String encryptedPassword = cryptographer.encrypt(password);
-            Account account = dao.findByLoginPassword(login, encryptedPassword);
-            if (account == null) {
+            Optional<Account> account = dao.findByLoginPassword(login, encryptedPassword);
+
+            if (!account.isPresent()) {
                 result = false;
             }
             return result;
@@ -76,7 +77,7 @@ public class UserService {
     public Optional<Account> findByLogin(String login) throws ServiceException {
         AccountDao dao = new AccountDaoImpl();
         try {
-              return Optional.of(dao.findByLogin(login));
+              return dao.findByLogin(login);
         } catch (DaoException e) {
             throw new ServiceException("error while find information about user", e);
         }
@@ -88,11 +89,11 @@ public class UserService {
         }
         try {
             AccountDao dao = new AccountDaoImpl();
-            Account account = dao.findByLogin(login);
-            if (account == null) {
+            Optional<Account> account = dao.findByLogin(login);
+            if (!account.isPresent()) {
                 throw new ServiceException("error while find information about user");
             }
-            return account.isAdmin();
+            return account.get().isAdmin();
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
@@ -104,11 +105,11 @@ public class UserService {
         }
         try {
             AccountDao dao = new AccountDaoImpl();
-            Account account = dao.findByLogin(login);
-            if (account == null) {
+            Optional<Account> account = dao.findByLogin(login);
+            if (!account.isPresent()) {
                 throw new ServiceException("error while find information about user");
             }
-            return account.isBlocked();
+            return account.get().isBlocked();
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
@@ -125,7 +126,7 @@ public class UserService {
                 result = false;
             } else {
                 AccountDao dao = new AccountDaoImpl();
-                dao.changeUserBlockStatus(login.get(), true);
+                dao.changeUserBlockStatus(login.get(), false);
             }
             return result;
         } catch (DaoException | EncryptionException e) {

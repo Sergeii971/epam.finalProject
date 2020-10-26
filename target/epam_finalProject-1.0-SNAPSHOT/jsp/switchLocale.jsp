@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -6,12 +5,15 @@
 <html>
 <head>
     <title>Title</title>
+    <meta charset="UTF-8">
+    <style type="text/css"></style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<a href="controller?command=switch_locale&locale=en">
-    <fmt:message key="title.locale_en"/></a>
-<a href="controller?command=switch_locale&locale=ru">
-    <fmt:message key="title.locale_ru"/></a>
-</form>
+<a href="${pageContext.request.contextPath}/controller?command=SWITCH_LOCALE&locale=en">
+    <fmt:message key="title.locale.en"/></a>
+
+<a href="${pageContext.request.contextPath}/controller?command=SWITCH_LOCALE&locale=ru">
+    <fmt:message key="title.locale.ru"/></a>
 </body>
 </html>

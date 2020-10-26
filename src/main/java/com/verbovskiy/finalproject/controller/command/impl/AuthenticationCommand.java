@@ -13,8 +13,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class AuthorizationCommand implements ActionCommand {
-    private static final Logger logger = LogManager.getLogger(AuthorizationCommand.class);
+public class AuthenticationCommand implements ActionCommand {
+    private static final Logger logger = LogManager.getLogger(AuthenticationCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -23,19 +23,25 @@ public class AuthorizationCommand implements ActionCommand {
         String accountLogin = request.getParameter(CommandParameter.LOGIN_PARAMETER);
         String accountPassword = request.getParameter(CommandParameter.PASSWORD_PARAMETER);
         String page = PageName.ERROR.getPath();
+        HttpSession session = request.getSession();
 
         try {
-            if ((userService.verifyAccount(accountLogin, accountPassword))
-                    && (!userService.isBlocked(accountLogin))) {
-                request.setAttribute(CommandParameter.IS_ACTIVE, true);
-                if (userService.isAdmin(accountLogin)) {
-                    page = PageName.ADMIN_INTERFACE.getPath();
+            if (userService.verifyAccount(accountLogin, accountPassword)) {
+                   if(!userService.isBlocked(accountLogin)) {
+                    session.setAttribute(CommandParameter.IS_ACTIVE, true);
+                    if (userService.isAdmin(accountLogin)) {
+                        page = PageName.ADMIN_INTERFACE.getPath();
+                    } else {
+                        page = PageName.USER_INTERFACE.getPath();
+                    }
                 } else {
-                    page = PageName.USER_INTERFACE.getPath();
+                       session.setAttribute(CommandParameter.LOGIN_PARAMETER, accountLogin);
+                       session.setAttribute(AttributeKey.SUCCESSFUL_ACTIVATION, false);
+                       page = PageName.AUTHORIZATION.getPath();
                 }
             } else {
-                request.setAttribute(CommandParameter.LOGIN_PARAMETER, accountLogin);
-                request.setAttribute(AttributeKey.SUCCESSFUL_AUTHORIZATION, false);
+                session.setAttribute(CommandParameter.LOGIN_PARAMETER, accountLogin);
+                session.setAttribute(AttributeKey.SUCCESSFUL_AUTHENTICATION, false);
                 page = PageName.AUTHORIZATION.getPath();
             }
         } catch (ServiceException e) {

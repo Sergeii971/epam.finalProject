@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
     @Override
@@ -102,16 +103,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByEmail(String email) throws DaoException {
+    public Optional<User> findByEmail(String email) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_USER_BY_EMAIL)) {
             statement.setString(1, email);
-            User user = null;
+            Optional<User> user = Optional.empty();
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                user = createUserFromSql(resultSet);
+                user = Optional.of(createUserFromSql(resultSet));
             }
             return user;
         } catch (SQLException e) {

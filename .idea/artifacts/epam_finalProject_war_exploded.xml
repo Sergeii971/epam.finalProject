@@ -12,6 +12,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="epam.finalProject" />
+          <element id="jpa-descriptors" facet="epam.finalProject/jpa/JPA" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: javax.mvc:javax.mvc-api:1.0.0" />
@@ -21,6 +22,7 @@
           <element id="library" level="project" name="Maven: javax:javaee-api:8.0.1" />
           <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.6.2" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Java EE 6-Java EE 6" />
           <element id="library" level="project" name="jstl-1.2" />
         </element>
       </element>

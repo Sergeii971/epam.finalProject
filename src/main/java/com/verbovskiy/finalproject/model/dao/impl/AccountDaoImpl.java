@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AccountDaoImpl implements AccountDao {
     @Override
@@ -48,16 +49,16 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account findByLogin(String login) throws DaoException {
+    public Optional<Account> findByLogin(String login) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ACCOUNT_BY_LOGIN)) {
             statement.setString(1, login);
-            Account account = null;
+            Optional<Account> account = Optional.empty();
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                account = createAccountFromSql(resultSet);
+                account = Optional.of(createAccountFromSql(resultSet));
             }
             return account;
         } catch (SQLException e) {
@@ -66,26 +67,23 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account findByLoginPassword(String login, String password) throws DaoException {
+    public Optional<Account> findByLoginPassword(String login, String password) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD)) {
             statement.setString(1, login);
             statement.setString(2, password);
-            Account account = null;
             ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    account = createAccountFromSql(resultSet);
-                }
+            Optional<Account> account = Optional.empty();
+
+            if (resultSet.next()) {
+                account = Optional.of(createAccountFromSql(resultSet));
+            }
             return account;
         } catch (SQLException e) {
             throw new DaoException("Error while finding user by login and password from database", e);
         }
-    }
-
-    public void updateIsBlockedStatus(String login) {
-
     }
 
     private Account createAccountFromSql(ResultSet resultSet) throws SQLException {

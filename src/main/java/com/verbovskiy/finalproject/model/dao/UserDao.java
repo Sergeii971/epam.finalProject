@@ -1,10 +1,10 @@
 package com.verbovskiy.finalproject.model.dao;
 
 import com.verbovskiy.finalproject.exception.DaoException;
-import com.verbovskiy.finalproject.model.entity.Account;
 import com.verbovskiy.finalproject.model.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserDao {
     void add(String login, String email, String name, String surname,String encryptedPassword,
@@ -14,5 +14,5 @@ public interface UserDao {
 
     List<User> findAll() throws DaoException;
 
-    User findByEmail(String email) throws DaoException;
+    Optional<User> findByEmail(String email) throws DaoException;
 }

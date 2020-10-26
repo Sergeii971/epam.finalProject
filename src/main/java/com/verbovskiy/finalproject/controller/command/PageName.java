@@ -9,7 +9,8 @@ public enum  PageName {
     USER_INTERFACE("/jsp/userInterface.jsp", true),
     ADMIN_INTERFACE("/jsp/adminInterface.jsp", true),
     CONFIRMATION("/jsp/userEmailConfirmation.jsp", false),
-    FORGOT_PASSWORD("/jsp/forgotPassword.jsp", false);
+    FORGOT_PASSWORD("/jsp/forgotPassword.jsp", false),
+    SWITCH_LOCALE("/jsp/switchLocale.jsp", false);
 
     private final String path;
     private final boolean isRequireAuthorization;

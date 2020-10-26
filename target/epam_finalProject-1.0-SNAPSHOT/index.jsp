@@ -3,6 +3,7 @@
 <head>
 </head>
 <body>
+
 <jsp:forward page="controller?command=MOVE_AUTHORIZATION_PAGE"></jsp:forward>
 </body>
 </html>

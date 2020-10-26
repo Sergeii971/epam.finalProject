@@ -28,6 +28,7 @@ public class PageRedirectSecurityFilter implements Filter {
             if ((isActive == null) || ((page.isPresent()) && (page.get().isRequireAuthorization()) && (!isActive))) {
                 session.setAttribute(AttributeKey.CURRENT_PAGE, PageName.AUTHORIZATION.getPath());
                 session.setAttribute(CommandParameter.IS_ACTIVE, false);
+                session.setAttribute(AttributeKey.LOCALE, AttributeKey.DEFAULT_LOCALE);
                 RequestDispatcher dispatcher = httpRequest.getServletContext().
                         getRequestDispatcher(PageName.AUTHORIZATION.getPath());
                 dispatcher.forward(httpRequest, httpResponse);
