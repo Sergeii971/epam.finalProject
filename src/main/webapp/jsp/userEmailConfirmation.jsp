@@ -15,6 +15,7 @@
         </label>
         <button class="submit" type="submit" name="register">OK</button>
     </form>
+        <jsp:include page="footer/comeBack.jsp"/>
     </div>
 </div>
 </body>

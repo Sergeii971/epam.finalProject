@@ -29,15 +29,16 @@
     </script>
 </head>
 <body>
-<jsp:include page="switchLocale.jsp"/>
+<jsp:include page="header/switchLocale.jsp"/>
 <div class="limiter">
+
     <div class="container-login100">
         <div class="wrap-login100">
             <div class="login100-pic js-tilt" data-tilt>
                 <img src="${pageContext.request.contextPath}/image/img-01.png" alt="IMG">
             </div>
             <form action="${pageContext.request.contextPath}/controller" method="post" class="login100-form validate-form">
-                <input type="hidden" name="command" value="authentication" />
+            <input type="hidden" name="command" value="authentication" />
                 <span class="login100-form-title">
 						<fmt:message key="label.Member_Login"/>
 					</span>
@@ -69,8 +70,9 @@
                 </div>
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
-                        <fmt:message key="login.sign_in"/>
+                        <fmt:message key="button.sign_in"/>
                     </button>
+
                 </div>
             <div class="text-center p-t-12">
 						<span class="txt1">
@@ -88,6 +90,7 @@
             </form>
         </div>
     </div>
+
 </div>
 
 <!--===============================================================================================-->

@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,7 +18,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ConnectionPool {
-    private static final String PROPERTIES_FILENAME = "C:\\Users\\sergei\\IdeaProjects\\epam.finalProject\\config\\database.properties";
+    private static final String PROPERTIES_FILENAME = "config\\database.properties";
     private static final String DRIVER_NAME = "db.driver";
     private static final String LOGIN = "db.login";
     private static final String PASSWORD = "db.password";
@@ -24,9 +26,8 @@ public class ConnectionPool {
     private static final int POOL_SIZE = 12;
     private static ConnectionPool pool = new ConnectionPool();
     private final Logger logger = LogManager.getLogger(ConnectionPool.class);
-    private Properties properties;
-    private BlockingQueue<ProxyConnection> freeConnections;
-    private Queue<ProxyConnection> givenAwayConnections;
+    private final BlockingQueue<ProxyConnection> freeConnections;
+    private final Queue<ProxyConnection> givenAwayConnections;
 
     public static ConnectionPool getInstance() {
         return pool;
@@ -34,8 +35,10 @@ public class ConnectionPool {
 
     ConnectionPool() {
         try {
-            properties = new Properties();
-            properties.load(new FileReader(PROPERTIES_FILENAME));
+            Properties properties = new Properties();
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream inputStream = loader.getResourceAsStream(PROPERTIES_FILENAME);
+            properties.load(inputStream);
             Class.forName(properties.getProperty(DRIVER_NAME));
             freeConnections = new LinkedBlockingQueue<>(POOL_SIZE);
             givenAwayConnections = new ArrayDeque<>(POOL_SIZE);
@@ -62,10 +65,8 @@ public class ConnectionPool {
     }
 
     public void releaseConnection(Connection connection) {
-        if (connection instanceof ProxyConnection) {
-            if (givenAwayConnections.remove(connection)) {
+        if ((connection instanceof ProxyConnection) && (givenAwayConnections.remove(connection))) {
                 freeConnections.offer((ProxyConnection) connection);
-            }
         } else {
             logger.log(Level.WARN, "Invalid connection to realizing");
         }

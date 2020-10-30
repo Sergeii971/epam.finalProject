@@ -8,18 +8,17 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class MailSender {
     private MimeMessage message;
-    private String sendToEmail;
-    private String mailSubject;
-    private String mailText;
-    private Properties properties;
-    private static final String PROPERTY_NAME = "C:\\Users\\sergei\\IdeaProjects\\epam.finalProject\\config\\mail.properties";
+    private final String sendToEmail;
+    private final String mailSubject;
+    private final String mailText;
+    private final Properties properties;
+    private static final String PROPERTY_NAME = "config\\mail.properties";
 
     public MailSender(String sendToEmail, String mailSubject, String mailText) throws SendMailException {
         try {
@@ -27,7 +26,9 @@ public class MailSender {
             this.mailSubject = mailSubject;
             this.mailText = mailText;
             properties = new Properties();
-            properties.load(new FileReader(PROPERTY_NAME));
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream inputStream = loader.getResourceAsStream(PROPERTY_NAME);
+            properties.load(inputStream);
         } catch (IOException e) {
             throw new SendMailException(e);
         }

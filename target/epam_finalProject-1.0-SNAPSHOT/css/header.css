@@ -1,0 +1,16 @@
+.top-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    background: #9053c7 !important;
+    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0)!important;
+    background: -o-linear-gradient(-135deg, #c850c0, #4158d0)!important;
+    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0)!important;
+    background: linear-gradient(-135deg, #c850c0, #4158d0)!important;
+}
+
+.top-line a {
+    margin: 5px 10px;
+    color: white;
+}

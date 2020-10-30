@@ -23,6 +23,7 @@
             </label>
             <button class="submit">OK</button>
         </form>
+        <jsp:include page="footer/comeBack.jsp"/>
     </div>
 </div>
 </body>

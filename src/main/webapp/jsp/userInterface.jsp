@@ -4,6 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-eeeeeeeeeee
+<jsp:include page="header/switchLocale.jsp"/>
+<jsp:include page="footer/comeBack.jsp"/>
 </body>
 </html>

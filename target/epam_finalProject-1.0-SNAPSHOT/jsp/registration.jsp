@@ -14,7 +14,7 @@
 </head>
 
 <body class="reg">
-<jsp:include page="switchLocale.jsp"/>
+<jsp:include page="header/switchLocale.jsp"/>
 <div class="container">
     <div class="content">
 
@@ -26,8 +26,8 @@
         </h1>
     </header>
 
-    <h1 class="text-center"><fmt:message key="label.registration"/></h1>
-    <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
+    <h1 class="text-center"><fmt:message key="button.registration"/></h1>
+        <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
         <input type="hidden" name="command" value="ADD_USER">
         <label class="col-one-half">
             <span class="label-text"><fmt:message key="label.name"/></span>
@@ -49,12 +49,15 @@
             <input type="password" name="password">
         </label>
         <div class="text-center">
+
            <button class="submit" type="submit" name="register"><fmt:message key="label.sign_up"/></button>
         </div>
 
-    </form>
+        <div>
+        </div>
+        </form>
+        <jsp:include page="footer/comeBack.jsp"/>
     </div>
-
 </div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 

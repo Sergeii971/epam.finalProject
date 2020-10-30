@@ -14,7 +14,7 @@ public class UserServiceTest {
     @BeforeClass
     public void setUp() throws ServiceException {
         service = new UserService();
-        service.add("1234","1234",false,true, "1234", "name", "surname");
+        service.add("epam.online.store@gmail.com","S12345678s",true,false, "epam.online.store@gmail.com", "Sergei", "Verbovskiy");
 //        service.add("qqqq","qqqq",true, false,"email2", "name2", "surname2");
     }
 

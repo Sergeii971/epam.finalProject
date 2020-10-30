@@ -7,6 +7,9 @@ import com.verbovskiy.finalproject.model.dao.query.DatabaseQuery;
 import com.verbovskiy.finalproject.model.dao.UserDao;
 import com.verbovskiy.finalproject.model.entity.Account;
 import com.verbovskiy.finalproject.model.entity.User;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
+    private final Logger logger = LogManager.getLogger(UserDaoImpl.class);
     @Override
     public void add(String login, String email, String name, String surname,
                     String encryptedPassword, boolean isAdmin, boolean isBlocked) throws DaoException {
@@ -47,11 +51,11 @@ public class UserDaoImpl implements UserDao {
         } finally {
             try {
                 connection.setAutoCommit(true);
-            } catch (SQLException throwable) {
-                throw new DaoException("Error while adding user to database", throwable);
+            } catch (SQLException e) {
+                logger.log(Level.ERROR, "connection error", e);
             }
             connectionPool.releaseConnection(connection);
-    }
+        }
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.verbovskiy.finalproject.controller.command.impl;
 
 import com.verbovskiy.finalproject.controller.command.ActionCommand;
-import com.verbovskiy.finalproject.controller.command.CommandParameter;
-import com.verbovskiy.finalproject.controller.command.PageName;
+import com.verbovskiy.finalproject.controller.command.RequestParameter;
+import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.exception.EncryptionException;
 import com.verbovskiy.finalproject.exception.SendMailException;
 import com.verbovskiy.finalproject.exception.ServiceException;
@@ -15,7 +15,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class SendRecoveryKeyCommand implements ActionCommand {
@@ -23,20 +23,22 @@ public class SendRecoveryKeyCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String email = request.getParameter(CommandParameter.EMAIL_PARAMETER);
+        String email = request.getParameter(RequestParameter.EMAIL);
         UserService service = new UserService();
-        String page = PageName.ERROR.getPath();
+        String page = PageType.ERROR.getPath();
 
         try {
             Optional<Account> account = service.findByLogin(email);
             if (account.isPresent()) {
                 Cryptographer cryptographer = new Cryptographer();
                 String recoveryKey = cryptographer.encrypt(account.get().toString());
-                MailSender sender = new MailSender(email, CommandParameter.MAIL_MASSAGE_SUBJECT, recoveryKey);
+                MailSender sender = new MailSender(email, RequestParameter.MAIL_MASSAGE_SUBJECT, recoveryKey);
                 sender.send();
             }
-            request.setAttribute(CommandParameter.EMAIL_PARAMETER, email);
-            page = PageName.FORGOT_PASSWORD.getPath();
+            HttpSession session = request.getSession();
+            session.setAttribute(RequestParameter.EMAIL, email);
+            addComeBackPagePath(session, PageType.FORGOT_PASSWORD.getPath());
+            page = PageType.FORGOT_PASSWORD.getPath();
         } catch (ServiceException | EncryptionException | SendMailException e) {
             logger.log(Level.ERROR, e);
         }
