@@ -27,26 +27,41 @@
     </header>
 
     <h1 class="text-center"><fmt:message key="button.registration"/></h1>
+        <c:if test="${not empty incorrectParameter && incorrectParameter['loginExist']}">
+            <label class="alert-danger"><fmt:message key="label.login_exist"/></label>
+        </c:if>
         <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
         <input type="hidden" name="command" value="ADD_USER">
         <label class="col-one-half">
             <span class="label-text"><fmt:message key="label.name"/></span>
-            <input type="text" name="name" value = ${name}>
+            <c:if test="${not empty incorrectParameter && incorrectParameter['name']}">
+                <label class="alert-danger"><fmt:message key="label.incorrect_name"/></label>
+            </c:if>
+            <input type="text" name="name" required  pattern="[a-zA-Zа-яА-Я-]{1,20}" value = ${name}>
         </label>
         <label class="col-one-half">
+            <c:if test="${not empty incorrectParameter && incorrectParameter['surname']}">
+                <label class="alert-danger"><fmt:message key="label.incorrect_surname"/></label>
+            </c:if>
             <span class="label-text"><fmt:message key="label.surname"/></span>
-            <input type="text" name="surname" value = ${surname}>
+            <input type="text" name="surname" required  pattern="[a-zA-Zа-яА-Я-]{1,20}" value = ${surname}>
         </label>
         <label>
+            <c:if test="${not empty incorrectParameter && incorrectParameter['email']}">
+            <label class="alert-danger"><fmt:message key="label.incorrect_email"/></label>
+        </c:if>
             <span class="label-text"><fmt:message key="login.email"/></span>
-            <input type="text" name="email" value = ${email}>
+            <input type="email" name="email" value = ${email}>
         </label>
         <label class="password">
             <span class="label-text"><fmt:message key="login.password"/></span>
             <button class="toggle-visibility"  title="toggle password visibility" tabindex="-1">
                 <span class="glyphicon glyphicon-eye-close"></span>
             </button>
-            <input type="password" name="password">
+            <c:if test="${not empty incorrectParameter && incorrectParameter['password']}">
+                <label class="alert-danger"><fmt:message key="label.incorrect_password"/></label>
+            </c:if>
+            <input type="password" name="password" required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,30}" >
         </label>
         <div class="text-center">
 

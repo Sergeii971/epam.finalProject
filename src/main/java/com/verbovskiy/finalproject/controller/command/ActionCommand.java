@@ -15,7 +15,13 @@ public interface ActionCommand {
 
         pages.put(currentPage, previousPage);
         session.setAttribute(AttributeKey.COME_BACK_PAGES, pages);
-        pages.put(PageType.CONFIRMATION.getPath(), currentPage);
+    }
+
+    default void removeComeBackPagePath(HttpSession session, String currentPage) {
+        Map<String, String> pages = (Map<String, String>) session.getAttribute(AttributeKey.COME_BACK_PAGES);
+        pages.clear();
+        session.setAttribute(RequestParameter.IS_ACTIVE, false);
+        pages.put(currentPage, PageType.AUTHORIZATION.getPath());
     }
 }
 

@@ -8,6 +8,17 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+        history.pushState(null, null, location.href);
+        history.back();
+        history.forward();
+        window.onpopstate = function () { history.go(1); };
+    </script>
+    <script>
+        document.addEventListener('keydown', (event) => {
+            if (event.keyCode === 116) event.preventDefault();
+        })
+    </script>
 </head>
 <body>
 <div class="top-line">

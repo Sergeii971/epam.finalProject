@@ -10,4 +10,7 @@ public class AttributeKey {
     public static final String SUCCESSFUL_ACTIVATION = "successfulActivation";
     public static final String DEFAULT_LOCALE = "en";
     public static final String COME_BACK_PAGES = "come_back_pages";
+    public static final String SUCCESSFUL_EMAIL_CONFIRMATION = "successfulEmailConfirmation";
+    public static final String LOGIN_EXIST = "loginExist";
+    public static final String INCORRECT_PARAMETER = "incorrectParameter";
 }

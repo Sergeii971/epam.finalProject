@@ -3,45 +3,40 @@ package com.verbovskiy.finalproject.controller.command;
 import java.util.Optional;
 
 public enum PageType {
-    AUTHORIZATION("/jsp/authorization.jsp", false, false),
-    REGISTRATION("/jsp/registration.jsp", false, false),
-    ERROR("/jsp/error.jsp", false, false),
-    USER_INTERFACE("/jsp/userInterface.jsp", true, false),
-    ADMIN_INTERFACE("/jsp/adminInterface.jsp", true, true),
-    CONFIRMATION("/jsp/userEmailConfirmation.jsp", true, false),
-    FORGOT_PASSWORD("/jsp/forgotPassword.jsp", false, false),
-    USER_MANAGEMENT("/jsp/userManagement.jsp", true, true),
-    SWITCH_LOCALE("/jsp/switchLocale.jsp", false, false);
+    AUTHORIZATION("/jsp/authorization.jsp", true),
+    REGISTRATION("/jsp/registration.jsp", true),
+    ERROR("/jsp/error/error500.jsp", false),
+    USER_INTERFACE("/jsp/userInterface.jsp", false),
+    ADMIN_INTERFACE("/jsp/adminInterface.jsp", false),
+    CONFIRMATION("/jsp/userEmailConfirmation.jsp", false),
+    FORGOT_PASSWORD("/jsp/forgotPassword.jsp", true),
+    USER_MANAGEMENT("/jsp/userManagement.jsp", false),
+    SWITCH_LOCALE("/jsp/switchLocale.jsp", false);
 
     private final String path;
-    private final boolean isRequireAuthorization;
-    private final boolean isAdminPage;
+    private final boolean linkAvailable;
 
-    PageType(String path, boolean isRequireAuthorization, boolean isAdminPage) {
+    PageType(String path, boolean isRequireAuthorization) {
         this.path = path;
-        this.isRequireAuthorization = isRequireAuthorization;
-        this.isAdminPage = isAdminPage;
+        this.linkAvailable = isRequireAuthorization;
     }
 
     public String getPath(){
         return path;
     }
 
-    public boolean isRequireAuthorization() {
-        return isRequireAuthorization;
-    }
-
-    public boolean isAdminPage() {
-        return isAdminPage;
+    public boolean isLinkAvailable() {
+        return linkAvailable;
     }
 
     public static Optional<PageType> findByPath(String path) {
         Optional<PageType> page = Optional.empty();
-
-        for (PageType pageType : PageType.values()) {
-            if (pageType.getPath().equals(path)) {
-                page = Optional.of(pageType);
-                break;
+        if (path != null) {
+            for (PageType pageType : PageType.values()) {
+                if (pageType.getPath().equals(path)) {
+                    page = Optional.of(pageType);
+                    break;
+                }
             }
         }
         return page;

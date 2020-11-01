@@ -15,4 +15,5 @@ public final class RequestParameter {
     public static final String SURNAME = "surname";
     public static final String MAIL_MASSAGE_SUBJECT = "register in online store";
     public static final String CONFIRM = "confirmation_code";
+    public static final Boolean IS_INCORRECT = true;
 }

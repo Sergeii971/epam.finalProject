@@ -37,7 +37,6 @@ public class SendRecoveryKeyCommand implements ActionCommand {
             }
             HttpSession session = request.getSession();
             session.setAttribute(RequestParameter.EMAIL, email);
-            addComeBackPagePath(session, PageType.FORGOT_PASSWORD.getPath());
             page = PageType.FORGOT_PASSWORD.getPath();
         } catch (ServiceException | EncryptionException | SendMailException e) {
             logger.log(Level.ERROR, e);

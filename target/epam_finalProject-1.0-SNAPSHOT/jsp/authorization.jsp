@@ -22,11 +22,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/font/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <script>
-        document.addEventListener('keydown', (event) => {
-            if (event.keyCode === 116) event.preventDefault();
-        })
-    </script>
 </head>
 <body>
 <jsp:include page="header/switchLocale.jsp"/>
@@ -62,7 +57,7 @@
                 <div class="wrap-input100 validate-input" data-validate = "Password is required">
                     <input class="input100" type="password" name="password" placeholder=<fmt:message key="login.password"/>
                             required
-<%--                           pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}" minlength="8" maxlength="128">--%>
+                           pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,30}" minlength="8" maxlength="128">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -95,19 +90,15 @@
 
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+<%--<!--===============================================================================================-->--%>
 <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/popper.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+<%--<!--===============================================================================================-->--%>
 <script src="${pageContext.request.contextPath}/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
+<%--<!--===============================================================================================-->--%>
 <script src="${pageContext.request.contextPath}/vendor/tilt/tilt.jquery.min.js"></script>
-<script >
-    $('.js-tilt').tilt({
-        scale: 1.1
-    })
-</script>
-<!--===============================================================================================-->
+
+<%--<!--===============================================================================================-->--%>
 <script src="${pageContext.request.contextPath}/js/authorization.js"></script>
 
 </body>

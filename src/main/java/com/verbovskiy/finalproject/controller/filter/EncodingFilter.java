@@ -20,7 +20,7 @@ public class EncodingFilter implements Filter {
         String codeRequest = request.getCharacterEncoding();
         if (code != null && !code.equalsIgnoreCase(codeRequest)) {
             request.setCharacterEncoding(code);
-            response.setCharacterEncoding(code);
+           response.setCharacterEncoding(code);
         }
         chain.doFilter(request, response);
     }

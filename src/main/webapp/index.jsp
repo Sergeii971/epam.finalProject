@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
-</head>
+    <title></title></head>
 <body>
 
 <jsp:forward page="controller?command=MOVE_AUTHORIZATION_PAGE"></jsp:forward>

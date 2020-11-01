@@ -2,8 +2,8 @@ package com.verbovskiy.finalproject.controller.command.impl;
 
 import com.verbovskiy.finalproject.controller.AttributeKey;
 import com.verbovskiy.finalproject.controller.command.ActionCommand;
-import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.controller.command.PageType;
+import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.EncryptionException;
 import com.verbovskiy.finalproject.exception.SendMailException;
 import com.verbovskiy.finalproject.exception.ServiceException;
@@ -36,19 +36,20 @@ public class AddUserCommand implements ActionCommand {
         HttpSession session = request.getSession();
 
         try {
-            if(service.add(email, password, isAdmin, isBlocked, email, name, surname)) {
+            Map<String, Boolean> incorrectParameter = service.add(email, password, isAdmin, isBlocked, email, name, surname);
+            if(incorrectParameter.size() == 0) {
                 Account account = new Account(email, isBlocked, isAdmin, isActive);
                 Cryptographer cryptographer = new Cryptographer();
                 String confirmationKey = cryptographer.encrypt(account.toString());
                 MailSender sender = new MailSender(email, RequestParameter.MAIL_MASSAGE_SUBJECT, confirmationKey);
                 sender.send();
+                addComeBackPagePath(session, PageType.CONFIRMATION.getPath());
                 page = PageType.CONFIRMATION.getPath();
             } else {
                 session.setAttribute(RequestParameter.EMAIL, email);
-                session.setAttribute(RequestParameter.PASSWORD, password);
                 session.setAttribute(RequestParameter.NAME, name);
                 session.setAttribute(RequestParameter.SURNAME, surname);
-                addComeBackPagePath(session, PageType.CONFIRMATION.getPath());
+                session.setAttribute(AttributeKey.INCORRECT_PARAMETER, incorrectParameter);
                 page = PageType.REGISTRATION.getPath();
             }
         } catch (ServiceException | EncryptionException | SendMailException e) {

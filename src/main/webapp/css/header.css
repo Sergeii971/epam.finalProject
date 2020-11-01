@@ -3,11 +3,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    background: #9053c7 !important;
-    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0)!important;
-    background: -o-linear-gradient(-135deg, #c850c0, #4158d0)!important;
-    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0)!important;
-    background: linear-gradient(-135deg, #c850c0, #4158d0)!important;
+    background: #9053c7;
+    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
 .top-line a {

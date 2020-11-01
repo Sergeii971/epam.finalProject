@@ -1,5 +1,7 @@
 package com.verbovskiy.finalproject.model.service;
 
+import com.verbovskiy.finalproject.controller.AttributeKey;
+import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.exception.EncryptionException;
 import com.verbovskiy.finalproject.exception.ServiceException;
@@ -9,36 +11,36 @@ import com.verbovskiy.finalproject.model.dao.UserDao;
 import com.verbovskiy.finalproject.model.dao.impl.UserDaoImpl;
 import com.verbovskiy.finalproject.model.entity.Account;
 import com.verbovskiy.finalproject.model.entity.User;
-import com.verbovskiy.finalproject.model.validator.AccountValidator;
 import com.verbovskiy.finalproject.util.encryption.Cryptographer;
+import com.verbovskiy.finalproject.util.validator.UserValidator;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class UserService {
-    public boolean add(String login, String password, boolean isAdmin, boolean isBlocked,
-                    String email, String name, String surname) throws ServiceException {
-        boolean result = true;
-        AccountValidator validator = new AccountValidator();
+    public Map<String, Boolean> add(String login, String password, boolean isAdmin, boolean isBlocked,
+                                   String email, String name, String surname) throws ServiceException {
         AccountDao accountDao = new AccountDaoImpl();
         UserDao userDao = new UserDaoImpl();
         try {
-        if (!validator.validateLoginPassword(login, password) || (accountDao.findByLogin(login).isPresent())) {
-            result = false;
-        } else {
-            Cryptographer cryptographer = new Cryptographer();
-            String encryptedPassword = cryptographer.encrypt(password);
-            userDao.add(login, email, name, surname, encryptedPassword, isAdmin, isBlocked);
-        }
-        return result;
+            Map<String, Boolean> incorrectParameter = UserValidator.validateUserData(email, password, name, surname);
+            if (!accountDao.findByLogin(login).isPresent()) {
+                if (incorrectParameter.size() == 0) {
+                    Cryptographer cryptographer = new Cryptographer();
+                    String encryptedPassword = cryptographer.encrypt(password);
+                    userDao.add(login, email, name, surname, encryptedPassword, isAdmin, isBlocked);
+                }
+            } else {
+                incorrectParameter.put(AttributeKey.LOGIN_EXIST, RequestParameter.IS_INCORRECT);
+            }
+            return incorrectParameter;
         } catch (EncryptionException | DaoException e) {
             throw new ServiceException(e.getMessage());
         }
     }
 
     public void remove(String email) throws ServiceException {
-        AccountValidator validator = new AccountValidator();
-
         if ((email == null) || (email.isEmpty())) {
             throw new ServiceException("incorrect user data");
         }
