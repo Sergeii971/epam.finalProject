@@ -13,4 +13,5 @@ public class AttributeKey {
     public static final String SUCCESSFUL_EMAIL_CONFIRMATION = "successfulEmailConfirmation";
     public static final String LOGIN_EXIST = "loginExist";
     public static final String INCORRECT_PARAMETER = "incorrectParameter";
+    public static final String IS_CONFIRMATION_CODE_SEND = "isConfirmationCodeSend";
 }

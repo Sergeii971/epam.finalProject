@@ -24,8 +24,14 @@ public class EmailConfirmationCommand implements ActionCommand {
         HttpSession session = request.getSession();
         try {
             if (service.ConfirmUser(confirmationKey)) {
-                removeComeBackPagePath(session, PageType.USER_INTERFACE.getPath());
-                page = PageType.USER_INTERFACE.getPath();
+                String email = (String) session.getAttribute(RequestParameter.EMAIL);
+                if (service.isAdmin(email)) {
+                    removeComeBackPagePath(session, PageType.ADMIN_INTERFACE.getPath());
+                    page = PageType.ADMIN_INTERFACE.getPath();
+                } else {
+                    removeComeBackPagePath(session, PageType.USER_INTERFACE.getPath());
+                    page = PageType.USER_INTERFACE.getPath();
+                }
             } else {
                 session.setAttribute(AttributeKey.SUCCESSFUL_EMAIL_CONFIRMATION, false);
                 page = PageType.CONFIRMATION.getPath();

@@ -11,10 +11,10 @@
         <error-code>404</error-code>
         <location>/jsp/error/error404.jsp</location>
     </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/jsp/error/error500.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>500</error-code>-->
+<!--        <location>/jsp/error/error500.jsp</location>-->
+<!--    </error-page>-->
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.verbovskiy.finalproject.controller.filter.EncodingFilter</filter-class>

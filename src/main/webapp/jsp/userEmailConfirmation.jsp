@@ -20,7 +20,7 @@
             <label class="alert-warning"><fmt:message key="label.account_not_confirmed"/></label>
         </c:if>
         <label class="col-one-half">
-            <input type="text" name="confirmation_code">
+            <input type="text" name="confirmation_code" autocomplete="off">
         </label>
         <button class="submit" type="submit" name="register">OK</button>
     </form>

@@ -1,5 +1,6 @@
 package com.verbovskiy.finalproject.controller.command.impl;
 
+import com.verbovskiy.finalproject.controller.AttributeKey;
 import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.controller.command.PageType;
@@ -26,6 +27,7 @@ public class SendRecoveryKeyCommand implements ActionCommand {
         String email = request.getParameter(RequestParameter.EMAIL);
         UserService service = new UserService();
         String page = PageType.ERROR.getPath();
+        HttpSession session = request.getSession();
 
         try {
             Optional<Account> account = service.findByLogin(email);
@@ -34,8 +36,8 @@ public class SendRecoveryKeyCommand implements ActionCommand {
                 String recoveryKey = cryptographer.encrypt(account.get().toString());
                 MailSender sender = new MailSender(email, RequestParameter.MAIL_MASSAGE_SUBJECT, recoveryKey);
                 sender.send();
+                session.setAttribute(AttributeKey.IS_CONFIRMATION_CODE_SEND, true);
             }
-            HttpSession session = request.getSession();
             session.setAttribute(RequestParameter.EMAIL, email);
             page = PageType.FORGOT_PASSWORD.getPath();
         } catch (ServiceException | EncryptionException | SendMailException e) {

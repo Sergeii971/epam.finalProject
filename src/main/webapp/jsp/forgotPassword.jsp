@@ -17,22 +17,31 @@
             <input type="hidden" name="command" value="SEND_RECOVERY_KEY">
             <label class="col-one-half">
                 <span class="label-text">Email</span>
+                <div>
                 <input type="text" name="email" value=${email}>
+                </div>
             </label>
-<%--            <button class="submit">OK</button>--%>
+            <c:if test="${!isConfirmationCodeSend}">
             <fp:user-pagination/>
+            </c:if>
+
         </form>
         <form action="${pageContext.request.contextPath}/controller" method="post">
-            <input type="hidden" name="command" value="FORGOT_PASSWORD">
-            <label class="col-one-half">
-                <span class="label-text">Confirmation_code</span>
-                <input type="text" name="email" autocomplete="off">
-            </label>
-            <button class="submit">OK</button>
+            <input type="hidden" name="command" value="EMAIL_CONFIRMATION">
+             <c:if test="${not empty isConfirmationCodeSend && isConfirmationCodeSend}">
+                 <label class="col-one-half">
+                     <span class="label-text">Confirmation_code</span>
+                     <div>
+                         <input type="text" name="confirmation_code" autocomplete="off">
+                     </div>
+                 </label>
+            <div class="text-center">
+            <button class="submit"><fmt:message key="button.ok"/></button>
+            </div>
+             </c:if>
         </form>
         <jsp:include page="footer/comeBack.jsp"/>
     </div>
 </div>
-<jsp:include page="footer/comeBack.jsp"/>
 </body>
 </html>
