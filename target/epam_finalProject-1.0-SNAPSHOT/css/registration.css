@@ -263,3 +263,10 @@ body.reg{
 	max-width: 600px;
 	max-height: 600px;
 }
+
+.alert-danger{
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+	font-size: 0.9rem!important;
+}

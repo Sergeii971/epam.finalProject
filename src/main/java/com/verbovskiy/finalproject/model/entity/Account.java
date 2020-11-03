@@ -4,19 +4,13 @@ public class Account extends Entity{
     private String login;
     private boolean isBlocked;
     private boolean isAdmin;
-    private boolean isActive;
+    private boolean isConfirmed;
 
-    public Account(String login, boolean isAdmin, boolean isBlocked) {
+    public Account(String login, boolean isAdmin, boolean isBlocked, boolean isConfirmed) {
         this.login = login;
         this.isAdmin = isAdmin;
         this.isBlocked = isBlocked;
-    }
-
-    public Account(String login, boolean isBlocked, boolean isAdmin, boolean isActive) {
-        this.login = login;
-        this.isBlocked = isBlocked;
-        this.isAdmin = isAdmin;
-        this.isActive = isActive;
+        this.isConfirmed = isConfirmed;
     }
 
     public void setLogin(String login) {
@@ -25,14 +19,6 @@ public class Account extends Entity{
 
     public void setBlocked(boolean blocked) {
         isBlocked = blocked;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
     }
 
     public void setAdmin(boolean admin) {
@@ -49,6 +35,14 @@ public class Account extends Entity{
 
     public boolean isAdmin() {
         return isAdmin;
+    }
+
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        isConfirmed = confirmed;
     }
 
     @Override
@@ -70,7 +64,7 @@ public class Account extends Entity{
                 return false;
             }
         }
-        return ((isAdmin == account.isAdmin) && (isBlocked == account.isBlocked) && (isActive == account.isActive));
+        return ((isAdmin == account.isAdmin) && (isBlocked == account.isBlocked) && (isConfirmed == account.isConfirmed));
     }
 
     @Override
@@ -79,7 +73,7 @@ public class Account extends Entity{
         result += 31 * login.hashCode();
         result += 31 * Boolean.hashCode(isAdmin);
         result += 31 * Boolean.hashCode(isBlocked);
-        result += 31 * Boolean.hashCode(isActive);
+        result += 31 * Boolean.hashCode(isConfirmed);
         return result;
     }
 
@@ -93,7 +87,7 @@ public class Account extends Entity{
         builder.append(" ");
         builder.append(isAdmin);
         builder.append(" ");
-        builder.append(isActive);
+        builder.append(isConfirmed);
         return builder.toString();
     }
 }

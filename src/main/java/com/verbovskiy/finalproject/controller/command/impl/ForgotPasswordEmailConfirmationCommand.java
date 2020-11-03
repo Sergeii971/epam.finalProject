@@ -13,8 +13,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class EmailConfirmationCommand implements ActionCommand {
-    private static final Logger logger = LogManager.getLogger(EmailConfirmationCommand.class);
+public class ForgotPasswordEmailConfirmationCommand implements ActionCommand {
+    private final Logger logger = LogManager.getLogger(ForgotPasswordEmailConfirmationCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -22,19 +22,14 @@ public class EmailConfirmationCommand implements ActionCommand {
         UserService service = new UserService();
         String page = PageType.ERROR.getPath();
         HttpSession session = request.getSession();
+
         try {
             if (service.ConfirmUser(confirmationKey)) {
-                String email = (String) session.getAttribute(RequestParameter.EMAIL);
-                if (service.isAdmin(email)) {
-                    removeComeBackPagePath(session, PageType.ADMIN_INTERFACE.getPath());
-                    page = PageType.ADMIN_INTERFACE.getPath();
-                } else {
-                    removeComeBackPagePath(session, PageType.USER_INTERFACE.getPath());
-                    page = PageType.USER_INTERFACE.getPath();
-                }
+                addComeBackPagePath(session, PageType.INPUT_NEW_PASSWORD_IN_FORGOT_PASSWORD.getPath());
+                page = PageType.INPUT_NEW_PASSWORD_IN_FORGOT_PASSWORD.getPath();
             } else {
-                session.setAttribute(AttributeKey.SUCCESSFUL_EMAIL_CONFIRMATION, false);
-                page = PageType.CONFIRMATION.getPath();
+                request.setAttribute(AttributeKey.SUCCESSFUL_EMAIL_CONFIRMATION, false);
+                page = PageType.FORGOT_PASSWORD.getPath();
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

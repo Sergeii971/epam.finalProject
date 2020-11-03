@@ -2,7 +2,6 @@ package com.verbovskiy.finalproject.controller.filter;
 
 import com.verbovskiy.finalproject.controller.AttributeKey;
 import com.verbovskiy.finalproject.controller.command.PageType;
-import com.verbovskiy.finalproject.controller.command.RequestParameter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -28,7 +27,6 @@ public class PageRedirectSecurityFilter implements Filter {
             String jumpPage = PageType.AUTHORIZATION.getPath();
             session.setAttribute(AttributeKey.CURRENT_PAGE, jumpPage);
             session.setAttribute(AttributeKey.COME_BACK_PAGES, new HashMap<>());
-            session.setAttribute(RequestParameter.IS_ACTIVE, false);
             session.setAttribute(AttributeKey.LOCALE, AttributeKey.DEFAULT_LOCALE);
             RequestDispatcher dispatcher = httpRequest.getServletContext().
                     getRequestDispatcher(jumpPage);

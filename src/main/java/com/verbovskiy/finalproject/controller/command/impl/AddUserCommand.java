@@ -28,28 +28,29 @@ public class AddUserCommand implements ActionCommand {
         String email = request.getParameter(RequestParameter.EMAIL);
         String password = request.getParameter(RequestParameter.PASSWORD);
         boolean isAdmin = false;
-        boolean isBlocked = true;
-        boolean isActive = false;
+        boolean isBlocked = false;
+        boolean isConfirmed = false;
         String name = request.getParameter(RequestParameter.NAME);
         String surname = request.getParameter(RequestParameter.SURNAME);
         String page = PageType.ERROR.getPath();
         HttpSession session = request.getSession();
 
         try {
-            Map<String, Boolean> incorrectParameter = service.add(email, password, isAdmin, isBlocked, email, name, surname);
+            Map<String, Boolean> incorrectParameter = service.add(email, password, isAdmin, isBlocked, isConfirmed,
+                    email, name, surname);
             if(incorrectParameter.size() == 0) {
-                Account account = new Account(email, isBlocked, isAdmin, isActive);
+                Account account = new Account(email, isBlocked, isAdmin, isConfirmed);
                 Cryptographer cryptographer = new Cryptographer();
                 String confirmationKey = cryptographer.encrypt(account.toString());
-                MailSender sender = new MailSender(email, RequestParameter.MAIL_MASSAGE_SUBJECT, confirmationKey);
+                MailSender sender = new MailSender(email,RequestParameter.EMPTY_VALUE, confirmationKey);
                 sender.send();
                 addComeBackPagePath(session, PageType.CONFIRMATION.getPath());
                 page = PageType.CONFIRMATION.getPath();
             } else {
-                session.setAttribute(RequestParameter.EMAIL, email);
-                session.setAttribute(RequestParameter.NAME, name);
-                session.setAttribute(RequestParameter.SURNAME, surname);
-                session.setAttribute(AttributeKey.INCORRECT_PARAMETER, incorrectParameter);
+                request.setAttribute(RequestParameter.EMAIL, email);
+                request.setAttribute(RequestParameter.NAME, name);
+                request.setAttribute(RequestParameter.SURNAME, surname);
+                request.setAttribute(AttributeKey.INCORRECT_PARAMETER, incorrectParameter);
                 page = PageType.REGISTRATION.getPath();
             }
         } catch (ServiceException | EncryptionException | SendMailException e) {

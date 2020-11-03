@@ -101,8 +101,11 @@ public class User {
         StringBuilder builder = new StringBuilder();
 
         builder.append(account.toString());
+        builder.append(" ");
         builder.append(email);
+        builder.append(" ");
         builder.append(name);
+        builder.append(" ");
         builder.append(surname);
         return builder.toString();
     }

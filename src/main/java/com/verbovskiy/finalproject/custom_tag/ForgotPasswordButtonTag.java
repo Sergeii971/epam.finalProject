@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 @SuppressWarnings("serial")
 public class ForgotPasswordButtonTag extends BodyTagSupport {
     private static final String CONTENT_PAGE = "property/contentPage";
+    private static final String BUTTON_OK = "button.ok";
 
     @Override
     public int doStartTag() throws JspTagException {
@@ -22,10 +23,9 @@ public class ForgotPasswordButtonTag extends BodyTagSupport {
             ResourceBundle bundle = ResourceBundle.getBundle(CONTENT_PAGE, locale);
             JspWriter out = pageContext.getOut();
             out.write("<div class=\"text-center\">");
-            out.write("<input type=\"submit\" value=");
-            out.write(bundle.getString("button.ok"));
-            out.write(">");
-            out.write("</div>");
+            out.write("<button class=\"submit\">");
+            out.write(bundle.getString(BUTTON_OK));
+            out.write("</button></div>");
         } catch (IOException e) {
             throw new JspTagException(e.getMessage());
         }

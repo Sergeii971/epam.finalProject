@@ -19,10 +19,15 @@
         <c:if test="${not empty successfulEmailConfirmation && !successfulEmailConfirmation}">
             <label class="alert-warning"><fmt:message key="label.account_not_confirmed"/></label>
         </c:if>
-        <label class="col-one-half">
-            <input type="text" name="confirmation_code" autocomplete="off">
+        <label class="text-center">
+            <div>
+            <input type="text" name="confirmation_code" autocomplete="off" required pattern="\p{Alnum}">
+            </div>
         </label>
+        <br>
+        <div class="text-center">
         <button class="submit" type="submit" name="register">OK</button>
+        </div>
     </form>
         <jsp:include page="footer/comeBack.jsp"/>
     </div>

@@ -33,10 +33,11 @@
         <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
         <input type="hidden" name="command" value="ADD_USER">
         <label class="col-one-half">
-            <span class="label-text"><fmt:message key="label.name"/></span>
             <c:if test="${not empty incorrectParameter && incorrectParameter['name']}">
-                <label class="alert-danger"><fmt:message key="label.incorrect_name"/></label>
-            </c:if>
+            <label class="alert-danger"><fmt:message key="label.incorrect_name"/></label>
+        </c:if>
+            <span class="label-text"><fmt:message key="label.name"/></span>
+
             <input type="text" name="name" required  pattern="[a-zA-Zа-яА-Я-]{1,20}" value = ${name}>
         </label>
         <label class="col-one-half">
@@ -54,21 +55,19 @@
             <input type="email" name="email" value = ${email}>
         </label>
         <label class="password">
+            <c:if test="${not empty incorrectParameter && incorrectParameter['password']}">
+            <label class="alert-danger"><fmt:message key="label.incorrect_password"/></label>
+        </c:if>
             <span class="label-text"><fmt:message key="login.password"/></span>
             <button class="toggle-visibility"  title="toggle password visibility" tabindex="-1">
                 <span class="glyphicon glyphicon-eye-close"></span>
             </button>
-            <c:if test="${not empty incorrectParameter && incorrectParameter['password']}">
-                <label class="alert-danger"><fmt:message key="label.incorrect_password"/></label>
-            </c:if>
+
             <input type="password" name="password" required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,30}" >
         </label>
         <div class="text-center">
 
            <button class="submit" type="submit" name="register"><fmt:message key="label.sign_up"/></button>
-        </div>
-
-        <div>
         </div>
         </form>
         <jsp:include page="footer/comeBack.jsp"/>

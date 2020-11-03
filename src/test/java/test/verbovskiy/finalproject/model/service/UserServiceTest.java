@@ -14,7 +14,7 @@ public class UserServiceTest {
     @BeforeClass
     public void setUp() throws ServiceException {
         service = new UserService();
-        //service.add("epam.online.store@gmail.com","S12345678s",true,false, "epam.online.store@gmail.com", "Sergei", "Verbovskiy");
+      // service.add("epam.online.store@gmail.com","S12345678s&",true,false, true, "epam.online.store@gmail.com", "Sergei", "Verbovskiy");
 //        service.add("qqqq","qqqq",true, false,"email2", "name2", "surname2");
     }
 
@@ -29,6 +29,7 @@ public class UserServiceTest {
     public void tierDown() throws ServiceException {
         //service.remove("1234");
 //       service.remove("email2");
-       service.remove("sergeiverbovskiy4@gmail");
+       service.remove("sergeiverbovskiy4@gmail.com");
+       //service.remove("epam.online.store@gmail.com");
     }
 }

@@ -32,11 +32,15 @@ public class SendRecoveryKeyCommand implements ActionCommand {
         try {
             Optional<Account> account = service.findByLogin(email);
             if (account.isPresent()) {
-                Cryptographer cryptographer = new Cryptographer();
-                String recoveryKey = cryptographer.encrypt(account.get().toString());
-                MailSender sender = new MailSender(email, RequestParameter.MAIL_MASSAGE_SUBJECT, recoveryKey);
-                sender.send();
-                session.setAttribute(AttributeKey.IS_CONFIRMATION_CODE_SEND, true);
+                if (!service.isBlocked(email)) {
+                    Cryptographer cryptographer = new Cryptographer();
+                    String recoveryKey = cryptographer.encrypt(account.get().toString());
+                    MailSender sender = new MailSender(email, RequestParameter.EMPTY_VALUE, recoveryKey);
+                    sender.send();
+                    request.setAttribute(AttributeKey.IS_CONFIRMATION_CODE_SEND, true);
+                } else {
+                    request.setAttribute(RequestParameter.IS_BLOCKED, true);
+                }
             }
             session.setAttribute(RequestParameter.EMAIL, email);
             page = PageType.FORGOT_PASSWORD.getPath();

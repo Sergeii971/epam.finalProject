@@ -35,11 +35,11 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public void changeUserBlockStatus(String login, boolean status) throws DaoException {
+    public void changeBlockStatus(String login, boolean status) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.CHANGE_STATUS)) {
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.CHANGE_BLOCK_STATUS)) {
             statement.setBoolean(1, status);
             statement.setString(2, login);
             statement.executeUpdate();
@@ -86,11 +86,40 @@ public class AccountDaoImpl implements AccountDao {
         }
     }
 
-    private Account createAccountFromSql(ResultSet resultSet) throws SQLException {
-        String login = resultSet.getString(ColumnName.LOGIN_COLUMN_NAME);
-        boolean isAdmin = resultSet.getBoolean(ColumnName.IS_ADMIN_COLUMN_NAME);
-        boolean isBlocked = resultSet.getBoolean(ColumnName.IS_BLOCKED_COLUMN_NAME);
+    @Override
+    public void changePassword(String login, String password) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-        return new Account(login, isAdmin, isBlocked);
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.CHANGE_PASSWORD)) {
+            statement.setString(1, password);
+            statement.setString(2, login);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Error during changing user password in database", e);
+        }
+    }
+
+    @Override
+    public void changeConfirmationStatus(String login, boolean isConfirmed) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.CHANGE_CONFIRM_STATUS)) {
+            statement.setBoolean(1, isConfirmed);
+            statement.setString(2, login);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Error during changing user password in database", e);
+        }
+    }
+
+    private Account createAccountFromSql(ResultSet resultSet) throws SQLException {
+        String login = resultSet.getString(ColumnName.LOGIN);
+        boolean isAdmin = resultSet.getBoolean(ColumnName.IS_ADMIN);
+        boolean isBlocked = resultSet.getBoolean(ColumnName.IS_BLOCKED);
+        boolean isConfirmed = resultSet.getBoolean(ColumnName.IS_CONFIRMED);
+
+        return new Account(login, isAdmin, isBlocked, isConfirmed);
     }
 }

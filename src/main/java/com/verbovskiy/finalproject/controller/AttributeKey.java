@@ -14,4 +14,8 @@ public class AttributeKey {
     public static final String LOGIN_EXIST = "loginExist";
     public static final String INCORRECT_PARAMETER = "incorrectParameter";
     public static final String IS_CONFIRMATION_CODE_SEND = "isConfirmationCodeSend";
+    public static final String SUCCESSFUL_PASSWORD_CHANGE = "successfulPasswordChange";
+    public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
+    public static final String USER_LIST = "userList";
+    public static final String IS_NOT_CONFIRMED_USER_EXIST = "isNotConfirmedUserExist";
 }

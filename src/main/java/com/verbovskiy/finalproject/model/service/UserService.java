@@ -6,20 +6,21 @@ import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.exception.EncryptionException;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.dao.AccountDao;
-import com.verbovskiy.finalproject.model.dao.impl.AccountDaoImpl;
 import com.verbovskiy.finalproject.model.dao.UserDao;
+import com.verbovskiy.finalproject.model.dao.impl.AccountDaoImpl;
 import com.verbovskiy.finalproject.model.dao.impl.UserDaoImpl;
 import com.verbovskiy.finalproject.model.entity.Account;
 import com.verbovskiy.finalproject.model.entity.User;
 import com.verbovskiy.finalproject.util.encryption.Cryptographer;
 import com.verbovskiy.finalproject.util.validator.UserValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class UserService {
-    public Map<String, Boolean> add(String login, String password, boolean isAdmin, boolean isBlocked,
+    public Map<String, Boolean> add(String login, String password, boolean isAdmin, boolean isBlocked, boolean isConfirmed,
                                    String email, String name, String surname) throws ServiceException {
         AccountDao accountDao = new AccountDaoImpl();
         UserDao userDao = new UserDaoImpl();
@@ -29,10 +30,10 @@ public class UserService {
                 if (incorrectParameter.size() == 0) {
                     Cryptographer cryptographer = new Cryptographer();
                     String encryptedPassword = cryptographer.encrypt(password);
-                    userDao.add(login, email, name, surname, encryptedPassword, isAdmin, isBlocked);
+                    userDao.add(login, email, name, surname, encryptedPassword, isAdmin, isBlocked, isConfirmed);
                 }
             } else {
-                incorrectParameter.put(AttributeKey.LOGIN_EXIST, RequestParameter.IS_INCORRECT);
+                incorrectParameter.put(AttributeKey.LOGIN_EXIST, true);
             }
             return incorrectParameter;
         } catch (EncryptionException | DaoException e) {
@@ -53,6 +54,15 @@ public class UserService {
             userDao.remove(user.get().getEmail());
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public List<User> findAllUser() throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            return dao.findAll();
+        } catch (DaoException e) {
+            throw new ServiceException("error while find information about user", e);
         }
     }
 
@@ -117,6 +127,22 @@ public class UserService {
         }
     }
 
+    public boolean isConfirmed(String login) throws ServiceException {
+        if ((login == null) || (login.isEmpty())) {
+            throw new ServiceException("incorrect user data");
+        }
+        try {
+            AccountDao dao = new AccountDaoImpl();
+            Optional<Account> account = dao.findByLogin(login);
+            if (!account.isPresent()) {
+                throw new ServiceException("error while find information about user");
+            }
+            return account.get().isConfirmed();
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
     public boolean ConfirmUser(String confirmationKey) throws ServiceException {
         if ((confirmationKey == null) || (confirmationKey.isEmpty())) {
             throw new ServiceException("incorrect user data");
@@ -128,10 +154,68 @@ public class UserService {
                 result = false;
             } else {
                 AccountDao dao = new AccountDaoImpl();
-                dao.changeUserBlockStatus(login.get(), false);
+                dao.changeConfirmationStatus(login.get(), true);
             }
             return result;
         } catch (DaoException | EncryptionException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public boolean updatePassword(String login, String password, String passwordConfirmation)
+            throws ServiceException {
+        boolean result = false;
+        try {
+            if (UserValidator.validatePasswords(password, passwordConfirmation)) {
+                Cryptographer cryptographer = new Cryptographer();
+                String encryptedPassword = cryptographer.encrypt(password);
+                AccountDao dao = new AccountDaoImpl();
+                dao.changePassword(login, encryptedPassword);
+                result = true;
+            }
+            return result;
+        } catch (EncryptionException | DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public void updateUserBlockStatus(String login, boolean isBlocked) throws ServiceException {
+        try {
+        AccountDao dao = new AccountDaoImpl();
+        dao.changeBlockStatus(login, isBlocked);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public List<User> filterUsers(String userStatus) throws ServiceException {
+        try {
+            if (userStatus == null || userStatus.isEmpty()) {
+                throw new ServiceException("incorrect user status");
+            }
+            List<User> users;
+            UserDao dao = new UserDaoImpl();
+            if (userStatus.equals(RequestParameter.IS_BLOCKED)) {
+                users = dao.findBlockedStatusUsers();
+            } else {
+                if (userStatus.equals(RequestParameter.IS_CONFIRMED)) {
+                    users = dao.findNotConfirmedStatusUsers();
+                } else {
+                    users = dao.findAll();
+                }
+            }
+            return users;
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public List<User> findNotConfirmedUsers() throws ServiceException {
+        try {
+            UserDao dao = new UserDaoImpl();
+            List<User> users = dao.findNotConfirmedStatusUsers();
+            return users;
+        } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
     }

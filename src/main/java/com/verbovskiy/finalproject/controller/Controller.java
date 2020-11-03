@@ -2,6 +2,7 @@ package com.verbovskiy.finalproject.controller;
 
 import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.CommandProvider;
+import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.model.connection.ConnectionPool;
 
 import javax.servlet.ServletException;
@@ -33,6 +34,9 @@ public class Controller extends HttpServlet {
         String page = command.execute(request);
         HttpSession session = request.getSession();
         session.setAttribute(AttributeKey.CURRENT_PAGE, page);
+        RequestAttributeHandler handler = new RequestAttributeHandler();
+        handler.setAttributes(request);
+        session.setAttribute(AttributeKey.REQUEST_ATTRIBUTE_HANDLER, handler);
         request.getRequestDispatcher(page).forward(request, response);
     }
 

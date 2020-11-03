@@ -11,14 +11,15 @@ public enum PageType {
     CONFIRMATION("/jsp/userEmailConfirmation.jsp", false),
     FORGOT_PASSWORD("/jsp/forgotPassword.jsp", true),
     USER_MANAGEMENT("/jsp/userManagement.jsp", false),
+    INPUT_NEW_PASSWORD_IN_FORGOT_PASSWORD("/jsp/inputNewPasswordInForgotPassword.jsp", true),
     SWITCH_LOCALE("/jsp/switchLocale.jsp", false);
 
     private final String path;
     private final boolean linkAvailable;
 
-    PageType(String path, boolean isRequireAuthorization) {
+    PageType(String path, boolean linkAvailable) {
         this.path = path;
-        this.linkAvailable = isRequireAuthorization;
+        this.linkAvailable = linkAvailable;
     }
 
     public String getPath(){

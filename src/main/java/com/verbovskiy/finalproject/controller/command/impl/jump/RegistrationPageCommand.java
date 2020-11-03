@@ -2,6 +2,7 @@ package com.verbovskiy.finalproject.controller.command.impl.jump;
 
 import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.PageType;
+import com.verbovskiy.finalproject.controller.command.RequestParameter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

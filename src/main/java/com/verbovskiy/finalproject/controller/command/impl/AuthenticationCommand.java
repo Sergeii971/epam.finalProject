@@ -27,24 +27,24 @@ public class AuthenticationCommand implements ActionCommand {
 
         try {
             if (userService.verifyAccount(accountLogin, accountPassword)) {
-                   if(!userService.isBlocked(accountLogin)) {
-                    session.setAttribute(RequestParameter.IS_ACTIVE, true);
-                    if (userService.isAdmin(accountLogin)) {
-                        page = PageType.ADMIN_INTERFACE.getPath();
-                        session.setAttribute(RequestParameter.IS_ADMIN, true);
-                    } else {
-                        page = PageType.USER_INTERFACE.getPath();
-                        session.setAttribute(RequestParameter.IS_ADMIN, false);
-                    }
+                   if(!userService.isBlocked(accountLogin) || userService.isConfirmed(accountLogin)) {
+                       session.setAttribute(RequestParameter.IS_ACTIVE, true);
+                       if (userService.isAdmin(accountLogin)) {
+                           page = PageType.ADMIN_INTERFACE.getPath();
+                           session.setAttribute(RequestParameter.IS_ADMIN, true);
+                       } else {
+                           page = PageType.USER_INTERFACE.getPath();
+                           session.setAttribute(RequestParameter.IS_ADMIN, false);
+                       }
                     addComeBackPagePath(session, page);
                 } else {
-                       session.setAttribute(RequestParameter.LOGIN, accountLogin);
-                       session.setAttribute(AttributeKey.SUCCESSFUL_ACTIVATION, false);
+                       request.setAttribute(RequestParameter.LOGIN, accountLogin);
+                       request.setAttribute(AttributeKey.SUCCESSFUL_ACTIVATION, false);
                        page = PageType.AUTHORIZATION.getPath();
                 }
             } else {
-                session.setAttribute(RequestParameter.LOGIN, accountLogin);
-                session.setAttribute(AttributeKey.SUCCESSFUL_AUTHENTICATION, false);
+                request.setAttribute(RequestParameter.LOGIN, accountLogin);
+                request.setAttribute(AttributeKey.SUCCESSFUL_AUTHENTICATION, false);
                 page = PageType.AUTHORIZATION.getPath();
             }
         } catch (ServiceException e) {

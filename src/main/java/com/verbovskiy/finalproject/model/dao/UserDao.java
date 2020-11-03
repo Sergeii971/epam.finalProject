@@ -8,11 +8,15 @@ import java.util.Optional;
 
 public interface UserDao {
     void add(String login, String email, String name, String surname,String encryptedPassword,
-             boolean isAdmin,boolean isBlocked) throws DaoException;
+             boolean isAdmin,boolean isBlocked,  boolean isConfirmed) throws DaoException;
 
     void remove(String email) throws DaoException;
 
     List<User> findAll() throws DaoException;
+
+    List<User> findBlockedStatusUsers() throws DaoException;
+
+    List<User> findNotConfirmedStatusUsers() throws DaoException;
 
     Optional<User> findByEmail(String email) throws DaoException;
 }

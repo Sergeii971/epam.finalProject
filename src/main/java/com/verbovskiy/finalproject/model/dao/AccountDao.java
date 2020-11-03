@@ -9,9 +9,13 @@ import java.util.Optional;
 public interface AccountDao {
     List<Account> findAll() throws DaoException;
 
-    void changeUserBlockStatus(String login, boolean status) throws DaoException;
+    void changeBlockStatus(String login, boolean status) throws DaoException;
 
     Optional<Account> findByLogin(String login) throws DaoException;
 
     Optional<Account> findByLoginPassword(String login, String password) throws DaoException;
+
+    void changePassword(String login, String password) throws DaoException;
+
+    void changeConfirmationStatus(String login, boolean isConfirmed) throws DaoException;
 }
