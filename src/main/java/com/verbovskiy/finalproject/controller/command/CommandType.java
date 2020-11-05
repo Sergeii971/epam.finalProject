@@ -1,10 +1,7 @@
 package com.verbovskiy.finalproject.controller.command;
 
 import com.verbovskiy.finalproject.controller.command.impl.*;
-import com.verbovskiy.finalproject.controller.command.impl.jump.AuthorizationPageCommand;
-import com.verbovskiy.finalproject.controller.command.impl.jump.ForgotPasswordPageCommand;
-import com.verbovskiy.finalproject.controller.command.impl.jump.RegistrationPageCommand;
-import com.verbovskiy.finalproject.controller.command.impl.jump.UserManagementPageCommand;
+import com.verbovskiy.finalproject.controller.command.impl.jump.*;
 
 public enum CommandType {
     ADD_USER(new AddUserCommand()),
@@ -21,6 +18,10 @@ public enum CommandType {
     FILTER_USERS(new FilterUserCommand()),
     DELETE_NOT_CONFIRMED_USER(new DeleteNotConfirmedUserCommand()),
     CHECK_NEW_PASSWORD(new CheckNewPasswordCommand()),
+    SEARCH_USER(new SearchUserCommand()),
+    SORT_USERS(new SortUsersCommand()),
+    ADD_GOOD(new AddGoodCommand()),
+    ADD_GOOD_PAGE(new AddGoodPageCommand()),
     SEND_RECOVERY_KEY(new SendRecoveryKeyCommand());
 
     private final ActionCommand command;

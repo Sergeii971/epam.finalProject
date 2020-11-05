@@ -11,6 +11,7 @@ public enum PageType {
     CONFIRMATION("/jsp/userEmailConfirmation.jsp", false),
     FORGOT_PASSWORD("/jsp/forgotPassword.jsp", true),
     USER_MANAGEMENT("/jsp/userManagement.jsp", false),
+    ADD_GOOD("/jsp/addGood.jsp", false),
     INPUT_NEW_PASSWORD_IN_FORGOT_PASSWORD("/jsp/inputNewPasswordInForgotPassword.jsp", true),
     SWITCH_LOCALE("/jsp/switchLocale.jsp", false);
 

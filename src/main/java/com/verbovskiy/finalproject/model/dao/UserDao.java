@@ -18,5 +18,7 @@ public interface UserDao {
 
     List<User> findNotConfirmedStatusUsers() throws DaoException;
 
+    List<User> searchUsers(String searchParameter) throws DaoException;
+
     Optional<User> findByEmail(String email) throws DaoException;
 }

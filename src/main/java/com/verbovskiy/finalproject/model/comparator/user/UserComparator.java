@@ -1,0 +1,20 @@
+package com.verbovskiy.finalproject.model.comparator.user;
+
+import com.verbovskiy.finalproject.model.entity.User;
+
+import java.util.Comparator;
+
+public enum UserComparator {
+    SURNAME((User user1, User user2) -> user1.getSurname().compareTo(user2.getSurname())),
+    EMAIL((User user1, User user2) -> user1.getEmail().compareTo(user2.getEmail()));
+
+    private Comparator<User> comparator;
+
+    UserComparator(Comparator<User> comparator) {
+        this.comparator = comparator;
+    }
+
+    public Comparator<User> getComparator() {
+        return comparator;
+    }
+}

@@ -21,6 +21,7 @@ import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
     private final Logger logger = LogManager.getLogger(UserDaoImpl.class);
+
     @Override
     public void add(String login, String email, String name, String surname, String encryptedPassword,
                     boolean isAdmin, boolean isBlocked, boolean isConfirmed) throws DaoException {
@@ -144,6 +145,25 @@ public class UserDaoImpl implements UserDao {
             return users;
         } catch (SQLException e) {
             throw new DaoException("Error while finding user by blocked status from database", e);
+        }
+    }
+
+    @Override
+    public List<User> searchUsers(String searchParameter) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.SEARCH_USER)) {
+            List<User> users = new ArrayList<>();
+            statement.setString(1, searchParameter);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                User user = createUserFromSql(resultSet);
+                users.add(user);
+            }
+            return users;
+        } catch (SQLException e) {
+            throw new DaoException("Error while search users by parameter from database", e);
         }
     }
 

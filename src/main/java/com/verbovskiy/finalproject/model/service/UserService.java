@@ -5,6 +5,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.exception.EncryptionException;
 import com.verbovskiy.finalproject.exception.ServiceException;
+import com.verbovskiy.finalproject.model.comparator.user.UserComparator;
 import com.verbovskiy.finalproject.model.dao.AccountDao;
 import com.verbovskiy.finalproject.model.dao.UserDao;
 import com.verbovskiy.finalproject.model.dao.impl.AccountDaoImpl;
@@ -14,7 +15,7 @@ import com.verbovskiy.finalproject.model.entity.User;
 import com.verbovskiy.finalproject.util.encryption.Cryptographer;
 import com.verbovskiy.finalproject.util.validator.UserValidator;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -210,11 +211,40 @@ public class UserService {
         }
     }
 
+    public List<User> sortUsers(String sortType, List<User> users) throws ServiceException {
+        if (sortType == null || sortType.isEmpty()) {
+            throw new ServiceException("incorrect SortType");
+        }
+        try {
+            Comparator comparator = UserComparator.valueOf(sortType.toUpperCase()).getComparator();
+            if (comparator != null) {
+                users.sort(comparator);
+            } else {
+                UserDao dao = new UserDaoImpl();
+                 users = dao.findAll();
+            }
+            return users;
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
     public List<User> findNotConfirmedUsers() throws ServiceException {
         try {
             UserDao dao = new UserDaoImpl();
-            List<User> users = dao.findNotConfirmedStatusUsers();
-            return users;
+            return dao.findNotConfirmedStatusUsers();
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public List<User> searchUsers(String parameter) throws ServiceException {
+        if (parameter == null || parameter.isEmpty()) {
+            throw new ServiceException("incorrect data");
+        }
+        try {
+            UserDao dao = new UserDaoImpl();
+            return dao.searchUsers(parameter);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }

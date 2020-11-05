@@ -1,4 +1,4 @@
-package test.verbovskiy.finalproject.util;
+package test.verbovskiy.finalproject.util.encryption;
 
 import com.verbovskiy.finalproject.exception.EncryptionException;
 import com.verbovskiy.finalproject.util.encryption.Cryptographer;

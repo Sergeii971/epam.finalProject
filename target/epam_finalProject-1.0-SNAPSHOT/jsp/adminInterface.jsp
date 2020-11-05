@@ -9,10 +9,7 @@
 </head>
 <body>
 <jsp:include page="header/switchLocale.jsp"/>
-<form action="${pageContext.request.contextPath}/controller" method="post">
-    <input type="hidden" name="command" value="USER_MANAGEMENT_PAGE">
-    <input type="submit" value=<fmt:message key="button.user_management"/>>
-</form>
+<jsp:include page="header/admin.jsp"/>
 <jsp:include page="footer/comeBack.jsp"/>
 </body>
 </html>

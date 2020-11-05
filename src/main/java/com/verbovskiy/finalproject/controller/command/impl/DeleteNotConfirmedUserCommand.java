@@ -26,10 +26,10 @@ public class DeleteNotConfirmedUserCommand implements ActionCommand {
         String page = PageType.ERROR.getPath();
 
         try {
-            List<User> users = service.findAllUser();
+            List<User> users = (List<User>) session.getAttribute(AttributeKey.USER_LIST);
             User user = users.get(userIndex);
             service.remove(user.getEmail());
-            users = service.findAllUser();
+            users.remove(user);
             session.setAttribute(AttributeKey.USER_LIST, users);
             List<User> isNotConfirmedUsers = service.findNotConfirmedUsers();
             if (isNotConfirmedUsers.size() == 0) {

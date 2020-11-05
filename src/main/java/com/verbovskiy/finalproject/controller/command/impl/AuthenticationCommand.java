@@ -18,32 +18,31 @@ public class AuthenticationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute(RequestParameter.IS_ACTIVE, false);
         UserService userService = new UserService();
-        String accountLogin = request.getParameter(RequestParameter.LOGIN);
-        String accountPassword = request.getParameter(RequestParameter.PASSWORD);
+        String email = request.getParameter(RequestParameter.LOGIN);
+        String password = request.getParameter(RequestParameter.PASSWORD);
         String page = PageType.ERROR.getPath();
         HttpSession session = request.getSession();
 
         try {
-            if (userService.verifyAccount(accountLogin, accountPassword)) {
-                   if(!userService.isBlocked(accountLogin) || userService.isConfirmed(accountLogin)) {
-                       session.setAttribute(RequestParameter.IS_ACTIVE, true);
-                       if (userService.isAdmin(accountLogin)) {
-                           page = PageType.ADMIN_INTERFACE.getPath();
+            if (userService.verifyAccount(email, password)) {
+                   if(!userService.isBlocked(email) || userService.isConfirmed(email)) {
+                       session.setAttribute(RequestParameter.EMAIL, email);
+                       if (userService.isAdmin(email)) {
                            session.setAttribute(RequestParameter.IS_ADMIN, true);
+                           page = PageType.ADMIN_INTERFACE.getPath();
                        } else {
-                           page = PageType.USER_INTERFACE.getPath();
                            session.setAttribute(RequestParameter.IS_ADMIN, false);
+                           page = PageType.USER_INTERFACE.getPath();
                        }
                     addComeBackPagePath(session, page);
                 } else {
-                       request.setAttribute(RequestParameter.LOGIN, accountLogin);
+                       request.setAttribute(RequestParameter.LOGIN, email);
                        request.setAttribute(AttributeKey.SUCCESSFUL_ACTIVATION, false);
                        page = PageType.AUTHORIZATION.getPath();
                 }
             } else {
-                request.setAttribute(RequestParameter.LOGIN, accountLogin);
+                request.setAttribute(RequestParameter.LOGIN, email);
                 request.setAttribute(AttributeKey.SUCCESSFUL_AUTHENTICATION, false);
                 page = PageType.AUTHORIZATION.getPath();
             }

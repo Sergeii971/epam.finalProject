@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="property.contentPage"/>
-<html >
+<html>
 <head>
     <meta charset="UTF-8">
     <title>DailyUI Challenge 001</title>
@@ -38,21 +38,21 @@
         </c:if>
             <span class="label-text"><fmt:message key="label.name"/></span>
 
-            <input type="text" name="name" required  pattern="[a-zA-Zа-яА-Я-]{1,20}" value = ${name}>
+            <input type="text" name="name" required  pattern="[a-zA-Zа-яА-Я-]{1,50}" value = ${name}>
         </label>
         <label class="col-one-half">
             <c:if test="${not empty incorrectParameter && incorrectParameter['surname']}">
                 <label class="alert-danger"><fmt:message key="label.incorrect_surname"/></label>
             </c:if>
             <span class="label-text"><fmt:message key="label.surname"/></span>
-            <input type="text" name="surname" required  pattern="[a-zA-Zа-яА-Я-]{1,20}" value = ${surname}>
+            <input type="text" name="surname" required  pattern="[a-zA-Zа-яА-Я-]{1,50}" value = ${surname}>
         </label>
         <label>
             <c:if test="${not empty incorrectParameter && incorrectParameter['email']}">
             <label class="alert-danger"><fmt:message key="label.incorrect_email"/></label>
         </c:if>
             <span class="label-text"><fmt:message key="login.email"/></span>
-            <input type="email" name="email" value = ${email}>
+            <input type="email" name="email" required pattern="{1,50}" value = ${email}>
         </label>
         <label class="password">
             <c:if test="${not empty incorrectParameter && incorrectParameter['password']}">
@@ -63,7 +63,7 @@
                 <span class="glyphicon glyphicon-eye-close"></span>
             </button>
 
-            <input type="password" name="password" required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,30}" >
+            <input type="password" name="password" required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,120}" >
         </label>
         <div class="text-center">
 
@@ -75,7 +75,7 @@
 </div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-<%--<script src="../js/registration.js"></script>--%>
+<script src="${pageContext.request.contextPath}/js/registration.js"></script>
 
 </body>
 </html>

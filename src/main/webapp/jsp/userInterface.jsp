@@ -5,6 +5,7 @@
 </head>
 <body>
 <jsp:include page="header/switchLocale.jsp"/>
+<jsp:include page="header/user.jsp"/>
 <jsp:include page="footer/comeBack.jsp"/>
 </body>
 </html>

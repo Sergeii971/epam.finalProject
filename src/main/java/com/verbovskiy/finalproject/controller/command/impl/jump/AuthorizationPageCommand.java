@@ -16,7 +16,6 @@ public class AuthorizationPageCommand implements ActionCommand {
         HttpSession session = request.getSession();
         if (session.isNew()) {
             session.setAttribute(AttributeKey.LOCALE, AttributeKey.DEFAULT_LOCALE);
-            session.setAttribute(RequestParameter.IS_ACTIVE, false);
             session.setAttribute(RequestParameter.IS_ADMIN, false);
             Map<String, String> pages = new HashMap<>();
             session.setAttribute(AttributeKey.COME_BACK_PAGES, pages);

@@ -1,6 +1,6 @@
 package com.verbovskiy.finalproject.model.entity;
 
-public class User {
+public class User extends Entity {
     private String email;
     private String name;
     private String surname;
@@ -89,10 +89,10 @@ public class User {
     public int hashCode() {
         int result = 1;
 
-        result = 31  * result + (account == null ? 0 : account.hashCode());
-        result = 31  * result + (email == null ? 0 : email.hashCode());
-        result = 31  * result + (name == null ? 0 : name.hashCode());
-        result = 31  * result + (surname == null ? 0 : surname.hashCode());
+        result += 31 * result + (account == null ? 0 : account.hashCode());
+        result += 31 * result + (email == null ? 0 : email.hashCode());
+        result += 31 * result + (name == null ? 0 : name.hashCode());
+        result += 31 * result + (surname == null ? 0 : surname.hashCode());
         return result;
     }
 

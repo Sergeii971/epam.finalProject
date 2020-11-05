@@ -221,7 +221,7 @@ body.reg{
 		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 		-webkit-transition: all 0.25s;
-		transition: all 0.25s;
+		transition: all 5s;
 	}
 
 .reg form label.password button.toggle-visibility:hover,

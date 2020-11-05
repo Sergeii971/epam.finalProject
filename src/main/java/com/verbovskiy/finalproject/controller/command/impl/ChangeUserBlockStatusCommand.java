@@ -28,11 +28,11 @@ public class ChangeUserBlockStatusCommand implements ActionCommand {
         String page = PageType.ERROR.getPath();
 
         try {
-            List<User> users = service.findAllUser();
+            List<User> users = (List<User>) session.getAttribute(AttributeKey.USER_LIST);
             User user = users.get(userIndex);
             service.updateUserBlockStatus(user.getEmail(), userBlockStatus);
-            List<User> newUserList = service.findAllUser();
-            session.setAttribute(AttributeKey.USER_LIST, newUserList);
+            user.getAccount().setBlocked(userBlockStatus);
+            session.setAttribute(AttributeKey.USER_LIST, users);
             page = PageType.USER_MANAGEMENT.getPath();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error while updating user status", e);
