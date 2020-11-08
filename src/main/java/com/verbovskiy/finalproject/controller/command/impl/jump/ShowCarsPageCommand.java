@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class AdminShowCarsPageCommand implements ActionCommand {
-    private final Logger logger = LogManager.getLogger(AdminShowCarsPageCommand.class);
+public class ShowCarsPageCommand implements ActionCommand {
+    private final Logger logger = LogManager.getLogger(ShowCarsPageCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -25,15 +25,16 @@ public class AdminShowCarsPageCommand implements ActionCommand {
         CarService service = new CarService();
         String page = PageType.ERROR.getPath();
         session.setAttribute(RequestParameter.HAS_NEXT_PAGE, true);
+        boolean isAdmin = (boolean) session.getAttribute(RequestParameter.IS_ADMIN);
 
         try {
-            List<Car> allCars = service.findAllCars();
+            List<Car> allCars = isAdmin ? service.findAllCars() : service.findAvailableCar();
             if (allCars == null || allCars.isEmpty()) {
                 request.setAttribute(RequestParameter.IS_EMPTY, true);
             } else {
                 int toIndex = Constant.NUMBER_OF_CAR_PER_PAGE;
                 if (allCars.size() <= Constant.NUMBER_OF_CAR_PER_PAGE) {
-                    toIndex = allCars.size() - 1;
+                    toIndex = allCars.size();
                     session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
                 }
                 List<Car> carsPerPage;
@@ -43,7 +44,7 @@ public class AdminShowCarsPageCommand implements ActionCommand {
                 session.setAttribute(AttributeKey.TO_INDEX, toIndex);
                 session.setAttribute(AttributeKey.FROM_INDEX, 0);
             }
-                page = PageType.ADMIN_SHOW_CAR.getPath();
+                page = PageType.SHOW_CAR.getPath();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
         }

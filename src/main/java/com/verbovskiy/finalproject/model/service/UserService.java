@@ -239,7 +239,7 @@ public class UserService {
     }
 
     public List<User> searchUsers(String parameter) throws ServiceException {
-        if (parameter == null || parameter.isEmpty()) {
+        if (parameter == null) {
             throw new ServiceException("incorrect data");
         }
         try {

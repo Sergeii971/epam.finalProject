@@ -23,4 +23,6 @@ public class AttributeKey {
     public static final String FROM_INDEX = "fromIndex";
     public static final String TO_INDEX = "toIndex";
     public static final String IS_FIRST_PAGE = "isFirstPage";
+    public static final String ORDER_LIST = "orderList";
+    public static final String ORDER_PER_PAGE = "orderPerPage";
 }

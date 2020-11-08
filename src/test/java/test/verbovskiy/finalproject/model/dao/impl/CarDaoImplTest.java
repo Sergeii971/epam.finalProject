@@ -26,6 +26,6 @@ public class CarDaoImplTest {
 
     @Test
     public void testRemove() throws DaoException {
-        dao.remove(1);
+        dao.remove(40);
     }
 }

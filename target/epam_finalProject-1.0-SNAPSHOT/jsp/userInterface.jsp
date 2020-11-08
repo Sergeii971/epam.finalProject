@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userInterface.css">
 </head>
-<body>
+<body class="reg">
 <jsp:include page="header/switchLocale.jsp"/>
 <jsp:include page="header/user.jsp"/>
-<jsp:include page="footer/comeBack.jsp"/>
 </body>
 </html>

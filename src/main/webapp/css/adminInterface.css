@@ -1,31 +1,16 @@
 body.reg{
-    background: #9053c7;
-    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
-    background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
-    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-    background: linear-gradient(-135deg, #c850c0, #4158d0);
+    background: url('../image/addGood.png') center no-repeat;
     background-size: cover;
     color: #333;
     font-size: 18px;
     font-family: 'Raleway', sans-serif;
 }
-.reg .container:before {
-    background: #9053c7;
-    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
-    background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
-    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-    background: linear-gradient(-135deg, #c850c0, #4158d0);
-    background-size: cover !important;
-    content: '' !important;
-    -webkit-filter: blur(10px) !important;
-    filter: blur(10px) !important;
-    height: 100vh !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    z-index: -1 !important;
-    -webkit-transform: translate(-50%, -50%) !important;
-    -ms-transform: translate(-50%, -50%) !important;
-    transform: translate(-50%, -50%) !important;
-    width: 100vw !important;
+
+.reg form button.submit {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid #333;
+    line-height: 1em;
+    padding: 0.5em 0.5em;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
 }

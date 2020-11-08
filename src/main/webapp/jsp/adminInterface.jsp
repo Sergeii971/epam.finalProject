@@ -13,6 +13,5 @@
 <div class="container">
 <jsp:include page="header/admin.jsp"/>
 </div>
-</div>
 </body>
 </html>

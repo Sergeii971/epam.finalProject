@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class CarPreviousPageCommand implements ActionCommand {
-    private final Logger logger = LogManager.getLogger(CarPreviousPageCommand.class);
-
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -38,6 +36,6 @@ public class CarPreviousPageCommand implements ActionCommand {
         session.setAttribute(AttributeKey.TO_INDEX, toIndex);
         session.setAttribute(AttributeKey.FROM_INDEX, fromIndex);
 
-        return PageType.ADMIN_SHOW_CAR.getPath();
+        return PageType.SHOW_CAR.getPath();
     }
 }

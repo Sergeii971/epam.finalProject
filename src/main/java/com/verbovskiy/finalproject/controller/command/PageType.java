@@ -12,7 +12,9 @@ public enum PageType {
     FORGOT_PASSWORD("/jsp/forgotPassword.jsp", true),
     USER_MANAGEMENT("/jsp/userManagement.jsp", false),
     ADD_CAR("/jsp/addCar.jsp", false),
-    ADMIN_SHOW_CAR("/jsp/adminShowCars.jsp", false),
+    BUY_CAR("/jsp/buyCar.jsp", false),
+    SHOW_CAR("/jsp/showCars.jsp", false),
+    SHOW_ORDER("/jsp/showOrders.jsp", false),
     INPUT_NEW_PASSWORD_IN_FORGOT_PASSWORD("/jsp/inputNewPasswordInForgotPassword.jsp", true),
     SWITCH_LOCALE("/jsp/switchLocale.jsp", false);
 

@@ -8,6 +8,7 @@ import com.verbovskiy.finalproject.model.dao.query.DatabaseQuery;
 import com.verbovskiy.finalproject.model.entity.*;
 import com.verbovskiy.finalproject.util.date_converter.DateConverter;
 
+import javax.swing.text.html.Option;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,7 @@ public class CarDaoImpl implements CarDao {
         try (Connection connection = connectionPool.getConnection();
                 PreparedStatement carStatement = connection.prepareStatement(DatabaseQuery.ADD_CAR)) {
             carStatement.setString(1, brand);
-            carStatement.setString(2, price);
+            carStatement.setDouble(2, Double.parseDouble(price));
             carStatement.setString(3, description);
             carStatement.setString(4, imageName);
             carStatement.setBoolean(5, isAvailable);
@@ -89,6 +90,79 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
+    public List<Car> adminFindBySearchParameters(String searchParameter, double fromPrice, double toPrice, String brand,
+                                                 String color, String boxType, String engineType) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.ADMIN_FIND_CARS_BY_SEARCH_PARAMETERS)) {
+            statement.setString(1, brand);
+            statement.setDouble(2, fromPrice);
+            statement.setDouble(3, toPrice);
+            statement.setString( 4, color);
+            statement.setString(5, engineType);
+            statement.setString(6, boxType);
+            statement.setString(7, searchParameter);
+            List<Car> cars = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Car car = createCarFromSql(resultSet);
+                cars.add(car);
+            }
+            return cars;
+        } catch (SQLException e) {
+            throw new DaoException("Error while finding cars by search parameters from database", e);
+        }
+    }
+
+    @Override
+    public List<Car> findAvailableCar() throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ALL_AVAILABLE_CAR)) {
+            boolean isAvailable = true;
+            statement.setBoolean(1, isAvailable);
+            List<Car> cars = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Car car = createCarFromSql(resultSet);
+                cars.add(car);
+            }
+            return cars;
+        } catch (SQLException e) {
+            throw new DaoException("Error while finding available car from database", e);
+        }
+    }
+
+    @Override
+    public List<Car> userFindBySearchParameters(String searchParameter, double fromPrice, double toPrice, String brand,
+                                                String color, String boxType, String engineType, boolean isAvailable) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.USER_FIND_CARS_BY_SEARCH_PARAMETERS)) {
+            statement.setString(1, brand);
+            statement.setDouble(2, fromPrice);
+            statement.setDouble(3, toPrice);
+            statement.setBoolean(4, isAvailable);
+            statement.setString( 5, color);
+            statement.setString(6, engineType);
+            statement.setString(7, boxType);
+            statement.setString(8, searchParameter);
+            List<Car> cars = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Car car = createCarFromSql(resultSet);
+                cars.add(car);
+            }
+            return cars;
+        } catch (SQLException e) {
+            throw new DaoException("Error while finding imageName by carId from database", e);
+        }
+    }
+
+    @Override
     public Optional<String> findImageNameById(long carId) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
@@ -105,6 +179,25 @@ public class CarDaoImpl implements CarDao {
             throw new DaoException("Error while finding imageName by carId from database", e);
         }
     }
+
+    @Override
+    public Optional<Car> findById(long carId) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_CAR_BY_ID)) {
+            statement.setLong(1, carId);
+            ResultSet resultSet = statement.executeQuery();
+            Optional<Car> car = Optional.empty();
+            if (resultSet.next()) {
+                car = Optional.of(createCarFromSql(resultSet));
+            }
+            return car;
+        } catch (SQLException e) {
+            throw new DaoException("Error while finding imageName by carId from database", e);
+        }
+    }
+
 
     private Car createCarFromSql(ResultSet resultSet) throws SQLException {
         long carId = Long.parseLong(resultSet.getString(ColumnName.CAR_ID));

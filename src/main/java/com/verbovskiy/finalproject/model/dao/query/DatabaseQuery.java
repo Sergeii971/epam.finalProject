@@ -34,4 +34,27 @@ public class DatabaseQuery {
     public static final String REMOVE_CAR = "DELETE FROM car " + "WHERE carId = ?";
     public static final String FIND_IMAGE_NAME_BY_ID = "SELECT imageName FROM car WHERE carId = ?";
     public static final String CHANGE_IS_AVAILABLE_CAR_STATUS = "UPDATE car SET isAvailable = ? WHERE carId = ?";
+    public static final String ADMIN_FIND_CARS_BY_SEARCH_PARAMETERS = FIND_ALL_CARS + " WHERE brand LIKE concat(?, '%')" +
+            " AND price >= ? AND price <= ? " + " AND color LIKE concat(?, '%') AND engineType LIKE concat(?, '%')" +
+            " AND boxType LIKE concat(?, '%') AND CONCAT(brand, price, description, " +
+            " model, manufactureYear,  color, engineType, boxType)" + " LIKE concat('%' , ?, '%') ORDER BY addedDate DESC";
+    public static final String USER_FIND_CARS_BY_SEARCH_PARAMETERS = FIND_ALL_CARS + " WHERE brand LIKE concat(?, '%')" +
+            " AND price >= ? AND price <= ? " + " AND isAvailable = ? AND color LIKE concat(?, '%')" +
+            " AND engineType LIKE concat(?, '%') AND boxType LIKE concat(?, '%') AND CONCAT(brand, price, description, " +
+            " model, manufactureYear, color, engineType, boxType)" + " LIKE concat('%' , ?, '%') ORDER BY addedDate DESC";
+    public static final String FIND_ALL_AVAILABLE_CAR = FIND_ALL_CARS  + " WHERE isAvailable = ?";
+    public static final String FIND_CAR_BY_ID = FIND_ALL_CARS + " WHERE carId = ? ";
+
+    public static final String ADD_ORDER = "INSERT INTO `order` (`date`, `user_email`, `car_carId`, inProcessing) VALUES (?, ?, ?, ?) ";
+    public static final String FIND_ALL_ORDERS = "SELECT orderId, date, inProcessing, carId, brand, price, description," +
+            " imageName, isAvailable, addedDate, model, manufactureYear, color, engineType, boxType," +
+            " email, name, surname, login, isAdmin, isBlocked, isConfirmed" +
+            " FROM `order` Inner Join car ON carId = car_carId Inner Join user" +
+            " ON user.email = user_email  Inner Join account ON account.login = user_login";
+    public static final String FIND_ORDER_BY_CAR_ID = FIND_ALL_ORDERS + " WHERE carId = ?";
+    public static final String REMOVE_ORDER = "DELETE FROM `order` " + "WHERE orderId = ?";
+    public static final String FIND_ORDERS_BY_SEARCH_PARAMETERS = FIND_ALL_ORDERS + " WHERE brand LIKE concat(?, '%')" +
+            " AND color LIKE concat(?, '%') AND engineType LIKE concat(?, '%') AND boxType LIKE concat(?, '%')" +
+            " AND CONCAT(brand, price, description, model, manufactureYear, color, engineType, boxType,  email, name," +
+            " surname) LIKE concat('%' , ?, '%') ORDER BY date DESC";
 }

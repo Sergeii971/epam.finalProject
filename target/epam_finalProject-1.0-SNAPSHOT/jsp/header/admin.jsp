@@ -18,8 +18,14 @@
     <button type="submit"> <fmt:message key="button.add_car"/></button>
 </form>
     <form action="${pageContext.request.contextPath}/controller" method="post">
-        <input type="hidden" name="command" value="ADMIN_SHOW_CARS_PAGE">
+        <input type="hidden" name="command" value="SHOW_CARS_PAGE">
         <button type="submit"> <fmt:message key="button.show_cars"/></button>
+    </form>
+    <form action="${pageContext.request.contextPath}/controller" method="post">
+        <input type="hidden" name="command" value="SHOW_ORDERS_PAGE"/>
+        <button>
+            <fmt:message key="button.show_orders"/>
+        </button>
     </form>
     <form action="${pageContext.request.contextPath}/controller" method="post">
         <input type="hidden" name="command" value="MOVE_AUTHORIZATION_PAGE"/>

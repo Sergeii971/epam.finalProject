@@ -28,7 +28,7 @@
         <input type="hidden" name="command" value="SEARCH_USER">
 
             <input class="reg" type="text" name="searchParameter" autocomplete="off"
-                   placeholder=<fmt:message key="placeholder.search"/> required pattern="[0-9a-zA-Z!@#$%^&*]">
+                   placeholder=<fmt:message key="placeholder.search"/> pattern="[0-9a-zA-Z!@#$%^&*]">
         <button class="reg" type="submit">
             <fmt:message key="button.find"/>
         </button>
@@ -63,7 +63,6 @@
 </table>
 </div>
 <div class="reg">
-<jsp:include page="footer/comeBack.jsp"/>
 </div>
 </body>
 </html>

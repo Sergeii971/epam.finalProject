@@ -5,10 +5,7 @@ import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.Constant;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
-import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Car;
-import com.verbovskiy.finalproject.model.service.CarService;
-import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -17,8 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class CarNextPageCommand implements ActionCommand {
-    private final Logger logger = LogManager.getLogger(CarNextPageCommand.class);
-
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -36,6 +31,6 @@ public class CarNextPageCommand implements ActionCommand {
         session.setAttribute(AttributeKey.TO_INDEX, toIndex);
         session.setAttribute(AttributeKey.FROM_INDEX, fromIndex);
         session.setAttribute(AttributeKey.IS_FIRST_PAGE, false);
-        return PageType.ADMIN_SHOW_CAR.getPath();
+        return PageType.SHOW_CAR.getPath();
     }
 }

@@ -13,7 +13,7 @@ public class CarValidator {
     private static final String PRICE_PATTERN = "^[0-9]{1,15}$";
     private static final String DESCRIPTION_PATTERN = "[0-9a-zA-Z!@#$%^&*]{0,500}";
     private static final String YEAR_PATTERN = "[0-9]{4}";
-    private static final int FIRST_CAR_CREATION_YEAR = 1885;
+    private static final int MIN_CAR_MANUFACTURE_YEAR = 2010;
 
     private CarValidator() {
     }
@@ -55,7 +55,7 @@ public class CarValidator {
             Matcher matcher = pattern.matcher(year);
             if (matcher.matches()) {
                 int yearIntFormat = Integer.parseInt(year);
-                if ((yearIntFormat > FIRST_CAR_CREATION_YEAR) && (yearIntFormat <= LocalDate.now().getYear())) {
+                if ((yearIntFormat >= MIN_CAR_MANUFACTURE_YEAR) && (yearIntFormat <= LocalDate.now().getYear())) {
                     isYearCorrect = true;
                 }
             }

@@ -24,9 +24,17 @@ public enum CommandType {
     SEARCH_USER(new SearchUserCommand()),
     SORT_USERS(new SortUsersCommand()),
     ADD_CAR(new AddCarCommand()),
-    ADMIN_SHOW_CARS_PAGE(new AdminShowCarsPageCommand()),
+    SHOW_CARS_PAGE(new ShowCarsPageCommand()),
+    BUY_CAR(new BuyCarCommand()),
+    BUY_CAR_PAGE(new BuyCarPageCommand()),
+    SHOW_ORDERS_PAGE(new ShowOrdersPageCommand()),
+    DELETE_ORDER(new DeleteOrderCommand()),
+    ORDER_NEXT_PAGE(new OrderNextPageCommand()),
+    ORDER_PREVIOUS_PAGE(new OrderPreviousPageCommand()),
+    FIND_ORDER(new FindOrderCommand()),
     ADD_CAR_PAGE(new AddCarPageCommand()),
-    CHANGE_CAR_IS_AVAILABLE_STATUS(new ChangeCarIsAvailableStatusCommand()),
+    FIND_CAR(new FindCarCommand()),
+    CHANGE_CAR_IS_AVAILABLE_STATUS(new ChangeCarAvailableStatusCommand()),
     SEND_RECOVERY_KEY(new SendRecoveryKeyCommand());
 
     private final ActionCommand command;

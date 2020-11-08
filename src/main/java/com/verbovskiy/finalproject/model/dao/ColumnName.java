@@ -23,4 +23,7 @@ public class ColumnName {
     public static final String COLOR = "color";
     public static final String ENGINE_TYPE = "engineType";
     public static final String BOX_TYPE = "boxType";
+    public static final String ORDER_DATE = "date";
+    public static final String ORDER_ID = "orderId";
+    public static final String IN_PROCESSING = "inProcessing";
 }

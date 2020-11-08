@@ -24,9 +24,8 @@
     <!--===============================================================================================-->
 </head>
 <body>
-<jsp:include page="header/switchLocale.jsp"/>
 <div class="limiter">
-
+    <jsp:include page="header/switchLocale.jsp"/>
     <div class="container-login100">
         <div class="wrap-login100">
             <div class="login100-pic js-tilt" data-tilt>

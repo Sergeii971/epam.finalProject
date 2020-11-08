@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userAdminHeader.css">
 </head>
 <body>
-
+<form action="${pageContext.request.contextPath}/controller" method="post">
+    <input type="hidden" name="command" value="SHOW_CARS_PAGE">
+    <button type="submit"> <fmt:message key="button.show_cars"/></button>
+</form>
+<form action="${pageContext.request.contextPath}/controller" method="post">
+    <input type="hidden" name="command" value="MOVE_AUTHORIZATION_PAGE"/>
+    <button>
+        <fmt:message key="button.come_back"/>
+    </button>
+</form>
 </body>
 </html>
