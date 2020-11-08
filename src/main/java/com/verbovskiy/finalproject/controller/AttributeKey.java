@@ -18,4 +18,9 @@ public class AttributeKey {
     public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
     public static final String USER_LIST = "userList";
     public static final String IS_NOT_CONFIRMED_USER_EXIST = "isNotConfirmedUserExist";
+    public static final String CAR_LIST = "carList";
+    public static final String CAR_PER_PAGE = "carPerPage";
+    public static final String FROM_INDEX = "fromIndex";
+    public static final String TO_INDEX = "toIndex";
+    public static final String IS_FIRST_PAGE = "isFirstPage";
 }

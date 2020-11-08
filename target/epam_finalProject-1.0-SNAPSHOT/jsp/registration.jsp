@@ -36,7 +36,7 @@
             <c:if test="${not empty incorrectParameter && incorrectParameter['name']}">
             <label class="alert-danger"><fmt:message key="label.incorrect_name"/></label>
         </c:if>
-            <span class="label-text"><fmt:message key="label.name"/></span>
+            <span class="label-text">*<fmt:message key="label.name"/></span>
 
             <input type="text" name="name" required  pattern="[a-zA-Zа-яА-Я-]{1,50}" value = ${name}>
         </label>
@@ -44,24 +44,21 @@
             <c:if test="${not empty incorrectParameter && incorrectParameter['surname']}">
                 <label class="alert-danger"><fmt:message key="label.incorrect_surname"/></label>
             </c:if>
-            <span class="label-text"><fmt:message key="label.surname"/></span>
+            <span class="label-text">*<fmt:message key="label.surname"/></span>
             <input type="text" name="surname" required  pattern="[a-zA-Zа-яА-Я-]{1,50}" value = ${surname}>
         </label>
         <label>
             <c:if test="${not empty incorrectParameter && incorrectParameter['email']}">
             <label class="alert-danger"><fmt:message key="label.incorrect_email"/></label>
         </c:if>
-            <span class="label-text"><fmt:message key="login.email"/></span>
+            <span class="label-text">*<fmt:message key="login.email"/></span>
             <input type="email" name="email" required pattern="{1,50}" value = ${email}>
         </label>
         <label class="password">
             <c:if test="${not empty incorrectParameter && incorrectParameter['password']}">
             <label class="alert-danger"><fmt:message key="label.incorrect_password"/></label>
         </c:if>
-            <span class="label-text"><fmt:message key="login.password"/></span>
-            <button class="toggle-visibility"  title="toggle password visibility" tabindex="-1">
-                <span class="glyphicon glyphicon-eye-close"></span>
-            </button>
+            <span class="label-text">*<fmt:message key="login.password"/></span>
 
             <input type="password" name="password" required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,120}" >
         </label>

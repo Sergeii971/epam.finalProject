@@ -31,8 +31,6 @@ public class UserManagementPageCommand implements ActionCommand {
             if (notConfirmedUsers.size() != 0) {
                 session.setAttribute(AttributeKey.IS_NOT_CONFIRMED_USER_EXIST, true);
             }
-            addComeBackPagePath(session, PageType.USER_MANAGEMENT.getPath());
-
             page = PageType.USER_MANAGEMENT.getPath();
         } catch (ServiceException e) {
         logger.log(Level.ERROR, e);

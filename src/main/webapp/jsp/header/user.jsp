@@ -5,11 +5,9 @@
 <fmt:setBundle basename="property.contentPage"/>
 <html>
 <head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userAdminHeader.css">
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/controller" method="post">
-    <input type="hidden" name="command" value="ADD_GOOD_PAGE">
-    <button type="submit"> <fmt:message key="button.add_good"/></button>
-</form>
+
 </body>
 </html>

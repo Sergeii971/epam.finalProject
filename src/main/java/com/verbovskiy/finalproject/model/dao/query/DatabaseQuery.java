@@ -26,4 +26,12 @@ public class DatabaseQuery {
             " FROM user Inner Join account ON account.login = user_login WHERE isConfirmed = ?";
     public static final String FIND_USER_BY_EMAIL = FIND_ALL_USERS + " WHERE email = ?";
     public static final String SEARCH_USER = FIND_ALL_USERS + " WHERE CONCAT(email, name, surname) LIKE concat('%' , ?, '%')";
+
+    public static final String ADD_CAR = "INSERT INTO car(brand, price, description, imageName," +
+            " isAvailable, addedDate, model, manufactureYear, color, engineType, boxType) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static final String FIND_ALL_CARS = "SELECT carId, brand, price, description, imageName, " +
+            " isAvailable, addedDate, model, manufactureYear,  color, engineType, boxType" + " FROM car";
+    public static final String REMOVE_CAR = "DELETE FROM car " + "WHERE carId = ?";
+    public static final String FIND_IMAGE_NAME_BY_ID = "SELECT imageName FROM car WHERE carId = ?";
+    public static final String CHANGE_IS_AVAILABLE_CAR_STATUS = "UPDATE car SET isAvailable = ? WHERE carId = ?";
 }

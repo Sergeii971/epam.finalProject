@@ -19,4 +19,20 @@ public final class RequestParameter {
     public static final String USER_INDEX = "userIndex";
     public static final String SEARCH_PARAMETER = "searchParameter";
     public static final String SORT_TYPE = "sortType";
+    public static final String IS_IMAGE_LOADED = "isImageLoaded";
+    public static final String IMAGE_NAME = "imageName";
+    public static final String IS_IMAGE_SELECTED = "isImageSelected";
+    public static final String BRAND = "brand";
+    public static final String MODEL = "model";
+    public static final String PRICE = "price";
+    public static final String DESCRIPTION = "description";
+    public static final String IS_AVAILABLE = "isAvailable";
+    public static final String ADDED_DATE = "addedDate";
+    public static final String MANUFACTURE_YEAR = "manufactureYear";
+    public static final String COLOR = "color";
+    public static final String ENGINE_TYPE = "engineType";
+    public static final String BOX_TYPE = "boxType";
+    public static final String CAR_ID = "carId";
+    public static final String IS_EMPTY = "isEmpty";
+    public static final String HAS_NEXT_PAGE = "hasNextPage";
 }

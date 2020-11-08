@@ -6,10 +6,13 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminInterface.css">
 </head>
-<body>
+<body class="reg">
 <jsp:include page="header/switchLocale.jsp"/>
+<div class="container">
 <jsp:include page="header/admin.jsp"/>
-<jsp:include page="footer/comeBack.jsp"/>
+</div>
+</div>
 </body>
 </html>

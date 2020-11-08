@@ -10,6 +10,7 @@
 </head>
 <body>
 <jsp:include page="header/switchLocale.jsp"/>
+<jsp:include page="header/admin.jsp"/>
 <div class="col-8">
     <div class="abc">
     <form action="${pageContext.request.contextPath}/controller" method="post">

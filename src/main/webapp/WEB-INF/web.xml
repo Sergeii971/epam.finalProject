@@ -37,12 +37,12 @@
     </filter-mapping>
     <jsp-config>
         <taglib>
-            <taglib-uri>forgotPassword</taglib-uri>
-            <taglib-location>/WEB-INF/tld/ForgotPassword.tld</taglib-location>
-        </taglib>
-        <taglib>
         <taglib-uri>userManagement</taglib-uri>
         <taglib-location>/WEB-INF/tld/UserManagement.tld</taglib-location>
     </taglib>
     </jsp-config>
+    <context-param>
+        <param-name>upload.location</param-name>
+        <param-value>C:/Users/sergei/IdeaProjects/epam.finalProject/target/epam_finalProject-1.0-SNAPSHOT/uploads/</param-value>
+    </context-param>
 </web-app>
