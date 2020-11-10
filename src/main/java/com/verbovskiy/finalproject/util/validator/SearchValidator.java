@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SearchValidator {
-    private static final String SEARCH_LINE_PATTERN = "[0-9a-zA-Z!@#$%^&*]{0,500}";
+    private static final String SEARCH_LINE_PATTERN = "[^*<>/{|}]+ {0,500}";
     private static final String PRICE_PATTERN = "^[0-9]{1,15}$";
 
     private SearchValidator() {

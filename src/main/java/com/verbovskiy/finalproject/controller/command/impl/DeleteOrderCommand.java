@@ -5,9 +5,7 @@ import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.entity.Car;
 import com.verbovskiy.finalproject.model.entity.Order;
-import com.verbovskiy.finalproject.model.service.CarService;
 import com.verbovskiy.finalproject.model.service.OrderService;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class DeleteOrderCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(DeleteOrderCommand.class);
@@ -48,7 +45,8 @@ public class DeleteOrderCommand implements ActionCommand {
                 session.setAttribute(AttributeKey.TO_INDEX, toIndex);
                 session.setAttribute(AttributeKey.FROM_INDEX, fromIndex);
             }
-            page = PageType.SHOW_ORDER.getPath();
+            boolean isAdmin = (boolean) session.getAttribute(RequestParameter.IS_ADMIN);
+            page = isAdmin ? PageType.ADMIN_SHOW_ORDER.getPath() : PageType.USER_SHOW_ORDER.getPath();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
         }

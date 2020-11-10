@@ -5,7 +5,7 @@
 <fmt:setBundle basename="property.contentPage"/>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
@@ -41,7 +41,8 @@
         <c:if test="${not empty isImageLoaded && isImageLoaded}">
             <img src="${pageContext.request.contextPath}/uploads/${imageName}" width="100" height="100" alt="IMG">
         </c:if>
-        <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
+        <c:if test="${not empty isImageLoaded && isImageLoaded}">
+        <form action="${pageContext.request.contextPath}/controller" method="post">
             <input type="hidden" name="command" value="ADD_CAR">
             <div class="selects">
             <select class="form-control" name="brand">
@@ -50,7 +51,7 @@
                 <option value="BUGATTI">Bugatti</option>
                 <option value="BENTLEY">Bentley</option>
                 <option value="CADILLAC">Cadillac</option>
-                <option value="Ferrari">Ferrari</option>
+                <option value="FERRARI">Ferrari</option>
                 <option value="JAGUAR">Jaguar</option>
                 <option value="MASERATI">Maserati</option>
                 <option value="NISSAN">Nissan</option>
@@ -75,7 +76,7 @@
                     <label class="alert-danger"><fmt:message key="label.incorrect_manufacture_year"/></label>
                 </c:if>
                 <span class="label-text">*<fmt:message key="label.car_manufacture_year"/></span>
-                <input type="text" name="manufactureYear" required  pattern="[0-9]{4,4}" value = ${manufactureYear}>
+                <input type="text" name="manufactureYear" required  pattern="[0-9]{4}" value = ${manufactureYear}>
             </label>
 
             <label class="col-one-half">
@@ -95,10 +96,14 @@
                 <c:if test="${not empty incorrectParameter && incorrectParameter['description']}">
                     <label class="alert-danger"><fmt:message key="label.incorrect_description"/></label>
                 </c:if>
+            <div class="cba">
                 <span class="label-text"><fmt:message key="label.description_add_car"/></span>
-                <textarea name="description">${description}</textarea>
+                <textarea pattern="[^*<>/{|}]+" name="description">${description}</textarea>
+            </div>
                 <button class="submit" type="submit"><fmt:message key="button.add_car"/></button>
+
         </form>
+        </c:if>
     </div>
 </div>
 <script src="${pageContext.request.contextPath}/js/inputTypeFile.js"></script>

@@ -6,9 +6,10 @@
 <fmt:setBundle basename="property.contentPage"/>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/table.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userManagement.css">
 </head>
-<body>
+<body class="reg">
 <jsp:include page="header/switchLocale.jsp"/>
 <jsp:include page="header/admin.jsp"/>
 <div class="col-8">
@@ -27,8 +28,8 @@
     <form action="${pageContext.request.contextPath}/controller" method="post">
         <input type="hidden" name="command" value="SEARCH_USER">
 
-            <input class="reg" type="text" name="searchParameter" autocomplete="off"
-                   placeholder=<fmt:message key="placeholder.search"/> pattern="[0-9a-zA-Z!@#$%^&*]">
+            <input class="reg" type="text" name="searchParameter" autocomplete="off" pattern="[^*<>/{|}]+"
+                   placeholder=<fmt:message key="placeholder.search"/>>
         <button class="reg" type="submit">
             <fmt:message key="button.find"/>
         </button>
@@ -47,6 +48,8 @@
     </div>
 <table>
     <tbody>
+    <c:choose>
+        <c:when test="${not empty isEmpty && !isEmpty}">
     <tr>
         <th><fmt:message key="column.email"/></th>
         <th><fmt:message key="column.name"/></th>
@@ -59,10 +62,33 @@
         </c:if>
     </tr>
     <um:userManagement/>
+        </c:when>
+        <c:otherwise>
+            <div class="a">
+                <fmt:message key="label.list_empty"/>
+            </div>
+        </c:otherwise>
+    </c:choose>
     </tbody>
 </table>
-</div>
-<div class="reg">
+    <div class="abc">
+    <c:if test="${not empty hasPreviousPage && hasPreviousPage}">
+    <form action="${pageContext.request.contextPath}/controller" method="post">
+    <input type="hidden" name="command" value="USER_MANAGEMENT_PREVIOUS_PAGE">
+    <button class="submit-button" type="submit">
+        <fmt:message key="button.previous_page"/>
+        </button>
+    </form>
+    </c:if>
+    <c:if test="${not empty hasNextPage && hasNextPage}">
+    <form action="${pageContext.request.contextPath}/controller" method="post">
+    <input type="hidden" name="command" value="USER_MANAGEMENT_NEXT_PAGE">
+    <button class="submit-button" type="submit">
+        <fmt:message key="button.next_page"/>
+        </button>
+    </form>
+    </c:if>
+    </div>
 </div>
 </body>
 </html>

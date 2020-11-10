@@ -5,10 +5,11 @@
 <fmt:setBundle basename="property.contentPage"/>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/showCar.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userAdminHeader.css">
 </head>
 <body>
-<div class="abc">
+<div class="abcd">
 <form action="${pageContext.request.contextPath}/controller" method="post">
     <input type="hidden" name="command" value="USER_MANAGEMENT_PAGE">
     <button type="submit"><fmt:message key="button.user_management"/></button>
@@ -22,7 +23,7 @@
         <button type="submit"> <fmt:message key="button.show_cars"/></button>
     </form>
     <form action="${pageContext.request.contextPath}/controller" method="post">
-        <input type="hidden" name="command" value="SHOW_ORDERS_PAGE"/>
+        <input type="hidden" name="command" value="ADMIN_SHOW_ORDERS_PAGE"/>
         <button>
             <fmt:message key="button.show_orders"/>
         </button>

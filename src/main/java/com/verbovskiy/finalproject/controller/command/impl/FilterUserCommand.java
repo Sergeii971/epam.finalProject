@@ -2,6 +2,7 @@ package com.verbovskiy.finalproject.controller.command.impl;
 
 import com.verbovskiy.finalproject.controller.AttributeKey;
 import com.verbovskiy.finalproject.controller.command.ActionCommand;
+import com.verbovskiy.finalproject.controller.command.Constant;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
@@ -21,12 +22,23 @@ public class FilterUserCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
+        session.setAttribute(RequestParameter.IS_EMPTY, false);
         String userStatus = request.getParameter(RequestParameter.USER_STATUS);
         String page = PageType.ERROR.getPath();
         try {
             UserService service = new UserService();
             List<User> users = service.filterUsers(userStatus);
+            int fromIndex = 0;
+            int toIndex = Constant.NUMBER_OF_USER_PER_PAGE;
+            if (users.isEmpty()) {
+                session.setAttribute(RequestParameter.IS_EMPTY, true);
+            }
+            if (users.size() < toIndex) {
+                toIndex = users.size();
+            }
             session.setAttribute(AttributeKey.USER_LIST, users);
+            session.setAttribute(AttributeKey.TO_INDEX, toIndex);
+            session.setAttribute(AttributeKey.FROM_INDEX, fromIndex);
             page = PageType.USER_MANAGEMENT.getPath();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

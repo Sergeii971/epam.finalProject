@@ -6,6 +6,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 
 public class RegistrationPageCommand implements ActionCommand {
     @Override

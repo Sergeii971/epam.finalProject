@@ -1,3 +1,4 @@
+@charset "utf-8";
 *{
     box-sizing: border-box;
     font-size: 1em;
@@ -5,11 +6,7 @@
     padding: 0;
 }
 body.reg{
-    background: #9053c7;
-    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
-    background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
-    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-    background: linear-gradient(-135deg, #c850c0, #4158d0);
+    background: url('../image/addGood.png') center no-repeat;
     background-size: cover;
     color: #333;
     font-size: 18px;
@@ -28,7 +25,7 @@ body.reg{
     transform: translate(-50%, -50%);
     padding: 2em;
     position: absolute;
-    top: 50%;
+    top: 58%;
     left: 50%;
     z-index: 1;
     width: 98%;
@@ -36,16 +33,11 @@ body.reg{
 }
 
 .reg .container:before {
-    background: #9053c7 !important;
-    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0) !important;
-    background: -o-linear-gradient(-135deg, #c850c0, #4158d0) !important;
-    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0) !important;
-    background: linear-gradient(-135deg, #c850c0, #4158d0) !important;
+    background: url('../image/addGood.png') center no-repeat;
     background-size: cover !important;
     content: '' !important;
     -webkit-filter: blur(10px) !important;
     filter: blur(10px) !important;
-    height: 100vh !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
@@ -73,4 +65,15 @@ body.reg{
     background-color: #f2dede;
     border-color: #ebccd1;
     font-size: 0.9rem!important;
+}
+
+.bcad {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bcad * {
+    margin: 5px;
 }

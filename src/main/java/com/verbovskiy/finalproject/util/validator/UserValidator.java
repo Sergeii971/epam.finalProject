@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class UserValidator {
     private static final String EMAIL_PATTERN = "^([a-zA-Z0-9_\\-\\.]+)@+\\p{Alnum}+\\.\\p{Alpha}{2,4}$";
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,120}$";
-    private static final String NAME_PATTERN = "^[а-яА-Яa-zA-Z-]{1,50}$";
+    private static final String NAME_PATTERN = "^([А-Я]{1}[а-яё]{1,29}|[A-Z]{1}[a-z]{1,29})$";
 
     private UserValidator() {
     }

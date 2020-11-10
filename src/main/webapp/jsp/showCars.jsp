@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/showCar.css">
 </head>
 <body class="reg">
@@ -25,8 +26,9 @@
     </div>
 </c:if>
     <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
+        <div class="abcde">
         <input type="hidden" name="command" value="FIND_CAR">
-        <input class="reg" type="text" name="searchParameter" autocomplete="off"
+        <input class="reg" type="text" name="searchParameter" autocomplete="off" pattern="[^*<>/{|}]+"
                placeholder=<fmt:message key="placeholder.search"/>>
         <label>
         <span class="label-text"><fmt:message key="label.price"/>
@@ -36,6 +38,7 @@
                placeholder=<fmt:message key="input.to"/> pattern="[0-9]">
             </span>
         </label>
+        </div>
         <div class="selects">
             <select class="form-control" name="brand">
                 <option value=""><fmt:message key="option.default"/> </option>
@@ -44,7 +47,7 @@
                 <option value="BUGATTI">Bugatti</option>
                 <option value="BENTLEY">Bentley</option>
                 <option value="CADILLAC">Cadillac</option>
-                <option value="Ferrari">Ferrari</option>
+                <option value="FERRARI">Ferrari</option>
                 <option value="JAGUAR">Jaguar</option>
                 <option value="MASERATI">Maserati</option>
                 <option value="NISSAN">Nissan</option>
@@ -146,6 +149,7 @@
 </c:forEach>
     </tbody>
 </table>
+    <div class="abc">
     <c:if test="${not empty isFirstPage && !isFirstPage}">
     <form action="${pageContext.request.contextPath}/controller" method="post">
         <input type="hidden" name="command" value="CAR_PREVIOUS_PAGE">
@@ -158,6 +162,7 @@
                 <button><fmt:message key="button.next_page"/></button>
             </form>
         </c:if>
+    </div>
 </div>
     </div>
 </body>

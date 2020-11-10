@@ -6,9 +6,7 @@ import com.verbovskiy.finalproject.controller.command.Constant;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.entity.Car;
 import com.verbovskiy.finalproject.model.entity.Order;
-import com.verbovskiy.finalproject.model.service.CarService;
 import com.verbovskiy.finalproject.model.service.OrderService;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -51,7 +49,7 @@ public class FindOrderCommand implements ActionCommand {
                 session.setAttribute(AttributeKey.TO_INDEX, toIndex);
                 session.setAttribute(AttributeKey.FROM_INDEX, 0);
             }
-            page = PageType.SHOW_ORDER.getPath();
+            page = PageType.ADMIN_SHOW_ORDER.getPath();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
         }

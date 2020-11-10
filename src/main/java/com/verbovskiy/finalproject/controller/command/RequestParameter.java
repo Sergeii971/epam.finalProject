@@ -35,9 +35,11 @@ public final class RequestParameter {
     public static final String CAR_ID = "carId";
     public static final String IS_EMPTY = "isEmpty";
     public static final String HAS_NEXT_PAGE = "hasNextPage";
+    public static final String HAS_PREVIOUS_PAGE = "hasPreviousPage";
     public static final String FROM_PRICE = "fromPrice";
     public static final String TO_PRICE = "toPrice";
     public static final String IS_BOUGHT = "isBought";
     public static final String IN_ORDER_LIST = "inOrderList";
     public static final String ORDER_ID = "orderId";
+    public static final String COMMAND_NAME = "command";
 }

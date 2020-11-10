@@ -72,6 +72,20 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
+    public void changeInProcessingStatus(long orderId, boolean status) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.CHANGE_IS_PROCESSING_ORDER_STATUS)) {
+            statement.setBoolean(1, status);
+            statement.setLong(2, orderId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Error during changing order status in database", e);
+        }
+    }
+
+    @Override
     public List<Order> findAll() throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
@@ -86,6 +100,26 @@ public class OrderDaoImpl implements OrderDao {
             return orders;
         } catch (SQLException e) {
             throw new DaoException("Error while get all users from database", e);
+        }
+    }
+
+    @Override
+    public List<Order> findByUserEmail(String email) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ORDER_BY_USER_EMAIL)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            List<Order> orders = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Order order = createOrderFromSql(resultSet);
+                orders.add(order);
+            }
+            return orders;
+        } catch (SQLException e) {
+            throw new DaoException("Error while finding orders by user email in database", e);
         }
     }
 

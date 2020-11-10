@@ -2,12 +2,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="property.contentPage"/>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>DailyUI Challenge 001</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registration.css">
@@ -17,7 +17,6 @@
 <jsp:include page="header/switchLocale.jsp"/>
 <div class="container">
     <div class="content">
-
     <header>
         <h1>
             <a href="#">
@@ -38,14 +37,14 @@
         </c:if>
             <span class="label-text">*<fmt:message key="label.name"/></span>
 
-            <input type="text" name="name" required  pattern="[a-zA-Zа-яА-Я-]{1,50}" value = ${name}>
+            <input type="text" name="name" required  pattern="^([А-Я]{1}[а-яё]{1,29}|[A-Z]{1}[a-z]{1,29})$" value = ${name}>
         </label>
         <label class="col-one-half">
             <c:if test="${not empty incorrectParameter && incorrectParameter['surname']}">
                 <label class="alert-danger"><fmt:message key="label.incorrect_surname"/></label>
             </c:if>
             <span class="label-text">*<fmt:message key="label.surname"/></span>
-            <input type="text" name="surname" required  pattern="[a-zA-Zа-яА-Я-]{1,50}" value = ${surname}>
+            <input type="text" name="surname" required  pattern="^([А-Я]{1}[а-яё]{1,29}|[A-Z]{1}[a-z]{1,29})$" value = ${surname}>
         </label>
         <label>
             <c:if test="${not empty incorrectParameter && incorrectParameter['email']}">

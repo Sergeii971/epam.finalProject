@@ -14,13 +14,18 @@ public class SwitchLocaleCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String locale = request.getParameter(AttributeKey.LOCALE);
+        String page = (String) session.getAttribute(AttributeKey.CURRENT_PAGE);
         session.setAttribute(AttributeKey.LOCALE, locale);
         RequestAttributeHandler requestAttributeHandler =
                 (RequestAttributeHandler) session.getAttribute(AttributeKey.REQUEST_ATTRIBUTE_HANDLER);
-        Map<String, Object> attributes = requestAttributeHandler.getAttributes();
-        for (Map.Entry<String, Object> entry : attributes.entrySet()) {
-            request.setAttribute(entry.getKey(), entry.getValue());
+        if (requestAttributeHandler != null) {
+            Map<String, Object> attributes = requestAttributeHandler.getAttributes();
+            for (Map.Entry<String, Object> entry : attributes.entrySet()) {
+                request.setAttribute(entry.getKey(), entry.getValue());
+            }
+        } else {
+            page = request.getParameter(AttributeKey.CURRENT_PAGE);
         }
-        return (String) session.getAttribute(AttributeKey.CURRENT_PAGE);
+        return page;
     }
 }

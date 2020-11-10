@@ -6,9 +6,7 @@ import com.verbovskiy.finalproject.controller.command.Constant;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.entity.Car;
 import com.verbovskiy.finalproject.model.entity.Order;
-import com.verbovskiy.finalproject.model.service.CarService;
 import com.verbovskiy.finalproject.model.service.OrderService;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -18,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class ShowOrdersPageCommand implements ActionCommand {
-    private final Logger logger = LogManager.getLogger(ShowOrdersPageCommand.class);
+public class AdminShowOrdersPageCommand implements ActionCommand {
+    private final Logger logger = LogManager.getLogger(AdminShowOrdersPageCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -32,6 +30,7 @@ public class ShowOrdersPageCommand implements ActionCommand {
             List<Order> allOrders = service.findAllOrders();
             if (allOrders == null || allOrders.isEmpty()) {
                 request.setAttribute(RequestParameter.IS_EMPTY, true);
+                session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
             } else {
                 int toIndex = Constant.NUMBER_OF_ORDER_PER_PAGE;
                 if (allOrders.size() <= Constant.NUMBER_OF_ORDER_PER_PAGE) {
@@ -45,7 +44,7 @@ public class ShowOrdersPageCommand implements ActionCommand {
                 session.setAttribute(AttributeKey.TO_INDEX, toIndex);
                 session.setAttribute(AttributeKey.FROM_INDEX, 0);
             }
-            page = PageType.SHOW_ORDER.getPath();
+            page = PageType.ADMIN_SHOW_ORDER.getPath();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
         }

@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class Order extends Entity {
     private long orderId;
     private LocalDate date;
-    private User user;
-    private Car car;
+    private final User user;
+    private final Car car;
     private boolean inProcessing;
 
     public Order(long orderId, LocalDate date, User user, Car car, boolean inProcessing) {
@@ -37,16 +37,8 @@ public class Order extends Entity {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Car getCar() {
         return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
     }
 
     public boolean isInProcessing() {

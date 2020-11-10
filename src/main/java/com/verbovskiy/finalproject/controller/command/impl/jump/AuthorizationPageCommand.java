@@ -14,13 +14,12 @@ public class AuthorizationPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
+
         session.setAttribute(RequestParameter.EMAIL, RequestParameter.EMPTY_VALUE);
         session.setAttribute(RequestParameter.IS_ADMIN, false);
-        if (session.isNew()) {
-            session.setAttribute(AttributeKey.LOCALE, AttributeKey.DEFAULT_LOCALE);
-            Map<String, String> pages = new HashMap<>();
-            session.setAttribute(AttributeKey.COME_BACK_PAGES, pages);
-        }
+        session.setAttribute(AttributeKey.LOCALE, AttributeKey.DEFAULT_LOCALE);
+        Map<String, String> pages = new HashMap<>();
+        session.setAttribute(AttributeKey.COME_BACK_PAGES, pages);
         return PageType.AUTHORIZATION.getPath();
     }
 }

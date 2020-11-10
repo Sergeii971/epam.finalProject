@@ -30,6 +30,11 @@ public class DeleteNotConfirmedUserCommand implements ActionCommand {
             User user = users.get(userIndex);
             service.remove(user.getEmail());
             users.remove(user);
+            int toIndex = (int) session.getAttribute(AttributeKey.TO_INDEX);
+            if (users.size() < toIndex) {
+                toIndex = users.size();
+                session.setAttribute(AttributeKey.TO_INDEX, toIndex);
+            }
             session.setAttribute(AttributeKey.USER_LIST, users);
             List<User> isNotConfirmedUsers = service.findNotConfirmedUsers();
             if (isNotConfirmedUsers.size() == 0) {

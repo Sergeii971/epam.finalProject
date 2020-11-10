@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
 
-@WebFilter( urlPatterns = {  "/jsp/*" })
+@WebFilter(filterName = "PageRedirectSecurityFilter",urlPatterns = {  "/jsp/*" })
 public class PageRedirectSecurityFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -23,7 +23,7 @@ public class PageRedirectSecurityFilter implements Filter {
         String currentPage = httpRequest.getServletPath();
         Optional<PageType> page = PageType.findByPath(currentPage);
 
-        if (((!page.isPresent()) || (!page.get().isLinkAvailable())) && (!httpResponse.isCommitted())) {
+        if ((!httpResponse.isCommitted()) && ((!page.isPresent()) || (!page.get().isLinkAvailable()))) {
             String jumpPage = PageType.AUTHORIZATION.getPath();
             session.setAttribute(AttributeKey.CURRENT_PAGE, jumpPage);
             session.setAttribute(AttributeKey.COME_BACK_PAGES, new HashMap<>());
@@ -31,7 +31,7 @@ public class PageRedirectSecurityFilter implements Filter {
             RequestDispatcher dispatcher = httpRequest.getServletContext().
                     getRequestDispatcher(jumpPage);
             dispatcher.forward(httpRequest, httpResponse);
-       }
+        }
         chain.doFilter(request, response);
     }
 }

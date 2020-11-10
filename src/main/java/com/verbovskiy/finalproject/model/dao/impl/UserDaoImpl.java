@@ -6,6 +6,7 @@ import com.verbovskiy.finalproject.model.dao.ColumnName;
 import com.verbovskiy.finalproject.model.dao.query.DatabaseQuery;
 import com.verbovskiy.finalproject.model.dao.UserDao;
 import com.verbovskiy.finalproject.model.entity.Account;
+import com.verbovskiy.finalproject.model.entity.Order;
 import com.verbovskiy.finalproject.model.entity.User;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -129,6 +130,24 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Optional<User> findByEmail(String email) throws DaoException {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_USER_BY_EMAIL)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            Optional<User> user =Optional.empty();
+            if (resultSet.next()) {
+                user = Optional.of(createUserFromSql(resultSet));
+            }
+            return user;
+        } catch (SQLException e) {
+            throw new DaoException("Error while finding user by email from database", e);
+        }
+    }
+
+    @Override
     public List<User> findNotConfirmedStatusUsers() throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
@@ -164,24 +183,6 @@ public class UserDaoImpl implements UserDao {
             return users;
         } catch (SQLException e) {
             throw new DaoException("Error while search users by parameter from database", e);
-        }
-    }
-
-    @Override
-    public Optional<User> findByEmail(String email) throws DaoException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_USER_BY_EMAIL)) {
-            statement.setString(1, email);
-            Optional<User> user = Optional.empty();
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                user = Optional.of(createUserFromSql(resultSet));
-            }
-            return user;
-        } catch (SQLException e) {
-            throw new DaoException("Error while finding user by login from database", e);
         }
     }
 

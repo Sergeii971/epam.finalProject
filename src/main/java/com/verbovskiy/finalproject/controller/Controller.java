@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/controller", name = "servlet")
 public class Controller extends HttpServlet {
-    private static final String COMMAND_NAME = "command";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
@@ -29,8 +29,7 @@ public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
-        CommandProvider commandProvider = new CommandProvider();
-        ActionCommand command = commandProvider.defineCommand(request.getParameter(COMMAND_NAME));
+        ActionCommand command = CommandProvider.defineCommand(request.getParameter(RequestParameter.COMMAND_NAME));
         String page = command.execute(request);
         HttpSession session = request.getSession();
         session.setAttribute(AttributeKey.CURRENT_PAGE, page);

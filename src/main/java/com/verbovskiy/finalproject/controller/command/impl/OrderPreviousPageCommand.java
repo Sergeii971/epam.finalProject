@@ -34,6 +34,6 @@ public class OrderPreviousPageCommand implements ActionCommand {
         session.setAttribute(AttributeKey.TO_INDEX, toIndex);
         session.setAttribute(AttributeKey.FROM_INDEX, fromIndex);
 
-        return PageType.SHOW_ORDER.getPath();
+        return PageType.ADMIN_SHOW_ORDER.getPath();
     }
 }

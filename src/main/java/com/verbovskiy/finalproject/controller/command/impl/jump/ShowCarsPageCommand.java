@@ -31,6 +31,7 @@ public class ShowCarsPageCommand implements ActionCommand {
             List<Car> allCars = isAdmin ? service.findAllCars() : service.findAvailableCar();
             if (allCars == null || allCars.isEmpty()) {
                 request.setAttribute(RequestParameter.IS_EMPTY, true);
+                session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
             } else {
                 int toIndex = Constant.NUMBER_OF_CAR_PER_PAGE;
                 if (allCars.size() <= Constant.NUMBER_OF_CAR_PER_PAGE) {

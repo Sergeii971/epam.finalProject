@@ -4,6 +4,7 @@ import java.util.Optional;
 
 public enum PageType {
     AUTHORIZATION("/jsp/authorization.jsp", true),
+    INDEX("/index.jsp", true),
     REGISTRATION("/jsp/registration.jsp", true),
     ERROR("/jsp/error/error500.jsp", false),
     USER_INTERFACE("/jsp/userInterface.jsp", false),
@@ -14,7 +15,8 @@ public enum PageType {
     ADD_CAR("/jsp/addCar.jsp", false),
     BUY_CAR("/jsp/buyCar.jsp", false),
     SHOW_CAR("/jsp/showCars.jsp", false),
-    SHOW_ORDER("/jsp/showOrders.jsp", false),
+    ADMIN_SHOW_ORDER("/jsp/adminShowOrders.jsp", false),
+    USER_SHOW_ORDER("/jsp/userShowOrders.jsp", false),
     INPUT_NEW_PASSWORD_IN_FORGOT_PASSWORD("/jsp/inputNewPasswordInForgotPassword.jsp", true),
     SWITCH_LOCALE("/jsp/switchLocale.jsp", false);
 

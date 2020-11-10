@@ -6,7 +6,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/showCar.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminShowOrders.css">
 </head>
 <body class="reg">
 <jsp:include page="header/switchLocale.jsp"/>
@@ -20,9 +21,10 @@
     </c:if>
     <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
         <input type="hidden" name="command" value="FIND_ORDER">
-        <input class="reg" type="text" name="searchParameter" autocomplete="off"
-               placeholder=<fmt:message key="placeholder.search"/>>
+
         <div class="selects">
+            <input type="text" name="searchParameter" autocomplete="off" pattern="[^*<>/{|}]+"
+                                     placeholder=<fmt:message key="placeholder.search"/>>
             <select class="form-control" name="brand">
                 <option value=""><fmt:message key="option.default"/> </option>
                 <option value="AUDI">Audi</option>
@@ -82,12 +84,14 @@
                     <br>
                     <fmt:message key="label.color"/>: ${order.car.color.color}
                     <br>
-                    <fmt:message key="label.engine_type"/>: ${ordercar.car.engineType.engine}
+                    <fmt:message key="label.engine_type"/>: ${order.car.engineType.engine}
                     <br>
                     <fmt:message key="label.car_manufacture_year"/>: ${order.car.manufactureYear}
                     <br>
+                    <c:if test="${not empty order.car.description}">
                     <fmt:message key="label.description"/>: ${order.car.description}
                     <br>
+                    </c:if>
                     <fmt:message key="label.order_date"/>: ${order.date}
                     <br>
                     <c:if test="${order.inProcessing}">
@@ -95,9 +99,16 @@
                         <input type="hidden" name="orderId" value=${order.orderId}>
                         <input type="hidden" name="command" value="DELETE_ORDER">
                         <button class="submit-button" type="submit">
-                            <fmt:message key="button.delete"/>
+                            <fmt:message key="button.cancel"/>
                         </button>
                     </form>
+                        <form action="${pageContext.request.contextPath}/controller" method="post">
+                            <input type="hidden" name="orderId" value=${order.orderId}>
+                            <input type="hidden" name="command" value="CHANGE_ORDER_STATUS">
+                            <button class="submit-button" type="submit">
+                                <fmt:message key="button.deal_took_place"/>
+                            </button>
+                        </form>
                     </c:if>
                 </td>
             <tr>

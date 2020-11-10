@@ -1,11 +1,14 @@
 package com.verbovskiy.finalproject.custom_tag;
 
 import com.verbovskiy.finalproject.controller.AttributeKey;
+import com.verbovskiy.finalproject.controller.command.Constant;
+import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.model.entity.User;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -17,12 +20,14 @@ import java.util.ResourceBundle;
 @SuppressWarnings("serial")
 public class UserManagementTable extends BodyTagSupport {
     private static final Logger logger = LogManager.getLogger(UserManagementTable.class);
-    private static final int PAGE_ENTRIES = 5;
     private static final String CONTENT_PAGE = "property/contentPage";
     private static final String BLOCK_BUTTON_TITLE = "button.block_user";
     private static final String UNBLOCK_BUTTON_TITLE = "button.unblock_user";
-    private static final String CHANGE_STATUS_LABEL = "column.change_user_status";
     private static final String DELETE_USER_BUTTON = "button.delete";
+    private static final String IS_CONFIRMED = "label.yes";
+    private static final String IS_NOT_CONFIRMED = "label.no";
+    private static final String IS_BLOCKED = "label.yes";
+    private static final String IS_NOT_BLOCKED = "label.no";
 
     @Override
     public int doStartTag() {
@@ -31,26 +36,28 @@ public class UserManagementTable extends BodyTagSupport {
         ResourceBundle bundle = ResourceBundle.getBundle(CONTENT_PAGE, locale);
         List<User> userList = (List<User>) session.getAttribute(AttributeKey.USER_LIST);
         try {
-            int rowNumber = userList.size();
-//            int pageNumber = 5;
-//            int fromIndex = pageNumber * PAGE_ENTRIES - PAGE_ENTRIES;
-//            int toIndex = Math.min(pageNumber * PAGE_ENTRIES, userList.size());
+            int fromIndex = (int) session.getAttribute(AttributeKey.FROM_INDEX);
+            int toIndex = (int) session.getAttribute(AttributeKey.TO_INDEX);
             JspWriter out = pageContext.getOut();
-            for (int i = 0; i < rowNumber; i++) {
-                if (!userList.get(i).getAccount().isAdmin()) {
+            for (int i = fromIndex; i < toIndex; i++) {
                     User user = userList.get(i);
                     out.write("<tr>");
                     out.write("<td>" + user.getEmail() + "</td>");
                     out.write("<td>" + user.getName() + "</td>");
                     out.write("<td>" + user.getSurname() + "</td>");
-                    out.write("<td>" + user.getAccount().isConfirmed() + "</td>");
-                    out.write("<td>" + user.getAccount().isBlocked() + "</td>");
+                    String isConfirmed = user.getAccount().isConfirmed() ? bundle.getString(IS_CONFIRMED) :
+                            bundle.getString(IS_NOT_CONFIRMED);
+                    out.write("<td>" + isConfirmed + "</td>");
+                String isBlocked = user.getAccount().isBlocked() ? bundle.getString(IS_BLOCKED) :
+                        bundle.getString(IS_NOT_BLOCKED);
+                    out.write("<td>" + isBlocked + "</td>");
                     out.write("<form action=\"controller\"" +
                             "method=\"post\">");
                     out.write("<td>");
                     out.write("<label class=\"custom-form\">");
                     out.write("<input type=\"hidden\" name=\"userIndex\" value=" + i + ">");
                     out.write("<input type=\"hidden\" name=\"command\" value=\"CHANGE_USER_BLOCK_STATUS\">");
+                    out.write("<div class=\"text-center\">");
                     if (!user.getAccount().isBlocked()) {
                         out.write("<input type=\"hidden\" name=\"userStatus\" value=\"true\">");
                         out.write("<button class=\"submit-button\" type=\"submit\">");
@@ -61,11 +68,14 @@ public class UserManagementTable extends BodyTagSupport {
                         out.write(bundle.getString(UNBLOCK_BUTTON_TITLE));
                     }
                     out.write("</button>");
+                    out.write("</div>");
                     out.write("</label>");
                     out.write("</td>");
                     out.write("</form>");
+
                     if (!user.getAccount().isConfirmed()) {
                         out.write("<td>");
+                        out.write("<div class=\"text-center\">");
                         out.write("<form action=\"controller\" method=\"post\">");
                         out.write("<label class=\"custom-form\">");
                         out.write("<input type=\"hidden\" name=\"userIndex\" value=" + i + ">");
@@ -74,29 +84,26 @@ public class UserManagementTable extends BodyTagSupport {
                         out.write(bundle.getString(DELETE_USER_BUTTON));
                         out.write("</button>");
                         out.write("</label>");
-                        out.write("</td>");
                         out.write("</form>");
+                        out.write("</div>");
+                        out.write("</td>");
+
                     }
                     out.write("</tr>");
                 }
+            if (fromIndex >= Constant.NUMBER_OF_USER_PER_PAGE) {
+                session.setAttribute(RequestParameter.HAS_PREVIOUS_PAGE, true);
+            } else {
+                session.setAttribute(RequestParameter.HAS_PREVIOUS_PAGE, false);
             }
-            out.write("<tr>");
-          //  out.write("<td colspan=\"7\" align=\"center\" id=\"pagination\">");
-//            if (fromIndex >= PAGE_ENTRIES) {
-//                out.write("<a href=\"${pageContext.request.contextPath}/controller?command=pagination&" +
-//                        "pagination_subject=clientsPageNumber&pagination_direction=previous_page\">&lt; </a>");
-//            }
-//            out.write("<label>" + pageNumber + "</label>");
-//            if (toIndex < userList.size()) {
-//                out.write("<a href=\"process_controller?command=pagination&" +
-//                        "pagination_subject=clientsPageNumber&pagination_direction=next_page\"> &gt;</a>");
-//            }
-          //  out.write("</td>");
-            out.write("</tr>");
+            if (toIndex % Constant.NUMBER_OF_USER_PER_PAGE == 0 && toIndex != userList.size()) {
+                session.setAttribute(RequestParameter.HAS_NEXT_PAGE, true);
+            } else {
+            session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
+        }
         } catch (IOException e) {
             logger.log(Level.ERROR, "Error while writing data on jsp page", e);
         }
-
         return SKIP_BODY;
     }
 }

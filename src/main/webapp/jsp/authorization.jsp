@@ -2,10 +2,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="property.contentPage"/>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
     <title>Login V1</title>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/image/icons/favicon.ico"/>
@@ -25,8 +26,8 @@
 </head>
 <body>
 <div class="limiter">
-    <jsp:include page="header/switchLocale.jsp"/>
     <div class="container-login100">
+        <jsp:include page="header/switchLocale.jsp"/>
         <div class="wrap-login100">
             <div class="login100-pic js-tilt" data-tilt>
                 <img src="${pageContext.request.contextPath}/image/img-01.png" alt="IMG">
@@ -45,9 +46,7 @@
                         <label class="alert-warning"><fmt:message key="login.not_activated_user"/></label>
                     </c:if>
                     <input class="input100" type="email" name="login" placeholder=<fmt:message key="login.email"/>
-                            autofocus required
-                           minlength="7" maxlength="50"
-                           value=${login}>
+                            autofocus required minlength="7" maxlength="50" value=${login}>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -56,7 +55,7 @@
                 <div class="wrap-input100 validate-input" data-validate = "Password is required">
                     <input class="input100" type="password" name="password" placeholder=<fmt:message key="login.password"/>
                             required
-                           pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,30}" minlength="8" maxlength="128">
+                           pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,120}" minlength="8" maxlength="120">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>

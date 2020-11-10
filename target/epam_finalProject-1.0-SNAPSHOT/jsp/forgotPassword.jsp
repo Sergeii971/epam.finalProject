@@ -5,6 +5,7 @@
 <fmt:setBundle basename="property.contentPage"/>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forgotPassword.css">
 </head>
 <body>
@@ -17,7 +18,7 @@
             <label class="text-center">
                 <div>
                     <span class="label-text"><fmt:message key="login.email"/></span>
-                    <input type="text" name="email" value=${email}>
+                    <input type="email" name="email" value=${email}>
                 </div>
             </label>
             <br>

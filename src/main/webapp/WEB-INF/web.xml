@@ -15,21 +15,30 @@
         <error-code>500</error-code>
         <location>/jsp/error/error500.jsp</location>
     </error-page>
+    <absolute-ordering>
+        <name>ServletSecurityFilter</name>
+        <name>PageRedirectSecurityFilter</name>
+        <name>EncodingFilter</name>
+    </absolute-ordering>
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.verbovskiy.finalproject.controller.filter.EncodingFilter</filter-class>
     </filter>
     <filter-mapping>
-    <filter-name>EncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+    <filter-name>ServletSecurityFilter</filter-name>
+    <filter-class>com.verbovskiy.finalproject.controller.filter.ServletSecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ServletSecurityFilter</filter-name>
+        <url-pattern>/controller</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>PageRedirectSecurityFilter</filter-name>
         <filter-class>com.verbovskiy.finalproject.controller.filter.PageRedirectSecurityFilter</filter-class>
-        <init-param>
-            <param-name>INDEX_PATH</param-name>
-            <param-value>/index.jsp</param-value>
-        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>PageRedirectSecurityFilter</filter-name>

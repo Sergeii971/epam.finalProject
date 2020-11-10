@@ -96,6 +96,19 @@ public class UserService {
         }
     }
 
+    public Optional<User> findAdminByEmail(String email) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            Optional<User> admin = dao.findByEmail(email);
+            if (!admin.isPresent()) {
+                throw new ServiceException("error while finding admin in database");
+            }
+            return admin;
+        } catch (DaoException e) {
+            throw new ServiceException("error while find information about user", e);
+        }
+    }
+
     public boolean isAdmin(String login) throws ServiceException {
         if ((login == null) || (login.isEmpty())) {
             throw new ServiceException("incorrect user data");

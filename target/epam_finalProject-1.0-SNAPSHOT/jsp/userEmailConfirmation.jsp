@@ -6,6 +6,7 @@
 <html>
 <head>
     <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userEmailConfirmation.css">
 </head>
 <body class="reg">
@@ -26,7 +27,7 @@
         </label>
         <br>
         <div class="text-center">
-        <button class="submit" type="submit" name="register">OK</button>
+        <button class="submit" type="submit" name="register"><fmt:message key="button.ok"/> </button>
         </div>
     </form>
         <jsp:include page="footer/comeBack.jsp"/>

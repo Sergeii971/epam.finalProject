@@ -15,7 +15,11 @@ public interface OrderDao {
     List<Order> findBySearchParameters(String searchParameter, String brand, String color,
                                        String boxType, String engineType) throws DaoException;
 
+    void changeInProcessingStatus(long orderId, boolean status) throws DaoException;
+
     List<Order> findAll() throws DaoException;
+
+    List<Order> findByUserEmail(String email) throws DaoException;
 
     Optional<Order> findByCarId(long carId) throws DaoException;
 }
