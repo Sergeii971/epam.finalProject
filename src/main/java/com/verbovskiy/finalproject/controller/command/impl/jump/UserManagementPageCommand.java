@@ -8,6 +8,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.User;
 import com.verbovskiy.finalproject.model.service.UserService;
+import com.verbovskiy.finalproject.model.service.impl.UserServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -23,7 +24,7 @@ public class UserManagementPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        UserService service = new UserService();
+        UserService service = new UserServiceImpl();
         String adminEmail = (String) session.getAttribute(RequestParameter.EMAIL);
         String page = PageType.ERROR.getPath();
 

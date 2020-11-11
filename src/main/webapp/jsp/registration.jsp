@@ -36,22 +36,21 @@
             <label class="alert-danger"><fmt:message key="label.incorrect_name"/></label>
         </c:if>
             <span class="label-text">*<fmt:message key="label.name"/></span>
-
-            <input type="text" name="name" required  pattern="^([А-Я]{1}[а-яё]{1,29}|[A-Z]{1}[a-z]{1,29})$" value = ${name}>
+            <input type="text" name="name" autocomplete="off" required  pattern="^([А-Я]{1}[а-яё]{1,29}|[A-Z]{1}[a-z]{1,29})$" value = ${name}>
         </label>
         <label class="col-one-half">
             <c:if test="${not empty incorrectParameter && incorrectParameter['surname']}">
                 <label class="alert-danger"><fmt:message key="label.incorrect_surname"/></label>
             </c:if>
             <span class="label-text">*<fmt:message key="label.surname"/></span>
-            <input type="text" name="surname" required  pattern="^([А-Я]{1}[а-яё]{1,29}|[A-Z]{1}[a-z]{1,29})$" value = ${surname}>
+            <input type="text" name="surname" autocomplete="off" required  pattern="^([А-Я]{1}[а-яё]{1,29}|[A-Z]{1}[a-z]{1,29})$" value = ${surname}>
         </label>
         <label>
             <c:if test="${not empty incorrectParameter && incorrectParameter['email']}">
             <label class="alert-danger"><fmt:message key="label.incorrect_email"/></label>
         </c:if>
             <span class="label-text">*<fmt:message key="login.email"/></span>
-            <input type="email" name="email" required pattern="{1,50}" value = ${email}>
+            <input type="email" name="email" autocomplete="off" required pattern="{1,50}" value = ${email}>
         </label>
         <label class="password">
             <c:if test="${not empty incorrectParameter && incorrectParameter['password']}">
@@ -59,7 +58,7 @@
         </c:if>
             <span class="label-text">*<fmt:message key="login.password"/></span>
 
-            <input type="password" name="password" required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,120}" >
+            <input type="password" name="password" autocomplete="off" required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,120}" >
         </label>
         <div class="text-center">
 

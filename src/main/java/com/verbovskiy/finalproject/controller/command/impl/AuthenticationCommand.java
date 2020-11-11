@@ -6,6 +6,7 @@ import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.service.UserService;
+import com.verbovskiy.finalproject.model.service.impl.UserServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -18,17 +19,17 @@ public class AuthenticationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        UserService userService = new UserService();
+        UserService service = new UserServiceImpl();
         String email = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
         String page = PageType.ERROR.getPath();
         HttpSession session = request.getSession();
 
         try {
-            if (userService.verifyAccount(email, password)) {
-                   if(!userService.isBlocked(email) || userService.isConfirmed(email)) {
+            if (service.verifyAccount(email, password)) {
+                   if(!service.isBlocked(email) || service.isConfirmed(email)) {
                        session.setAttribute(RequestParameter.EMAIL, email);
-                       if (userService.isAdmin(email)) {
+                       if (service.isAdmin(email)) {
                            session.setAttribute(RequestParameter.IS_ADMIN, true);
                            page = PageType.ADMIN_INTERFACE.getPath();
                        } else {

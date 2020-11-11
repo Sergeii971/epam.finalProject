@@ -8,6 +8,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Car;
 import com.verbovskiy.finalproject.model.service.CarService;
+import com.verbovskiy.finalproject.model.service.impl.CarServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -22,7 +23,9 @@ public class ShowCarsPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        CarService service = new CarService();
+        session.setAttribute(RequestParameter.HAS_PREVIOUS_PAGE, false);
+        session.setAttribute(AttributeKey.IS_FIRST_PAGE, true);
+        CarService service = new CarServiceImpl();
         String page = PageType.ERROR.getPath();
         session.setAttribute(RequestParameter.HAS_NEXT_PAGE, true);
         boolean isAdmin = (boolean) session.getAttribute(RequestParameter.IS_ADMIN);

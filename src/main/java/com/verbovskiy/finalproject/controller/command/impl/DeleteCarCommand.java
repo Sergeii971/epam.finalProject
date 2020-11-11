@@ -8,7 +8,8 @@ import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Car;
 import com.verbovskiy.finalproject.model.entity.Order;
 import com.verbovskiy.finalproject.model.service.CarService;
-import com.verbovskiy.finalproject.model.service.OrderService;
+import com.verbovskiy.finalproject.model.service.impl.CarServiceImpl;
+import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -29,21 +30,21 @@ public class DeleteCarCommand implements ActionCommand {
         String page = PageType.ERROR.getPath();
 
         try {
-            OrderService orderService = new OrderService();
+            OrderServiceImpl orderService = new OrderServiceImpl();
             Optional<Order> order =orderService.findByCarId(carId);
             if (order.isPresent()) {
                 request.setAttribute(RequestParameter.IN_ORDER_LIST, true);
             } else {
                 int toIndex = (int) session.getAttribute(AttributeKey.TO_INDEX);
                 int fromIndex = (int) session.getAttribute(AttributeKey.FROM_INDEX);
-                CarService service = new CarService();
+                CarService service = new CarServiceImpl();
                 service.remove(carId);
                 List<Car> allCars = service.findAllCars();
                 if (allCars.size() == 0) {
                     request.setAttribute(RequestParameter.IS_EMPTY, true);
                     session.setAttribute(AttributeKey.CAR_PER_PAGE, new ArrayList<>());
                 } else {
-                    if (allCars.size() <= toIndex - 1) {
+                    if (allCars.size() <= toIndex) {
                         toIndex = allCars.size();
                         session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
                     }

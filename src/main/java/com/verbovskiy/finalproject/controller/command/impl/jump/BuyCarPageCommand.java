@@ -6,6 +6,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Car;
 import com.verbovskiy.finalproject.model.service.CarService;
+import com.verbovskiy.finalproject.model.service.impl.CarServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -18,9 +19,8 @@ public class BuyCarPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session = request.getSession();
         long carId = Long.parseLong(request.getParameter(RequestParameter.CAR_ID));
-        CarService service = new CarService();
+        CarService service = new CarServiceImpl();
         String page = PageType.ERROR.getPath();
 
         try {

@@ -8,6 +8,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Order;
 import com.verbovskiy.finalproject.model.service.OrderService;
+import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -28,7 +29,7 @@ public class FindOrderCommand implements ActionCommand {
         String color = request.getParameter(RequestParameter.COLOR);
         String boxType = request.getParameter(RequestParameter.BOX_TYPE);
         String engineType = request.getParameter(RequestParameter.ENGINE_TYPE);
-        OrderService service = new OrderService();
+        OrderService service = new OrderServiceImpl();
         String page = PageType.ERROR.getPath();
         session.setAttribute(AttributeKey.IS_FIRST_PAGE, true);
         try {

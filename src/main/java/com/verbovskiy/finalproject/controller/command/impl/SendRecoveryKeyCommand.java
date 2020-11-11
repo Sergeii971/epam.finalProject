@@ -9,6 +9,7 @@ import com.verbovskiy.finalproject.exception.SendMailException;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Account;
 import com.verbovskiy.finalproject.model.service.UserService;
+import com.verbovskiy.finalproject.model.service.impl.UserServiceImpl;
 import com.verbovskiy.finalproject.util.encryption.Cryptographer;
 import com.verbovskiy.finalproject.util.mail.MailSender;
 import org.apache.log4j.Level;
@@ -25,7 +26,7 @@ public class SendRecoveryKeyCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String email = request.getParameter(RequestParameter.EMAIL);
-        UserService service = new UserService();
+        UserService service = new UserServiceImpl();
         String page = PageType.ERROR.getPath();
         HttpSession session = request.getSession();
 

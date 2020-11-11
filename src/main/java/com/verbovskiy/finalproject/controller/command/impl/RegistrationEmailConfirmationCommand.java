@@ -6,6 +6,7 @@ import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.service.UserService;
+import com.verbovskiy.finalproject.model.service.impl.UserServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -19,7 +20,7 @@ public class RegistrationEmailConfirmationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String confirmationKey = request.getParameter(RequestParameter.CONFIRM);
-        UserService service = new UserService();
+        UserService service = new UserServiceImpl();
         String page = PageType.ERROR.getPath();
         HttpSession session = request.getSession();
         try {

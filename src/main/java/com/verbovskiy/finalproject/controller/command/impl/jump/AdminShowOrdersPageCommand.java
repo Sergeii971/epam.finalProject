@@ -8,6 +8,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Order;
 import com.verbovskiy.finalproject.model.service.OrderService;
+import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -22,7 +23,9 @@ public class AdminShowOrdersPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        OrderService service = new OrderService();
+        session.setAttribute(RequestParameter.HAS_PREVIOUS_PAGE, false);
+        session.setAttribute(AttributeKey.IS_FIRST_PAGE, true);
+        OrderService service = new OrderServiceImpl();
         String page = PageType.ERROR.getPath();
         session.setAttribute(RequestParameter.HAS_NEXT_PAGE, true);
 

@@ -18,7 +18,7 @@ public class UserDaoImplTest {
 
     @BeforeClass
     public void setUp() throws DaoException {
-        dao = new UserDaoImpl();
+        //dao = new UserDaoImpl();
         dao.remove("ergeiverbovskiy4@gmail.com");
     }
 

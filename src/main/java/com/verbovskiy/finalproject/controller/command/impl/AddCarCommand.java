@@ -6,6 +6,7 @@ import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.service.CarService;
+import com.verbovskiy.finalproject.model.service.impl.CarServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -20,7 +21,7 @@ public class AddCarCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        CarService service = new CarService();
+        CarService service = new CarServiceImpl();
         HttpSession session = request.getSession();
         String brand = request.getParameter(RequestParameter.BRAND);
         String price = request.getParameter(RequestParameter.PRICE);

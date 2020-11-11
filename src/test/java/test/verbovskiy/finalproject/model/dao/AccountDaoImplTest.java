@@ -12,7 +12,7 @@ public class AccountDaoImplTest {
 
     @BeforeClass
     public void setUp() throws DaoException {
-        dao = new AccountDaoImpl();
+        //dao = new AccountDaoImpl();
        // dao.add("1234","1234",false,false);
         //dao.add( "qqqq","qqqq",true, false);
     }

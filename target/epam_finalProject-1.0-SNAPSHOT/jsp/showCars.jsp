@@ -77,48 +77,48 @@
 <div>
 <table>
     <tbody>
-<c:forEach var="order" items="${carPerPage}">
+<c:forEach var="car" items="${carPerPage}">
 <tr>
     <td>
-    <img src="${pageContext.request.contextPath}/uploads/${order.imageName}" width="250" height="250" alt="IMG">
+    <img src="${pageContext.request.contextPath}/uploads/${car.imageName}" width="250" height="250" alt="IMG">
     </td>
     <td>
-        <fmt:message key="label.car_brand"/>: ${order.brand.brand}
+        <fmt:message key="label.car_brand"/>: ${car.brand.brand}
         <br>
-        <fmt:message key="label.car_model"/>: ${order.model}
+        <fmt:message key="label.car_model"/>: ${car.model}
         <br>
-        <fmt:message key="label.price"/>: ${order.price}
+        <fmt:message key="label.price"/>: ${car.price}
         <br>
-        <fmt:message key="label.box_type"/>: ${order.boxType.box}
+        <fmt:message key="label.box_type"/>: ${car.boxType.box}
         <br>
-        <fmt:message key="label.color"/>: ${order.color.color}
+        <fmt:message key="label.color"/>: ${car.color.color}
         <br>
-        <fmt:message key="label.engine_type"/>: ${order.engineType.engine}
+        <fmt:message key="label.engine_type"/>: ${car.engineType.engine}
         <br>
-        <fmt:message key="label.car_manufacture_year"/>: ${order.manufactureYear}
+        <fmt:message key="label.car_manufacture_year"/>: ${car.manufactureYear}
         <br>
-        <fmt:message key="label.description"/>: ${order.description}
+        <fmt:message key="label.description"/>: ${car.description}
        <br>
-        <fmt:message key="label.added_date"/>: ${order.addedDate}
+        <fmt:message key="label.added_date"/>: ${car.addedDate}
         <br>
         <c:choose>
                 <c:when test="${not empty isAdmin && isAdmin}">
         <form action="${pageContext.request.contextPath}/controller" method="post">
-            <input type="hidden" name="carId" value=${order.carId}>
+            <input type="hidden" name="carId" value=${car.carId}>
             <input type="hidden" name="command" value="DELETE_CAR">
             <button class="submit-button" type="submit">
                 <fmt:message key="button.delete"/>
                 </button>
         </form>
         <form action="${pageContext.request.contextPath}/controller" method="post">
-            <input type="hidden" name="carId" value=${order.carId}>
+            <input type="hidden" name="carId" value=${car.carId}>
             <input type="hidden" name="command" value="CHANGE_CAR_IS_AVAILABLE_STATUS">
             <c:if test="${not empty inOrderList && inOrderList}">
                 <label class="alert-danger"><fmt:message key="label.in_order_list"/></label>
                 <br>
             </c:if>
             <c:choose>
-                <c:when test="${order.isAvailable}">
+                <c:when test="${car.isAvailable}">
                     <input type="hidden" name="isAvailable" value="false">
                     <button class="submit-button" type="submit">
                         <fmt:message key="button.block_car"/>
@@ -136,7 +136,7 @@
         </c:when>
             <c:otherwise>
                 <form action="${pageContext.request.contextPath}/controller" method="post">
-                    <input type="hidden" name="carId" value=${order.carId}>
+                    <input type="hidden" name="carId" value=${car.carId}>
                     <input type="hidden" name="command" value="BUY_CAR_PAGE">
                     <button class="submit-button" type="submit">
                         <fmt:message key="button.buy"/>

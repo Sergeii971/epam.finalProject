@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 public class AddCarPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session = request.getSession();
         return PageType.ADD_CAR.getPath();
     }
 }

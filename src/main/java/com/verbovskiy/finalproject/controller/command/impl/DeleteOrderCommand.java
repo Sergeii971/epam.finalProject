@@ -7,6 +7,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Order;
 import com.verbovskiy.finalproject.model.service.OrderService;
+import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -26,7 +27,7 @@ public class DeleteOrderCommand implements ActionCommand {
         String page = PageType.ERROR.getPath();
 
         try {
-            OrderService service = new OrderService();
+            OrderService service = new OrderServiceImpl();
             int toIndex = (int) session.getAttribute(AttributeKey.TO_INDEX);
             int fromIndex = (int) session.getAttribute(AttributeKey.FROM_INDEX);
             service.remove(orderId);
@@ -35,7 +36,7 @@ public class DeleteOrderCommand implements ActionCommand {
                 request.setAttribute(RequestParameter.IS_EMPTY, true);
                 session.setAttribute(AttributeKey.ORDER_PER_PAGE, new ArrayList<>());
             } else {
-                if (allOrders.size() <= toIndex - 1) {
+                if (allOrders.size() <= toIndex) {
                     toIndex = allOrders.size();
                     session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
                 }

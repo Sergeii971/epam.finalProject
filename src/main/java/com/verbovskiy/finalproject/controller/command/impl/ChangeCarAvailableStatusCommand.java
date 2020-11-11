@@ -7,6 +7,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Car;
 import com.verbovskiy.finalproject.model.service.CarService;
+import com.verbovskiy.finalproject.model.service.impl.CarServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -25,7 +26,7 @@ public class ChangeCarAvailableStatusCommand implements ActionCommand {
         String page = PageType.ERROR.getPath();
 
         try {
-            CarService carService = new CarService();
+            CarService carService = new CarServiceImpl();
             String statusStringFormat = request.getParameter(RequestParameter.IS_AVAILABLE);
             boolean isAvailable = Boolean.parseBoolean(statusStringFormat);
             carService.updateIsAvailableStatus(carId, isAvailable);

@@ -18,8 +18,8 @@ public class CarNextPageCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         List<Car> allCars = (List<Car>) session.getAttribute(AttributeKey.CAR_LIST);
-        int fromIndex = ((Integer) session.getAttribute(AttributeKey.FROM_INDEX)) + Constant.NUMBER_OF_CAR_PER_PAGE;
-        int toIndex = ((Integer)session.getAttribute(AttributeKey.TO_INDEX)) + Constant.NUMBER_OF_CAR_PER_PAGE;
+        int fromIndex = ((int) session.getAttribute(AttributeKey.FROM_INDEX)) + Constant.NUMBER_OF_CAR_PER_PAGE;
+        int toIndex = ((int)session.getAttribute(AttributeKey.TO_INDEX)) + Constant.NUMBER_OF_CAR_PER_PAGE;
 
         if (allCars.size() <= toIndex) {
             toIndex = allCars.size();

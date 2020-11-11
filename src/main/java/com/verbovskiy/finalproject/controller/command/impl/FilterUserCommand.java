@@ -8,6 +8,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.User;
 import com.verbovskiy.finalproject.model.service.UserService;
+import com.verbovskiy.finalproject.model.service.impl.UserServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -26,7 +27,7 @@ public class FilterUserCommand implements ActionCommand {
         String userStatus = request.getParameter(RequestParameter.USER_STATUS);
         String page = PageType.ERROR.getPath();
         try {
-            UserService service = new UserService();
+            UserService service = new UserServiceImpl();
             List<User> users = service.filterUsers(userStatus);
             int fromIndex = 0;
             int toIndex = Constant.NUMBER_OF_USER_PER_PAGE;

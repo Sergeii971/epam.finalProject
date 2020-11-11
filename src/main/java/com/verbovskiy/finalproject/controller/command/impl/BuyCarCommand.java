@@ -4,8 +4,8 @@ import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.service.CarService;
 import com.verbovskiy.finalproject.model.service.OrderService;
+import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -28,7 +28,7 @@ public class BuyCarCommand implements ActionCommand {
         String page = PageType.ERROR.getPath();
 
         try {
-            OrderService orderService = new OrderService();
+            OrderService orderService = new OrderServiceImpl();
             orderService.add(userEmail, carId, date, inProcessing);
             request.setAttribute(RequestParameter.IS_BOUGHT, true);
             page = PageType.BUY_CAR.getPath();

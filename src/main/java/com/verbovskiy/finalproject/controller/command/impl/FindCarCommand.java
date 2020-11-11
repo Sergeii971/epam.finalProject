@@ -8,6 +8,7 @@ import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Car;
 import com.verbovskiy.finalproject.model.service.CarService;
+import com.verbovskiy.finalproject.model.service.impl.CarServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -31,7 +32,7 @@ public class FindCarCommand implements ActionCommand {
         String boxType = request.getParameter(RequestParameter.BOX_TYPE);
         String engineType = request.getParameter(RequestParameter.ENGINE_TYPE);
         boolean isAdmin = (boolean) session.getAttribute(RequestParameter.IS_ADMIN);
-        CarService service = new CarService();
+        CarService service = new CarServiceImpl();
         String page = PageType.ERROR.getPath();
         session.setAttribute(AttributeKey.IS_FIRST_PAGE, true);
         try {

@@ -19,15 +19,19 @@ public class CarPreviousPageCommand implements ActionCommand {
         HttpSession session = request.getSession();
         List<Car> allCars = (List<Car>) session.getAttribute(AttributeKey.CAR_LIST);
         int fromIndex = ((Integer) session.getAttribute(AttributeKey.FROM_INDEX)) - Constant.NUMBER_OF_CAR_PER_PAGE;
-        int toIndex = ((Integer)session.getAttribute(AttributeKey.TO_INDEX)) - Constant.NUMBER_OF_CAR_PER_PAGE;
+        int toIndex = ((Integer)session.getAttribute(AttributeKey.TO_INDEX));
 
-        if (fromIndex == 0) {
+        if (toIndex == allCars.size()) {
+            toIndex -= allCars.size() % Constant.NUMBER_OF_CAR_PER_PAGE;
+        } else {
+            toIndex -= Constant.NUMBER_OF_CAR_PER_PAGE;
+        }
+        if (fromIndex < Constant.NUMBER_OF_CAR_PER_PAGE) {
             session.setAttribute(AttributeKey.IS_FIRST_PAGE, true);
-        }
-        if (toIndex < Constant.NUMBER_OF_CAR_PER_PAGE) {
             toIndex = Constant.NUMBER_OF_CAR_PER_PAGE;
+            fromIndex = 0;
         }
-        if (allCars.size() > Constant.NUMBER_OF_CAR_PER_PAGE) {
+        if (allCars.size() > toIndex) {
             session.setAttribute(RequestParameter.HAS_NEXT_PAGE, true);
         }
         List<Car> carsPerPage = allCars.subList(fromIndex, toIndex);
