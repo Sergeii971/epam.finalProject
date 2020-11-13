@@ -102,22 +102,22 @@ ____
 ### Users<a name="users"></a> 
   To differentiate the levels of access and capabilities of users of the online store, roles were introduced in the application:
     * **Client**
-      The client, in turn, has three statuses: ** Activated, Inactivated, Blocked **.
-      The client who has passed the registration procedure is assigned the role ** Client ** and the status ** Inactive **. The client's email address specified during registration is sent
-      a letter with a confirmation code, by entering which its status changes to ** Activated **. If necessary, the administrator can block it,
-      the status from ** Unlocked ** will change to ** Locked **.
+      The client, in turn, has three statuses: **Activated, Inactivated, Blocked**.
+      The client who has passed the registration procedure is assigned the role **Client** and the status **Inactive**. The client's email address specified during registration is sent
+      a letter with a confirmation code, by entering which its status changes to **Activated**. If necessary, the administrator can block it,
+      the status from **Unlocked** will change to **Locked**.
       Functionality:
-      * **Inactive**
+       * **Inactive**
         * View home page
         * Change site language
         * View registration page
-      * **Activated**
+       * **Activated**
         * View home page
         * View available cars for order
         * Change site language
         * Car order
         * View all your orders
-      * **Locked**
+       * **Locked**
         * View home page
         * Change site language
     * **Administrator**
@@ -157,6 +157,7 @@ ____
     After the customer has paid, the order status changes to Completed
   
   In the event that the Order is completed, but has not been paid, it is considered invalid and is deleted.
+  
   [⬆️Table of contents](#contents)
 ____    
 
