@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * The type registration page command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class RegistrationPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

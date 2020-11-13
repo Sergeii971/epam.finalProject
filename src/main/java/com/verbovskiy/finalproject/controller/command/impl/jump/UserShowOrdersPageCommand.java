@@ -16,6 +16,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type show page command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class UserShowOrdersPageCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(UserShowOrdersPageCommand.class);
 

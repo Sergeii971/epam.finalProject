@@ -18,6 +18,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type user management page command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class UserManagementPageCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(UserManagementPageCommand.class);
 

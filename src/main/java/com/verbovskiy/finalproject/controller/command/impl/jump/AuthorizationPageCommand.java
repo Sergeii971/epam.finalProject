@@ -10,6 +10,12 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type authorization page command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class AuthorizationPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
