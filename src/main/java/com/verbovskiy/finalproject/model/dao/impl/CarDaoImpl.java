@@ -2,13 +2,14 @@ package com.verbovskiy.finalproject.model.dao.impl;
 
 import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.model.connection.ConnectionPool;
+import com.verbovskiy.finalproject.model.dao.AccountDao;
 import com.verbovskiy.finalproject.model.dao.CarDao;
 import com.verbovskiy.finalproject.model.dao.ColumnName;
+import com.verbovskiy.finalproject.model.dao.UserDao;
 import com.verbovskiy.finalproject.model.dao.query.DatabaseQuery;
 import com.verbovskiy.finalproject.model.entity.*;
 import com.verbovskiy.finalproject.util.date_converter.DateConverter;
 
-import javax.swing.text.html.Option;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class CarDaoImpl implements CarDao {
+    private static CarDao instance;
+
+    private CarDaoImpl() {
+    }
+
+    public static CarDao getInstance() {
+        if (instance == null) {
+            instance = new CarDaoImpl();
+        }
+        return instance;
+    }
+
     @Override
     public void add(String brand, String price, String description, String imageName,
                     boolean isAvailable, long addedDate, String model, String manufactureYear,
@@ -211,7 +224,7 @@ public class CarDaoImpl implements CarDao {
         int manufactureYear = Integer.parseInt(resultSet.getString(ColumnName.MANUFACTURE_YEAR));
         CarColor color = CarColor.valueOf(resultSet.getString(ColumnName.COLOR));
         BoxType boxType = BoxType.valueOf(resultSet.getString(ColumnName.BOX_TYPE));
-        Engine engineType = Engine.valueOf(resultSet.getString(ColumnName.ENGINE_TYPE));
+        CarEngine engineType = CarEngine.valueOf(resultSet.getString(ColumnName.ENGINE_TYPE));
 
         return new Car(carId, brand, model, manufactureYear, price, description, imageName, addedDate, isAvailable,
                 color, boxType, engineType);

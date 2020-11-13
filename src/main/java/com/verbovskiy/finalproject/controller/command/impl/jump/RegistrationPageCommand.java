@@ -13,7 +13,10 @@ public class RegistrationPageCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         addComeBackPagePath(session, PageType.REGISTRATION.getPath());
-
+        String email = (String) session.getAttribute(RequestParameter.EMAIL);
+        if (email != null && !email.isEmpty()) {
+         session.removeAttribute(RequestParameter.EMAIL);
+        }
         return PageType.REGISTRATION.getPath();
     }
 }

@@ -2,19 +2,13 @@ package com.verbovskiy.finalproject.model.service.impl;
 
 import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.dao.AccountDao;
 import com.verbovskiy.finalproject.model.dao.CarDao;
-import com.verbovskiy.finalproject.model.dao.UserDao;
-import com.verbovskiy.finalproject.model.dao.impl.AccountDaoImpl;
 import com.verbovskiy.finalproject.model.dao.impl.CarDaoImpl;
-import com.verbovskiy.finalproject.model.dao.impl.UserDaoImpl;
-import com.verbovskiy.finalproject.model.entity.Account;
 import com.verbovskiy.finalproject.model.entity.Car;
-import com.verbovskiy.finalproject.model.entity.User;
 import com.verbovskiy.finalproject.model.service.CarService;
 import com.verbovskiy.finalproject.util.date_converter.DateConverter;
-import com.verbovskiy.finalproject.util.validator.CarValidator;
-import com.verbovskiy.finalproject.util.validator.SearchValidator;
+import com.verbovskiy.finalproject.validator.CarValidator;
+import com.verbovskiy.finalproject.validator.SearchValidator;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,6 +22,7 @@ public class CarServiceImpl implements CarService {
     private static final String DEFAULT_IMAGE_NAME = "unknown.png";
     private static final String FOLDER_PATH = "C:\\Users\\sergei\\IdeaProjects\\epam.finalProject\\" +
             "target\\epam_finalProject-1.0-SNAPSHOT\\uploads\\";
+    private final CarDao carDao = CarDaoImpl.getInstance();
 
     @Override
     public Map<String, Boolean> add(String brand, String price, String description, String imageName, boolean isAvailable,
@@ -36,12 +31,11 @@ public class CarServiceImpl implements CarService {
         try {
             Map<String, Boolean> incorrectParameter = CarValidator.validateCarData(price, description, model, manufactureYear);
             if (incorrectParameter.size() == 0) {
-                CarDao dao = new CarDaoImpl();
                 long dateLongFormat = DateConverter.convertToLong(addedDate);
                 if ((imageName == null) || (imageName.isEmpty())) {
                     imageName = DEFAULT_IMAGE_NAME;
                 }
-                dao.add(brand, price, description, imageName, isAvailable, dateLongFormat, model,
+                carDao.add(brand, price, description, imageName, isAvailable, dateLongFormat, model,
                         manufactureYear, color, boxType, engineType);
             }
             return incorrectParameter;
@@ -53,8 +47,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public void remove(long carId) throws ServiceException {
         try {
-            CarDao dao = new CarDaoImpl();
-            Optional<String> imageName = dao.findImageNameById(carId);
+            Optional<String> imageName = carDao.findImageNameById(carId);
             if (!imageName.isPresent()) {
                 throw new ServiceException("error while find imageName");
             }
@@ -62,7 +55,7 @@ public class CarServiceImpl implements CarService {
             if (Files.exists(Paths.get(filePath)) && !imageName.get().equals(DEFAULT_IMAGE_NAME)) {
                 Files.delete(Paths.get(filePath));
             }
-            dao.remove(carId);
+            carDao.remove(carId);
         } catch (DaoException | IOException e) {
             throw new ServiceException("error while remove car", e);
         }
@@ -71,9 +64,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car findById(long carId) throws ServiceException {
-        CarDao dao = new CarDaoImpl();
         try {
-            Optional<Car> car = dao.findById(carId);
+            Optional<Car> car = carDao.findById(carId);
             if (!car.isPresent()) {
                 throw new ServiceException("error while find information about car by id");
             }
@@ -85,9 +77,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> findAllCars() throws ServiceException {
-        CarDao dao = new CarDaoImpl();
         try {
-            return dao.findAll();
+            return carDao.findAll();
         } catch (DaoException e) {
             throw new ServiceException("error while find information about cars", e);
         }
@@ -103,13 +94,12 @@ public class CarServiceImpl implements CarService {
             try {
                 double fromPriceDoubleFormat = fromPrice.isEmpty() ? 0 : Double.parseDouble(fromPrice);
                 double toPriceDoubleFormat = toPrice.isEmpty() ? Double.MAX_VALUE : Double.parseDouble(toPrice);
-                CarDao dao = new CarDaoImpl();
                 if (isAdmin) {
-                    cars = Optional.of(dao.adminFindBySearchParameters(searchParameter, fromPriceDoubleFormat,
+                    cars = Optional.of(carDao.adminFindBySearchParameters(searchParameter, fromPriceDoubleFormat,
                             toPriceDoubleFormat, brand, color, boxType, engineType));
                 } else {
                     boolean isAvailable = true;
-                    cars = Optional.of(dao.userFindBySearchParameters(searchParameter, fromPriceDoubleFormat,
+                    cars = Optional.of(carDao.userFindBySearchParameters(searchParameter, fromPriceDoubleFormat,
                             toPriceDoubleFormat, brand, color, boxType, engineType, isAvailable));
                 }
             } catch (DaoException e) {
@@ -122,8 +112,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> findAvailableCar() throws ServiceException {
         try {
-            CarDao dao = new CarDaoImpl();
-            return dao.findAvailableCar();
+            return carDao.findAvailableCar();
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
@@ -132,8 +121,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public void updateIsAvailableStatus(long carId, boolean status) throws ServiceException {
         try {
-            CarDao dao = new CarDaoImpl();
-            dao.changeIsAvailableStatus(carId, status);
+            carDao.changeIsAvailableStatus(carId, status);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }

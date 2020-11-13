@@ -1,12 +1,12 @@
 package com.verbovskiy.finalproject.model.entity;
 
-public enum Engine {
+public enum CarEngine {
     DIESEL("diesel"),
     PETROL("petrol");
 
     private final String engine;
 
-    Engine(String engine) {
+    CarEngine(String engine) {
         this.engine = engine;
     }
 

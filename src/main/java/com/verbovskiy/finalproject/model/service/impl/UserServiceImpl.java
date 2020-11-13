@@ -6,13 +6,15 @@ import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.exception.EncryptionException;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.comparator.user.UserComparator;
+import com.verbovskiy.finalproject.model.dao.AccountDao;
+import com.verbovskiy.finalproject.model.dao.UserDao;
 import com.verbovskiy.finalproject.model.dao.impl.AccountDaoImpl;
 import com.verbovskiy.finalproject.model.dao.impl.UserDaoImpl;
 import com.verbovskiy.finalproject.model.entity.Account;
 import com.verbovskiy.finalproject.model.entity.User;
 import com.verbovskiy.finalproject.model.service.UserService;
 import com.verbovskiy.finalproject.util.encryption.Cryptographer;
-import com.verbovskiy.finalproject.util.validator.UserValidator;
+import com.verbovskiy.finalproject.validator.UserValidator;
 
 import java.util.Comparator;
 import java.util.List;
@@ -20,8 +22,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-    private final UserDaoImpl userDao = new UserDaoImpl();
-    private final AccountDaoImpl accountDao = new AccountDaoImpl();
+    private final UserDao userDao = UserDaoImpl.getInstance();
+    private final AccountDao accountDao = AccountDaoImpl.getInstance();
 
     @Override
     public Map<String, Boolean> add(String login, String password, boolean isAdmin, boolean isBlocked, boolean isConfirmed,
@@ -116,7 +118,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isAdmin(String login) throws ServiceException {
-        if ((login == null) || (login.isEmpty())) {
+        if ((login == null)) {
             throw new ServiceException("incorrect user data");
         }
         try {
@@ -132,7 +134,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isBlocked(String login) throws ServiceException {
-        if ((login == null) || (login.isEmpty())) {
+        if ((login == null)) {
             throw new ServiceException("incorrect user data");
         }
         try {

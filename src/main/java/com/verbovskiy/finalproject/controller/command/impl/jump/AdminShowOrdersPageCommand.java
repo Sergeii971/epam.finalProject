@@ -6,7 +6,7 @@ import com.verbovskiy.finalproject.controller.command.Constant;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.entity.Order;
+import com.verbovskiy.finalproject.model.entity.UserOrder;
 import com.verbovskiy.finalproject.model.service.OrderService;
 import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
@@ -30,7 +30,7 @@ public class AdminShowOrdersPageCommand implements ActionCommand {
         session.setAttribute(RequestParameter.HAS_NEXT_PAGE, true);
 
         try {
-            List<Order> allOrders = service.findAllOrders();
+            List<UserOrder> allOrders = service.findAllOrders();
             if (allOrders == null || allOrders.isEmpty()) {
                 request.setAttribute(RequestParameter.IS_EMPTY, true);
                 session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
@@ -40,7 +40,7 @@ public class AdminShowOrdersPageCommand implements ActionCommand {
                     toIndex = allOrders.size();
                     session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
                 }
-                List<Order> ordersPerPage;
+                List<UserOrder> ordersPerPage;
                 ordersPerPage = (allOrders.size() == 1) ? allOrders : allOrders.subList(0, toIndex);
                 session.setAttribute(AttributeKey.ORDER_PER_PAGE, ordersPerPage);
                 session.setAttribute(AttributeKey.ORDER_LIST, allOrders);

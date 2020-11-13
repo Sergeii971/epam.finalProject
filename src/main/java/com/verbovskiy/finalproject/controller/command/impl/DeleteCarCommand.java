@@ -6,7 +6,7 @@ import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Car;
-import com.verbovskiy.finalproject.model.entity.Order;
+import com.verbovskiy.finalproject.model.entity.UserOrder;
 import com.verbovskiy.finalproject.model.service.CarService;
 import com.verbovskiy.finalproject.model.service.impl.CarServiceImpl;
 import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
@@ -31,7 +31,7 @@ public class DeleteCarCommand implements ActionCommand {
 
         try {
             OrderServiceImpl orderService = new OrderServiceImpl();
-            Optional<Order> order =orderService.findByCarId(carId);
+            Optional<UserOrder> order =orderService.findByCarId(carId);
             if (order.isPresent()) {
                 request.setAttribute(RequestParameter.IN_ORDER_LIST, true);
             } else {

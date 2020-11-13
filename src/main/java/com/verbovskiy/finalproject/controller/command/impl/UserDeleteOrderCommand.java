@@ -1,4 +1,4 @@
-package com.verbovskiy.finalproject.controller.command.impl.jump;
+package com.verbovskiy.finalproject.controller.command.impl;
 
 import com.verbovskiy.finalproject.controller.AttributeKey;
 import com.verbovskiy.finalproject.controller.command.ActionCommand;
@@ -6,6 +6,7 @@ import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.UserOrder;
+import com.verbovskiy.finalproject.model.service.OrderService;
 import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -16,23 +17,21 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
-public class UserShowOrdersPageCommand implements ActionCommand {
-    private final Logger logger = LogManager.getLogger(UserShowOrdersPageCommand.class);
+public class UserDeleteOrderCommand implements ActionCommand {
+    private final Logger logger = LogManager.getLogger(UserDeleteOrderCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        OrderServiceImpl service = new OrderServiceImpl();
-        String page = PageType.ERROR.getPath();
+        long orderId = Long.parseLong(request.getParameter(RequestParameter.ORDER_ID));
         String email = (String) session.getAttribute(RequestParameter.EMAIL);
+        String page = PageType.ERROR.getPath();
 
         try {
-            Optional<List<UserOrder>> orders = service.findOrdersByUserEmail(email);
-            if (!orders.isPresent()) {
-                request.setAttribute(RequestParameter.IS_EMPTY, true);
-            } else {
-                session.setAttribute(AttributeKey.ORDER_LIST, orders.get());
-            }
+            OrderService service = new OrderServiceImpl();
+            service.remove(orderId);
+            Optional<List<UserOrder>> allOrders = service.findOrdersByUserEmail(email);
+            session.setAttribute(AttributeKey.ORDER_LIST, allOrders.get());
             page = PageType.USER_SHOW_ORDER.getPath();
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

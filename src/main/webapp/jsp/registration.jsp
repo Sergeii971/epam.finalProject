@@ -58,7 +58,7 @@
         </c:if>
             <span class="label-text">*<fmt:message key="login.password"/></span>
 
-            <input type="password" name="password" autocomplete="off" required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,120}" >
+            <input type="password" name="password" autocomplete="off">
         </label>
         <div class="text-center">
 

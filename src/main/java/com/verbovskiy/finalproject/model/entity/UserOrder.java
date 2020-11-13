@@ -2,14 +2,14 @@ package com.verbovskiy.finalproject.model.entity;
 
 import java.time.LocalDate;
 
-public class Order extends Entity {
+public class UserOrder extends Entity {
     private long orderId;
     private LocalDate date;
     private final User user;
     private final Car car;
     private boolean inProcessing;
 
-    public Order(long orderId, LocalDate date, User user, Car car, boolean inProcessing) {
+    public UserOrder(long orderId, LocalDate date, User user, Car car, boolean inProcessing) {
         this.orderId = orderId;
         this.date = date;
         this.user = user;
@@ -57,7 +57,7 @@ public class Order extends Entity {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        Order order = (Order) o;
+        UserOrder order = (UserOrder) o;
 
         if (date == null) {
             if (order.date != null) {

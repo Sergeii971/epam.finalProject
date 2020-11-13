@@ -1,6 +1,6 @@
-package test.verbovskiy.finalproject.util.validator;
+package test.verbovskiy.finalproject.validator;
 
-import com.verbovskiy.finalproject.util.validator.CarValidator;
+import com.verbovskiy.finalproject.validator.CarValidator;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -22,7 +22,7 @@ public class CarValidatorTest {
 
     @Test
     public void validateManufactureYearPositiveTest() {
-        String year = "2000";
+        String year = "2010";
         boolean actual = CarValidator.validateManufactureYear(year);
         assertTrue(actual);
     }

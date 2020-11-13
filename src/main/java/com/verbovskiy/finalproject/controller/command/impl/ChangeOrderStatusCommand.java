@@ -5,7 +5,7 @@ import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.entity.Order;
+import com.verbovskiy.finalproject.model.entity.UserOrder;
 import com.verbovskiy.finalproject.model.service.OrderService;
 import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
@@ -30,10 +30,10 @@ public class ChangeOrderStatusCommand implements ActionCommand {
             OrderService service = new OrderServiceImpl();
 
             service.updateInProcessingStatus(orderId, inProcessing);
-            List<Order> allOrders = service.findAllOrders();
+            List<UserOrder> allOrders = service.findAllOrders();
             int toIndex = (int) session.getAttribute(AttributeKey.TO_INDEX);
             int fromIndex = (int) session.getAttribute(AttributeKey.FROM_INDEX);
-            List<Order> ordersPerPage = allOrders.subList(fromIndex, toIndex);
+            List<UserOrder> ordersPerPage = allOrders.subList(fromIndex, toIndex);
 
             session.setAttribute(AttributeKey.ORDER_LIST, allOrders);
             session.setAttribute(AttributeKey.ORDER_PER_PAGE, ordersPerPage);

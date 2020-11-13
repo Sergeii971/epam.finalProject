@@ -4,20 +4,21 @@ import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.dao.OrderDao;
 import com.verbovskiy.finalproject.model.dao.impl.OrderDaoImpl;
-import com.verbovskiy.finalproject.model.entity.Order;
+import com.verbovskiy.finalproject.model.entity.UserOrder;
 import com.verbovskiy.finalproject.model.service.OrderService;
 import com.verbovskiy.finalproject.util.date_converter.DateConverter;
-import com.verbovskiy.finalproject.util.validator.SearchValidator;
+import com.verbovskiy.finalproject.validator.SearchValidator;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
+    private final OrderDao dao = OrderDaoImpl.getInstance();
+
     @Override
     public void add(String userEmail, long carId, LocalDate date, boolean inProcessing) throws ServiceException {
         try {
-            OrderDao dao = new OrderDaoImpl();
             long dateLongFormat = DateConverter.convertToLong(date);
             dao.add(userEmail, carId, dateLongFormat, inProcessing);
         } catch (DaoException e) {
@@ -28,17 +29,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void remove(long orderId) throws ServiceException {
         try {
-            OrderDao dao = new OrderDaoImpl();
             dao.remove(orderId);
         } catch (DaoException e) {
-            throw new ServiceException("error while remove car", e);
+            throw new ServiceException("error while remove order", e);
         }
 
     }
 
     @Override
-    public Optional<Order> findByCarId(long carId) throws ServiceException {
-        OrderDao dao = new OrderDaoImpl();
+    public Optional<UserOrder> findByCarId(long carId) throws ServiceException {
         try {
             return dao.findByCarId(carId);
         } catch (DaoException e) {
@@ -47,13 +46,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<List<Order>> findOrdersByParameters(String searchParameter, String brand, String color,
-                                                        String boxType, String engineType) throws ServiceException {
-        Optional<List<Order>> orders = Optional.empty();
+    public Optional<List<UserOrder>> findOrdersByParameters(String searchParameter, String brand, String color,
+                                                            String boxType, String engineType) throws ServiceException {
+        Optional<List<UserOrder>> orders = Optional.empty();
 
         if (SearchValidator.validateSearch(searchParameter)) {
             try {
-               OrderDao dao = new OrderDaoImpl();
                return Optional.of(dao.findBySearchParameters(searchParameter, brand, color, boxType, engineType));
             } catch (DaoException e) {
                 throw new ServiceException(e.getMessage());
@@ -63,9 +61,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<List<Order>> findOrdersByUserEmail(String email) throws ServiceException {
+    public Optional<List<UserOrder>> findOrdersByUserEmail(String email) throws ServiceException {
         try {
-            OrderDao dao = new OrderDaoImpl();
             return Optional.of(dao.findByUserEmail(email));
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
@@ -75,7 +72,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void updateInProcessingStatus(long orderId, boolean status) throws ServiceException {
         try {
-            OrderDao dao = new OrderDaoImpl();
             dao.changeInProcessingStatus(orderId, status);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
@@ -83,8 +79,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findAllOrders() throws ServiceException {
-        OrderDao dao = new OrderDaoImpl();
+    public List<UserOrder> findAllOrders() throws ServiceException {
         try {
             return dao.findAll();
         } catch (DaoException e) {

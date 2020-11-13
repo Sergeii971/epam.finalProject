@@ -1,4 +1,4 @@
-package com.verbovskiy.finalproject.util.validator;
+package com.verbovskiy.finalproject.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

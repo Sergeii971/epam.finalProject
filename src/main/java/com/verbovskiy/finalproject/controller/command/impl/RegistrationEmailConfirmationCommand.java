@@ -27,10 +27,10 @@ public class RegistrationEmailConfirmationCommand implements ActionCommand {
             if (service.ConfirmUser(confirmationKey)) {
                 removeComeBackPagePath(session, PageType.USER_INTERFACE.getPath());
                 page = PageType.USER_INTERFACE.getPath();
-                session.removeAttribute(RequestParameter.EMAIL);
                 session.removeAttribute(RequestParameter.NAME);
                 session.removeAttribute(RequestParameter.SURNAME);
                 session.removeAttribute(AttributeKey.SUCCESSFUL_EMAIL_CONFIRMATION);
+                session.setAttribute(RequestParameter.IS_ADMIN, false);
             } else {
                 request.setAttribute(AttributeKey.SUCCESSFUL_EMAIL_CONFIRMATION, false);
                 page = PageType.CONFIRMATION.getPath();

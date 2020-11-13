@@ -18,6 +18,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderDaoImpl implements OrderDao {
+    private static OrderDao instance;
+
+    private OrderDaoImpl() {
+    }
+
+    public static OrderDao getInstance() {
+        if (instance == null) {
+            instance = new OrderDaoImpl();
+        }
+        return instance;
+    }
+
     @Override
     public void add(String userEmail, long carId, long date, boolean inProcessing) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -48,8 +60,8 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findBySearchParameters(String searchParameter, String brand, String color,
-                                                   String boxType, String engineType) throws DaoException {
+    public List<UserOrder> findBySearchParameters(String searchParameter, String brand, String color,
+                                                  String boxType, String engineType) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
@@ -59,10 +71,10 @@ public class OrderDaoImpl implements OrderDao {
             statement.setString(3, engineType);
             statement.setString(4, boxType);
             statement.setString(5, searchParameter);
-            List<Order> orders = new ArrayList<>();
+            List<UserOrder> orders = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Order order = createOrderFromSql(resultSet);
+                UserOrder order = createOrderFromSql(resultSet);
                 orders.add(order);
             }
             return orders;
@@ -86,15 +98,15 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findAll() throws DaoException {
+    public List<UserOrder> findAll() throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ALL_ORDERS)) {
-            List<Order> orders = new ArrayList<>();
+            List<UserOrder> orders = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Order order = createOrderFromSql(resultSet);
+                UserOrder order = createOrderFromSql(resultSet);
                 orders.add(order);
             }
             return orders;
@@ -104,17 +116,17 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findByUserEmail(String email) throws DaoException {
+    public List<UserOrder> findByUserEmail(String email) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ORDER_BY_USER_EMAIL)) {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
-            List<Order> orders = new ArrayList<>();
+            List<UserOrder> orders = new ArrayList<>();
 
             while (resultSet.next()) {
-                Order order = createOrderFromSql(resultSet);
+                UserOrder order = createOrderFromSql(resultSet);
                 orders.add(order);
             }
             return orders;
@@ -124,14 +136,14 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Optional<Order> findByCarId(long carId) throws DaoException {
+    public Optional<UserOrder> findByCarId(long carId) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(DatabaseQuery.FIND_ORDER_BY_CAR_ID)) {
             statement.setLong(1, carId);
             ResultSet resultSet = statement.executeQuery();
-            Optional<Order> order = Optional.empty();
+            Optional<UserOrder> order = Optional.empty();
             if (resultSet.next()) {
                 order = Optional.of(createOrderFromSql(resultSet));
             }
@@ -141,7 +153,7 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
-    private Order createOrderFromSql(ResultSet resultSet) throws SQLException {
+    private UserOrder createOrderFromSql(ResultSet resultSet) throws SQLException {
         long orderId = Long.parseLong(resultSet.getString(ColumnName.ORDER_ID));
         LocalDate orderDate = DateConverter.convertToDate(resultSet.getLong(ColumnName.ORDER_DATE));
         boolean inProcessing = resultSet.getBoolean(ColumnName.IN_PROCESSING);
@@ -156,7 +168,7 @@ public class OrderDaoImpl implements OrderDao {
         int manufactureYear = Integer.parseInt(resultSet.getString(ColumnName.MANUFACTURE_YEAR));
         CarColor color = CarColor.valueOf(resultSet.getString(ColumnName.COLOR));
         BoxType boxType = BoxType.valueOf(resultSet.getString(ColumnName.BOX_TYPE));
-        Engine engineType = Engine.valueOf(resultSet.getString(ColumnName.ENGINE_TYPE));
+        CarEngine engineType = CarEngine.valueOf(resultSet.getString(ColumnName.ENGINE_TYPE));
         Car car = new Car(carId, brand, model, manufactureYear, price, description, imageName, addedDate, isAvailable,
                 color, boxType, engineType);
         String login = resultSet.getString(ColumnName.LOGIN);
@@ -169,6 +181,6 @@ public class OrderDaoImpl implements OrderDao {
         String surname = resultSet.getString(ColumnName.SURNAME);
         User user = new User(account, email, name, surname);
 
-        return new Order(orderId, orderDate, user, car, inProcessing);
+        return new UserOrder(orderId, orderDate, user, car, inProcessing);
     }
 }

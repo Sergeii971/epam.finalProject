@@ -1,4 +1,4 @@
-package com.verbovskiy.finalproject.util.validator;
+package com.verbovskiy.finalproject.validator;
 
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 

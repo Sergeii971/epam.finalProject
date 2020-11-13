@@ -24,7 +24,7 @@ public class ConnectionPool {
     private static final String PASSWORD = "db.password";
     private static final String URL = "db.url";
     private static final int POOL_SIZE = 12;
-    private static ConnectionPool pool = new ConnectionPool();
+    private static final ConnectionPool pool = new ConnectionPool();
     private final Logger logger = LogManager.getLogger(ConnectionPool.class);
     private final BlockingQueue<ProxyConnection> freeConnections;
     private final Queue<ProxyConnection> givenAwayConnections;

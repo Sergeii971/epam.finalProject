@@ -1,7 +1,6 @@
-package test.verbovskiy.finalproject.util.validator;
+package test.verbovskiy.finalproject.validator;
 
-import com.verbovskiy.finalproject.util.validator.UserValidator;
-import org.testng.annotations.BeforeClass;
+import com.verbovskiy.finalproject.validator.UserValidator;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;

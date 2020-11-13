@@ -16,6 +16,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class AccountDaoImpl implements AccountDao {
+    private static AccountDao instance;
+
+    private AccountDaoImpl() {
+    }
+
+    public static AccountDao getInstance() {
+        if (instance == null) {
+            instance = new AccountDaoImpl();
+        }
+        return instance;
+    }
     @Override
     public List<Account> findAll() throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();

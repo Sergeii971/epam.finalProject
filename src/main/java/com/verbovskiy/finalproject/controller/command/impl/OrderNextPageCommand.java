@@ -5,7 +5,7 @@ import com.verbovskiy.finalproject.controller.command.ActionCommand;
 import com.verbovskiy.finalproject.controller.command.Constant;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
-import com.verbovskiy.finalproject.model.entity.Order;
+import com.verbovskiy.finalproject.model.entity.UserOrder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,7 +15,7 @@ public class OrderNextPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        List<Order> allOrders = (List<Order>) session.getAttribute(AttributeKey.ORDER_LIST);
+        List<UserOrder> allOrders = (List<UserOrder>) session.getAttribute(AttributeKey.ORDER_LIST);
         int fromIndex = ((Integer) session.getAttribute(AttributeKey.FROM_INDEX)) + Constant.NUMBER_OF_ORDER_PER_PAGE;
         int toIndex = ((Integer)session.getAttribute(AttributeKey.TO_INDEX)) + Constant.NUMBER_OF_ORDER_PER_PAGE;
 
@@ -23,7 +23,7 @@ public class OrderNextPageCommand implements ActionCommand {
             toIndex = allOrders.size();
             session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
         }
-        List<Order> ordersPerPage = allOrders.subList(fromIndex, toIndex);
+        List<UserOrder> ordersPerPage = allOrders.subList(fromIndex, toIndex);
         session.setAttribute(AttributeKey.ORDER_PER_PAGE, ordersPerPage);
         session.setAttribute(AttributeKey.ORDER_LIST, allOrders);
         session.setAttribute(AttributeKey.TO_INDEX, toIndex);

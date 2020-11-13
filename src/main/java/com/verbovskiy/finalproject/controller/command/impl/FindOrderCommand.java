@@ -6,7 +6,7 @@ import com.verbovskiy.finalproject.controller.command.Constant;
 import com.verbovskiy.finalproject.controller.command.PageType;
 import com.verbovskiy.finalproject.controller.command.RequestParameter;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.entity.Order;
+import com.verbovskiy.finalproject.model.entity.UserOrder;
 import com.verbovskiy.finalproject.model.service.OrderService;
 import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
@@ -33,7 +33,7 @@ public class FindOrderCommand implements ActionCommand {
         String page = PageType.ERROR.getPath();
         session.setAttribute(AttributeKey.IS_FIRST_PAGE, true);
         try {
-            Optional<List<Order>> orders = service.findOrdersByParameters(searchParameter, brand, color, boxType,
+            Optional<List<UserOrder>> orders = service.findOrdersByParameters(searchParameter, brand, color, boxType,
                     engineType);
             if (!orders.isPresent()) {
                 request.setAttribute(AttributeKey.INCORRECT_PARAMETER, true);
@@ -44,7 +44,7 @@ public class FindOrderCommand implements ActionCommand {
                     toIndex = orders.get().size();
                     session.setAttribute(RequestParameter.HAS_NEXT_PAGE, false);
                 }
-                List<Order> ordersPerPage = (orders.get().size() == 1) ? orders.get() : orders.get().subList(0, toIndex);
+                List<UserOrder> ordersPerPage = (orders.get().size() == 1) ? orders.get() : orders.get().subList(0, toIndex);
                 session.setAttribute(AttributeKey.ORDER_PER_PAGE, ordersPerPage);
                 session.setAttribute(AttributeKey.ORDER_LIST, orders.get());
                 session.setAttribute(AttributeKey.TO_INDEX, toIndex);

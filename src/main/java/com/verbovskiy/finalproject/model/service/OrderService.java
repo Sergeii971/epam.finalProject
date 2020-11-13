@@ -1,7 +1,7 @@
 package com.verbovskiy.finalproject.model.service;
 
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.entity.Order;
+import com.verbovskiy.finalproject.model.entity.UserOrder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,14 +12,14 @@ public interface OrderService {
 
     void remove(long orderId) throws ServiceException;
 
-    Optional<Order> findByCarId(long carId) throws ServiceException;
+    Optional<UserOrder> findByCarId(long carId) throws ServiceException;
 
-    Optional<List<Order>> findOrdersByParameters(String searchParameter, String brand, String color,
-                                                 String boxType, String engineType) throws ServiceException;
+    Optional<List<UserOrder>> findOrdersByParameters(String searchParameter, String brand, String color,
+                                                     String boxType, String engineType) throws ServiceException;
 
-    Optional<List<Order>> findOrdersByUserEmail(String email) throws ServiceException;
+    Optional<List<UserOrder>> findOrdersByUserEmail(String email) throws ServiceException;
 
     void updateInProcessingStatus(long orderId, boolean status) throws ServiceException;
 
-    List<Order> findAllOrders() throws ServiceException;
+    List<UserOrder> findAllOrders() throws ServiceException;
 }

@@ -6,7 +6,6 @@ import com.verbovskiy.finalproject.model.dao.ColumnName;
 import com.verbovskiy.finalproject.model.dao.query.DatabaseQuery;
 import com.verbovskiy.finalproject.model.dao.UserDao;
 import com.verbovskiy.finalproject.model.entity.Account;
-import com.verbovskiy.finalproject.model.entity.Order;
 import com.verbovskiy.finalproject.model.entity.User;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -22,6 +21,17 @@ import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
     private final Logger logger = LogManager.getLogger(UserDaoImpl.class);
+    private static UserDao instance;
+
+    private UserDaoImpl() {
+    }
+
+    public static UserDao getInstance() {
+        if (instance == null) {
+            instance = new UserDaoImpl();
+        }
+        return instance;
+    }
 
     @Override
     public void add(String login, String email, String name, String surname, String encryptedPassword,

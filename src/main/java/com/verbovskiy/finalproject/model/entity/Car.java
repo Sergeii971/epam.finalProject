@@ -13,11 +13,11 @@ public class Car extends Entity {
     private LocalDate addedDate;
     private boolean isAvailable;
     private BoxType boxType;
-    private Engine engineType;
+    private CarEngine engineType;
     private CarColor color;
 
     public Car(long carId, CarBrand brand, String model, int manufactureYear, double price, String description,
-               String imageName, LocalDate addedDate, boolean isAvailable, CarColor color, BoxType boxType, Engine engineType) {
+               String imageName, LocalDate addedDate, boolean isAvailable, CarColor color, BoxType boxType, CarEngine engineType) {
         this.carId = carId;
         this.brand = brand;
         this.model = model;
@@ -120,11 +120,11 @@ public class Car extends Entity {
         this.boxType = boxType;
     }
 
-    public Engine getEngineType() {
+    public CarEngine getEngineType() {
         return engineType;
     }
 
-    public void setEngineType(Engine engineType) {
+    public void setEngineType(CarEngine engineType) {
         this.engineType = engineType;
     }
 

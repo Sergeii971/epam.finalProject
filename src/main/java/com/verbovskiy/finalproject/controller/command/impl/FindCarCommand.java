@@ -39,7 +39,7 @@ public class FindCarCommand implements ActionCommand {
             Optional<List<Car>> cars = service.findCarsByParameters(searchParameter, fromPrice, toPrice,
                     brand, color, boxType, engineType, isAdmin);
             if (!cars.isPresent()) {
-                request.setAttribute(AttributeKey.INCORRECT_PARAMETER, true);
+                session.setAttribute(AttributeKey.INCORRECT_PARAMETER, true);
                 request.setAttribute(RequestParameter.SEARCH_PARAMETER, searchParameter);
                 request.setAttribute(RequestParameter.TO_PRICE, toPrice);
                 request.setAttribute(RequestParameter.FROM_PRICE, fromPrice);
