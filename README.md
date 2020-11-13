@@ -70,10 +70,12 @@ ___
   Заказ содержит информацию об автомобиле и клиенте, заказавшем его, а также дате заявки.  
   
   Заказу присваивается один из двух статусов:
-  * **В обработке**  
+  * **В обработке**
+    
   Присваивается новому заказу после его оформления клиентом
   * **Выполнен**
-  После оплаты клиентом статус заказа меняется на Выполнен
+  
+  После оплаты заказа клиентом статус меняется на Выполнен
   
   В случае, когда Заказ выполнен, но не был оплачен, он считается недействительным и удаляется.  
   
@@ -139,8 +141,6 @@ ____
     * View all clients
     * Change client status Unlocked / Locked
     * Removing non-activated clients
-    Are the subject area an online store. They have various parameters, such as: model name, brand, engine type, color, year of manufacture, type of transmission.
-    Also, each car is assigned a value and a flag - whether it is available for ordering to customers or not.
     
   [⬆️Table of contents](#contents)
   
@@ -151,14 +151,16 @@ ____
   [⬆️Table of contents](#contents)
   
 ### Orders<a name="orders"></a>
-  The result of the customer choosing a car is an order.
+  The result of choosing a car by a customer is an order.
   The order contains information about the vehicle and the customer who ordered it, as well as the date of the application.
   
   An order is assigned one of two statuses:
   * **In processing**
+  
     Assigned to a new order after the client has placed it
   * **Completed**
-    After the customer has paid, the order status changes to Completed
+  
+    After the customer pays the order, the status changes to **Completed**
   
   In the event that the Order is completed, but has not been paid, it is considered invalid and is deleted.
   
