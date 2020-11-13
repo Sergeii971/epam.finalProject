@@ -101,7 +101,6 @@ ____
 ____
 ### Users<a name="users"></a> 
   To differentiate the levels of access and capabilities of users of the online store, roles were introduced in the application:
-<<<<<<< HEAD
   * **Client**
     The client, in turn, has three statuses: **Activated, Inactivated, Blocked**.
     The client who has passed the registration procedure is assigned the role **Client** and the status **Inactive**. The client's email address specified during registration is sent
@@ -140,44 +139,7 @@ ____
     * Removing non-activated clients
     Are the subject area an online store. They have various parameters, such as: model name, brand, engine type, color, year of manufacture, type of transmission.
     Also, each car is assigned a value and a flag - whether it is available for ordering to customers or not.
-=======
-    * **Client**
-      The client, in turn, has three statuses: **Activated, Inactivated, Blocked**.
-      The client who has passed the registration procedure is assigned the role **Client** and the status **Inactive**. The client's email address specified during registration       is sent a letter with a confirmation code, by entering which its status changes to **Activated**. If necessary, the administrator can block it,
-      the status from **Unlocked** will change to **Locked**.
-      Functionality:
-       * **Inactive**
-        * View home page
-        * Change site language
-        * View registration page
-       * **Activated**
-        * View home page
-        * View available cars for order
-        * Change site language
-        * Car order
-        * View all your orders
-       * **Locked**
-        * View home page
-        * Change site language
-    * **Administrator**
-      Manages the work of the online store. His responsibilities include: adding / removing / blocking cars on the site,
-      customer order management, customer management.
-      Functionality:
-       * View home page
-       * Change site language
-       * View customer orders
-       * Order confirmation / cancellation
-       * View car catalog
-       * Adding a new car to the catalog
-       * Change car status
-       * Removing a car if it is not in the order list
-       * View all clients
-       * Change client status Unlocked / Locked
-       * Removing non-activated clients
-      Are the subject area an online store. They have various parameters, such as: model name, brand, engine type, color, year of manufacture, type of transmission.
-      Also, each car is assigned a value and a flag - whether it is available for ordering to customers or not.
->>>>>>> cbc18d36f36f435e51aea98045b92a4bece8e6d7
-      
+    
   [⬆️Table of contents](#contents)
   
 ### Cars<a name="cars"></a>
