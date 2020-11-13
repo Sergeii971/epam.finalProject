@@ -103,9 +103,9 @@ ____
   To differentiate the levels of access and capabilities of users of the online store, roles were introduced in the application:
     * **Client**
       The client, in turn, has three statuses: **Activated, Inactivated, Blocked**.
-      The client who has passed the registration procedure is assigned the role **Client** and the status **Inactive**. The client's email address specified during registration is sent
-      a letter with a confirmation code, by entering which its status changes to **Activated**. If necessary, the administrator can block it,
+      The client who has passed the registration procedure is assigned the role **Client** and the status **Inactive**. The client's email address specified during registration       is sent a letter with a confirmation code, by entering which its status changes to **Activated**. If necessary, the administrator can block it,
       the status from **Unlocked** will change to **Locked**.
+
       Functionality:
        * **Inactive**
         * View home page
@@ -123,6 +123,7 @@ ____
     * **Administrator**
       Manages the work of the online store. His responsibilities include: adding / removing / blocking cars on the site,
       customer order management, customer management.
+      
        Functionality:
        * View home page
        * Change site language
