@@ -72,10 +72,10 @@ ___
   Заказу присваивается один из двух статусов:
   * **В обработке**
     
-  Присваивается новому заказу после его оформления клиентом
+    Присваивается новому заказу после его оформления клиентом
   * **Выполнен**
   
-  После оплаты заказа клиентом статус меняется на Выполнен
+    После оплаты заказа клиентом статус меняется на Выполнен
   
   В случае, когда Заказ выполнен, но не был оплачен, он считается недействительным и удаляется.  
   
@@ -99,7 +99,7 @@ ____
     After confirming the order, the car is delivered to the point of issue, and the user receives a letter by Email stating that his order has arrived.
     After the customer pays for the selected car, the administrator marks the transaction as completed.
     
-[⬆️Table of contents](#contents)
+[⬆️Contents](#contents)
 ____
 ### Users<a name="users"></a> 
   To differentiate the levels of access and capabilities of users of the online store, roles were introduced in the application:
@@ -142,13 +142,13 @@ ____
     * Change client status Unlocked / Locked
     * Removing non-activated clients
     
-  [⬆️Table of contents](#contents)
+  [⬆️Contents](#contents)
   
 ### Cars<a name="cars"></a>
   Are the subject area of an online store. They have various parameters, such as: model name, brand, engine type, color, year of manufacture, type of transmission.
   Also, each car is assigned a value and a flag - whether it is available for ordering to customers or not.
   
-  [⬆️Table of contents](#contents)
+  [⬆️Contents](#contents)
   
 ### Orders<a name="orders"></a>
   The result of choosing a car by a customer is an order.
@@ -162,8 +162,8 @@ ____
   
     After the customer pays the order, the status changes to **Completed**
   
-  In the event that the Order is completed, but has not been paid, it is considered invalid and is deleted.
+  When the Order is completed, but is not paid, it is considered invalid and is deleted.
   
-  [⬆️Table of contents](#contents)
+  [⬆️Contents](#contents)
 ____    
 
