@@ -86,7 +86,7 @@ ____
 ### Author: Verbovskiy Sergei
 #### [Перейти на русский](#русский)
 ---
-### Table of Contents<a name="contents"></a>
+### Contents<a name="contents"></a>
 * [General description](#description)
 * [Users](#users)
 * [Cars](#cars)
@@ -94,7 +94,7 @@ ____
 ### General Description <a name="description"></a>
   The web application provides the ability to make online car orders.
     The client, using the catalog, can choose a suitable option for himself in terms of parameters and price.
-    After confirming the order, the car is delivered to the point of issue, and the user receives a letter by e-mail stating that his order has arrived.
+    After confirming the order, the car is delivered to the point of issue, and the user receives a letter by Email stating that his order has arrived.
     After the customer pays for the selected car, the administrator marks the transaction as completed.
     
 [⬆️Table of contents](#contents)
@@ -102,10 +102,11 @@ ____
 ### Users<a name="users"></a> 
   To differentiate the levels of access and capabilities of users of the online store, roles were introduced in the application:
   * **Client**
+    
     The client, in turn, has three statuses: **Activated, Inactivated, Blocked**.
-    The client who has passed the registration procedure is assigned the role **Client** and the status **Inactive**. The client's email address specified during registration is sent
-    a letter with a confirmation code, by entering which its status changes to **Activated**. If necessary, the administrator can block it,
-    the status from **Unlocked** will change to **Locked**.
+    The client who has passed the registration procedure is assigned the role **Client** and the status **Inactive**.
+    A letter with a confirmation code, by entering which its status changes to **Activated**, is sent to the client's email address, which was specified during registration.
+    If necessary, the administrator can block it, the status from **Unlocked** will be changed to **Locked**.
     
     Functionality:
     * **Inactive**
@@ -122,6 +123,7 @@ ____
       * View home page
       * Change site language
   * **Administrator**
+  
     Manages the work of the online store. His responsibilities include: adding / removing / blocking cars on the site,
     customer order management, customer management.
     
