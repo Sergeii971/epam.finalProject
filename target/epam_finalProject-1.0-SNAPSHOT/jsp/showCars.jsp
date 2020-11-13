@@ -25,17 +25,20 @@
     <fmt:message key="label.list_empty"/>
     </div>
 </c:if>
+    <c:if test="${not empty incorrectParameter && incorrectParameter}">
+        <label class="alert-danger"> <fmt:message key="label.incorrect_search_parameter"/></label>
+    </c:if>
     <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
         <div class="abcde">
         <input type="hidden" name="command" value="FIND_CAR">
-        <input class="reg" type="text" name="searchParameter" autocomplete="off" pattern="[^*<>/{|}]+"
-               placeholder=<fmt:message key="placeholder.search"/>>
+        <input class="reg" type="text" name="searchParameter" autocomplete="off" value="${searchParameter}"
+               pattern="[^*<>/{|}]+" placeholder=<fmt:message key="placeholder.search"/>>
         <label>
         <span class="label-text"><fmt:message key="label.price"/>
-        <input class="reg" type="text" name="fromPrice" autocomplete="off"
-               placeholder=<fmt:message key="input.from"/> pattern="[0-9]">
-        <input class="reg" type="text" name="toPrice" autocomplete="off"
-               placeholder=<fmt:message key="input.to"/> pattern="[0-9]">
+        <input class="reg" type="text" name="fromPrice" autocomplete="off" value="${fromPrice}" pattern="[^*<>/{|}]+"
+               placeholder=<fmt:message key="input.from"/>>
+        <input class="reg" type="text" name="toPrice" autocomplete="off" value="${toPrice}" pattern="[^*<>/{|}]+"
+               placeholder=<fmt:message key="input.to"/>>
             </span>
         </label>
         </div>

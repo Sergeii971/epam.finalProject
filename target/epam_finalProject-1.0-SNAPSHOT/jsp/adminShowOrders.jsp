@@ -19,6 +19,9 @@
             <fmt:message key="label.list_empty"/>
         </div>
     </c:if>
+    <c:if test="${not empty incorrectParameter && incorrectParameter}">
+        <label class="alert-danger"> <fmt:message key="label.incorrect_search_parameter"/></label>
+    </c:if>
     <form action="${pageContext.request.contextPath}/controller" method="post" class="registration-form">
         <input type="hidden" name="command" value="FIND_ORDER">
 
@@ -97,7 +100,7 @@
                     <c:if test="${order.inProcessing}">
                     <form action="${pageContext.request.contextPath}/controller" method="post">
                         <input type="hidden" name="orderId" value=${order.orderId}>
-                        <input type="hidden" name="command" value="DELETE_ORDER">
+                        <input type="hidden" name="command" value="ADMIN_DELETE_ORDER">
                         <button class="submit-button" type="submit">
                             <fmt:message key="button.cancel"/>
                         </button>

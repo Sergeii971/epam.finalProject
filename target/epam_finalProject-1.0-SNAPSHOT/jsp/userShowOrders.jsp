@@ -51,7 +51,7 @@
                     <c:if test="${order.inProcessing}">
                         <form action="${pageContext.request.contextPath}/controller" method="post">
                             <input type="hidden" name="orderId" value=${order.orderId}>
-                            <input type="hidden" name="command" value="DELETE_ORDER">
+                            <input type="hidden" name="command" value="USER_DELETE_ORDER">
                             <button class="submit-button" type="submit">
                                 <fmt:message key="button.cancel"/>
                             </button>
