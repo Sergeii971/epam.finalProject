@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class CarValidator {
     private static final String MODEL_PATTERN = "^[0-9a-zA-Z-_]{1,50}$";
     private static final String PRICE_PATTERN = "^[0-9]{1,15}$";
-    private static final String DESCRIPTION_PATTERN = "[^*<>/{|}]+ {0,500}";
+    private static final String DESCRIPTION_PATTERN = "[^*<>\\\\/{|}]+ {0,500}";
     private static final String YEAR_PATTERN = "[0-9]{4}";
     private static final int MIN_CAR_MANUFACTURE_YEAR = 2010;
 

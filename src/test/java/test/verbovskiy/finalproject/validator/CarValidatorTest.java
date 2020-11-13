@@ -36,7 +36,7 @@ public class CarValidatorTest {
 
     @Test
     public void validateDescriptionPositiveTest() {
-        String description = "";
+        String description = "уркер";
         boolean actual = CarValidator.validateDescription(description);
         assertTrue(actual);
     }

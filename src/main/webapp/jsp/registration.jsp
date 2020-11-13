@@ -50,7 +50,7 @@
             <label class="alert-danger"><fmt:message key="label.incorrect_email"/></label>
         </c:if>
             <span class="label-text">*<fmt:message key="login.email"/></span>
-            <input type="email" name="email" autocomplete="off" required pattern="{1,50}" value = ${email}>
+            <input type="email" name="email" autocomplete="off" minlength="8" maxlength="50" value = ${email}>
         </label>
         <label class="password">
             <c:if test="${not empty incorrectParameter && incorrectParameter['password']}">
@@ -58,7 +58,7 @@
         </c:if>
             <span class="label-text">*<fmt:message key="login.password"/></span>
 
-            <input type="password" name="password" autocomplete="off">
+            <input type="password" name="password" autocomplete="off" pattern="[^*<>/{|}]+">
         </label>
         <div class="text-center">
 
