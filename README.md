@@ -18,7 +18,7 @@
   
 [⬆️Оглавление](#оглавление)
 ____
-### Пользователи<a name="пользователи"></a> 
+### Пользователи<a name="пользователи"></a>  
   Для разграничения уровней доступа и возможностей пользователей онлайн-магазина в приложении были введены роли: 
   * **Клиент**  
     У клиента в свою очередь определены три статуса: **Активирован, Неактивирован, Заблокирован**.  
@@ -59,7 +59,7 @@ ____
     
 [⬆️Оглавление](#оглавление)
 ____
-### Автомобили<a name="автомобили"></a>   
+### Автомобили<a name="автомобили"></a>  
   Являются предметной областью интернет-магазина. Они обладают различными параметрами, такими как: название модели, марка, тип двигателя, цвет, год выпуска, тип коробки передач.
   Так же каждому автомобилю присвоена стоимость и флаг - доступен он для заказа клиентам или нет.  
   
@@ -80,97 +80,83 @@ ___
 [⬆️Оглавление](#оглавление)
 ____
 
-# Online store selling cars "<a name="English"> </a>
+# Online store selling cars<a name="english"></a>
 ---
 ### Java Web Development Teaching Project
 ### Author: Verbovskiy Sergei
-#### [Go to EN](#русский)
+#### [Перейти на русский](#русский)
 ---
-### Table of Contents <a name="table"> </a>
-* [General description](#general_description)
+### Table of Contents<a name="contents"></a>
+* [General description](#description)
 * [Users](#users)
 * [Cars](#cars)
 * [Orders](#orders)
-### General Description <a name=" General_description"> </a>
+### General Description <a name="description"></a>
   The web application provides the ability to make online car orders.
-  The client, using the catalog, can choose a suitable option for himself in terms of parameters and price.
-  After confirming the order, the car is delivered to the pick-up point and the user receives an e-mail message stating that his order has arrived.
-  After payment, the administrator marks the deal as completed.
+    The client, using the catalog, can choose a suitable option for himself in terms of parameters and price.
+    After confirming the order, the car is delivered to the point of issue, and the user receives a letter by e-mail stating that his order has arrived.
+    After the customer pays for the selected car, the administrator marks the transaction as completed.
+    
 [⬆️Table of contents](#contents)
 ____
 ### Users<a name="users"></a> 
-  To differentiate the access levels and capabilities of users of the online service, roles were introduced in the app:
-  * **Guest**  
-    Unauthorized user
-  
-    Functionality:
-      * Home page view
-      * View available cars for order
-      * Changing the site language
-      * Login / Register
-  * **Client**  
-    The client, in turn, has three statuses: **Pending, Active, Blocked**. 
-    The guest who has passed the registration procedure is assigned the role **Client** and the status **Pending**. The client's email address specified during registration is sent
-     a letter with a link by clicking on which the client's status changes to **Active**. If the client violates the rules for using the service, the administrator can block it,
-     status from **Active** will change to **Blocked**.
-    
-    Functionality:
-      * **Pending**  
-        * Home page view
-        * View available cars for order
-        * Changing the site language
-      * **Active** 
-        * Home page view
-        * View available cars for order
-        * Changing the site language
-        * Car order
-        * Order payment
-        * View all your orders
-      * **Blocked** 
-        * Home page view
-        * Changing the site language 
-  * ** Administrator **
-      Manages the work of the store. His responsibilities include adding new cars to the catalog, managing cars,
-      customer order management, customer management.
-      
+  To differentiate the levels of access and capabilities of users of the online store, roles were introduced in the application:
+    * **Client**
+      The client, in turn, has three statuses: ** Activated, Inactivated, Blocked **.
+      The client who has passed the registration procedure is assigned the role ** Client ** and the status ** Inactive **. The client's email address specified during registration is sent
+      a letter with a confirmation code, by entering which its status changes to ** Activated **. If necessary, the administrator can block it,
+      the status from ** Unlocked ** will change to ** Locked **.
       Functionality:
-      * View home page
-      * Change site language
-      * View customer orders
-      * Order confirmation / cancellation
-      * View car catalog
-      * Adding a new car to the catalog
-      * Change car status
-      * removal of the car if it is not in the order list
-      * View all clients
-      * Change client status Active / Blocked
-      * Removing non-activated clients
-    
-[⬆️Table of contents](#table of contents)
-____
-### Automobiles <a name=" Automobiles"> </a>
-  Are the subject area of an online store. They have various parameters, such as model name, brand, engine type, color, year of manufacture, type of transmission.
-  Also, each car is assigned a value and a flag - whether it is available for ordering by customers or not.
-[⬆️Table of contents](#contents)
-___
-[⬆️ Table of contents](#table of contents)
-___
-### Orders <a name="orders"> </a>
-  The result of ordering a car by a customer is an order.
-  The order contains information about the car and the customer who ordered it, as well as the date of appearance.
+      * **Inactive**
+        * View home page
+        * Change site language
+        * View registration page
+      * **Activated**
+        * View home page
+        * View available cars for order
+        * Change site language
+        * Car order
+        * View all your orders
+      * **Locked**
+        * View home page
+        * Change site language
+    * **Administrator**
+      Manages the work of the online store. His responsibilities include: adding / removing / blocking cars on the site,
+      customer order management, customer management.
+       Functionality:
+       * View home page
+       * Change site language
+       * View customer orders
+       * Order confirmation / cancellation
+       * View car catalog
+       * Adding a new car to the catalog
+       * Change car status
+       * Removing a car if it is not in the order list
+       * View all clients
+       * Change client status Unlocked / Locked
+       * Removing non-activated clients
+      Are the subject area an online store. They have various parameters, such as: model name, brand, engine type, color, year of manufacture, type of transmission.
+      Also, each car is assigned a value and a flag - whether it is available for ordering to customers or not.
+      
+  [⬆️Table of contents](#contents)
+  
+  ### Cars<a name="cars"></a>
+  Are the subject area of an online store. They have various parameters, such as: model name, brand, engine type, color, year of manufacture, type of transmission.
+  Also, each car is assigned a value and a flag - whether it is available for ordering to customers or not.
+  
+  [⬆️Table of contents](#contents)
+  
+  ### Orders<a name="orders"></a>
+  The result of the customer choosing a car is an order.
+  The order contains information about the vehicle and the customer who ordered it, as well as the date of the application.
   
   An order is assigned one of two statuses:
-  * ** In processing **
-  Assigned to a new order after the client has placed it
-  * ** Completed **
-  After payment by the client, the status of the order from being processed changes to Completed
+  * **In processing**
+    Assigned to a new order after the client has placed it
+  * **Completed**
+    After the customer has paid, the order status changes to Completed
   
-  In cases when:
-  * The order was completed, but was not paid
-  * The order was canceled by the administrator
-  
-  such order is considered invalid and will be deleted.
-  
-[⬆️ Table of contents](#table of contents)
-____
+  In the event that the Order is completed, but has not been paid, it is considered invalid and is deleted.
+  [⬆️Table of contents](#contents)
+____    
 
