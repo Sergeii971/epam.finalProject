@@ -20,6 +20,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+/**
+ * The type send recovery key command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class SendRecoveryKeyCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(SendRecoveryKeyCommand.class);
 

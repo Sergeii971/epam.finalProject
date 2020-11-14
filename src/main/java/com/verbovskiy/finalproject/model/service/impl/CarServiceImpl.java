@@ -18,6 +18,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The type Car service.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class CarServiceImpl implements CarService {
     private static final String DEFAULT_IMAGE_NAME = "unknown.png";
     private static final String FOLDER_PATH = "C:\\Users\\sergei\\IdeaProjects\\epam.finalProject\\" +

@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.model.entity;
 
+/**
+ * The type Account.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class Account extends Entity{
     private String login;
     private boolean isBlocked;
@@ -13,34 +19,74 @@ public class Account extends Entity{
         this.isConfirmed = isConfirmed;
     }
 
+    /**
+     * Sets login.
+     *
+     * @param login the login
+     */
     public void setLogin(String login) {
         this.login = login;
     }
 
+    /**
+     * Sets blocked.
+     *
+     * @param blocked the block status
+     */
     public void setBlocked(boolean blocked) {
         isBlocked = blocked;
     }
 
+    /**
+     * Sets admin.
+     *
+     * @param admin the admin
+     */
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
 
+    /**
+     * is blocked.
+     *
+     * @return is blocked
+     */
     public boolean isBlocked() {
         return isBlocked;
     }
 
+    /**
+     * Gets login.
+     *
+     * @return the login
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * is admin.
+     *
+     * @return is admin
+     */
     public boolean isAdmin() {
         return isAdmin;
     }
 
+    /**
+     * is confirmed.
+     *
+     * @return is confirmed
+     */
     public boolean isConfirmed() {
         return isConfirmed;
     }
 
+    /**
+     * Sets confirmed.
+     *
+     * @param confirmed the confirmed
+     */
     public void setConfirmed(boolean confirmed) {
         isConfirmed = confirmed;
     }

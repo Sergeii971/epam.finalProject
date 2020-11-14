@@ -13,6 +13,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Order service.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class OrderServiceImpl implements OrderService {
     private final OrderDao dao = OrderDaoImpl.getInstance();
 

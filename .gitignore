@@ -1,5 +1,5 @@
 /target/
 /.gitignore
-/.lib/
+/lib/
 /epam.finalProject.iml
 /.idea/

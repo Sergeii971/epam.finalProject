@@ -12,6 +12,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
 
+/**
+ * The type page redirect security filter.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 @WebFilter(filterName = "PageRedirectSecurityFilter",urlPatterns = {  "/jsp/*" })
 public class PageRedirectSecurityFilter implements Filter {
     @Override

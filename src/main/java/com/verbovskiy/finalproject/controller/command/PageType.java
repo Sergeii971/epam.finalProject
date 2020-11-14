@@ -2,6 +2,12 @@ package com.verbovskiy.finalproject.controller.command;
 
 import java.util.Optional;
 
+/**
+ * The enum page type
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public enum PageType {
     AUTHORIZATION("/jsp/authorization.jsp", true),
     INDEX("/index.jsp", true),
@@ -28,14 +34,30 @@ public enum PageType {
         this.linkAvailable = linkAvailable;
     }
 
+    /**
+     * Gets path.
+     *
+     * @return the path
+     */
     public String getPath(){
         return path;
     }
 
+    /**
+     * is link available
+     *
+     * @return boolean
+     */
     public boolean isLinkAvailable() {
         return linkAvailable;
     }
 
+    /**
+     * looking for the same path in enum
+     *
+     * @param path the path
+     * @return page type
+     */
     public static Optional<PageType> findByPath(String path) {
         Optional<PageType> page = Optional.empty();
         if (path != null) {

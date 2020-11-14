@@ -14,6 +14,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * The type controller.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 @WebServlet(urlPatterns = "/controller", name = "servlet")
 public class Controller extends HttpServlet {
 
@@ -27,6 +33,14 @@ public class Controller extends HttpServlet {
         processRequest(request, response);
     }
 
+    /**
+     * Process request.
+     *
+     * @param request  the request
+     * @param response the response
+     * @throws ServletException the servlet exception
+     * @throws IOException      the io exception
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
         ActionCommand command = CommandProvider.defineCommand(request.getParameter(RequestParameter.COMMAND_NAME));

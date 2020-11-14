@@ -2,6 +2,12 @@ package com.verbovskiy.finalproject.model.entity;
 
 import java.time.LocalDate;
 
+/**
+ * The type User order.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class UserOrder extends Entity {
     private long orderId;
     private LocalDate date;
@@ -17,34 +23,74 @@ public class UserOrder extends Entity {
         this.inProcessing = inProcessing;
     }
 
+    /**
+     * Gets order id.
+     *
+     * @return the order id
+     */
     public long getOrderId() {
         return orderId;
     }
 
+    /**
+     * Sets order id.
+     *
+     * @param orderId the order id
+     */
     public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Sets date.
+     *
+     * @param date the date
+     */
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Gets car.
+     *
+     * @return the car
+     */
     public Car getCar() {
         return car;
     }
 
+    /**
+     * Gets is in processing.
+     *
+     * @return the in processing
+     */
     public boolean isInProcessing() {
         return inProcessing;
     }
 
+    /**
+     * Sets in processing.
+     *
+     * @param inProcessing the in processing
+     */
     public void setInProcessing(boolean inProcessing) {
         this.inProcessing = inProcessing;
     }

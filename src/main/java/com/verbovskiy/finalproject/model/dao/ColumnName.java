@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.model.dao;
 
+/**
+ * The type Column name.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class ColumnName {
     private ColumnName() {
     }

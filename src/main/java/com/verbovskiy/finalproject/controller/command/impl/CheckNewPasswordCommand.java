@@ -14,6 +14,12 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The type check new password command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class CheckNewPasswordCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(CheckNewPasswordCommand.class);
 

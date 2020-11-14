@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.controller.command;
 
+/**
+ * The type Request parameter
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public final class RequestParameter {
     private RequestParameter() {
     }

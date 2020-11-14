@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.model.dao.query;
 
+/**
+ * The type Database query.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class DatabaseQuery {
     private DatabaseQuery() {
     }

@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The type change order status command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class ChangeOrderStatusCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(ChangeOrderStatusCommand.class);
 

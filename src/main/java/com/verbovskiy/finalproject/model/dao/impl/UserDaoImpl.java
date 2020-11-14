@@ -19,6 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User dao.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class UserDaoImpl implements UserDao {
     private final Logger logger = LogManager.getLogger(UserDaoImpl.class);
     private static UserDao instance;
@@ -26,6 +32,11 @@ public class UserDaoImpl implements UserDao {
     private UserDaoImpl() {
     }
 
+    /**
+     * Get instance user dao.
+     *
+     * @return the user dao
+     */
     public static UserDao getInstance() {
         if (instance == null) {
             instance = new UserDaoImpl();
@@ -158,7 +169,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findNotConfirmedStatusUsers() throws DaoException {
+    public List<User> findNotConfirmedUsers() throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();

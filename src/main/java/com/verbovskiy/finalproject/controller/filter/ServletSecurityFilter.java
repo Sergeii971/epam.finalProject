@@ -14,6 +14,12 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * The type Servlet security filter.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 @WebFilter(filterName = "ServletSecurityFilter", urlPatterns = { "/controller" })
 public class ServletSecurityFilter implements Filter {
     @Override

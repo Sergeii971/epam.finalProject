@@ -18,6 +18,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type find car command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class FindCarCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(FindCarCommand.class);
 

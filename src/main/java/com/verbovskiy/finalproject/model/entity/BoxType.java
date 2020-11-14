@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.model.entity;
 
+/**
+ * The enum Box type.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public enum BoxType {
     MECHANICS("mechanics"),
     AUTOMATION("automation");
@@ -10,6 +16,11 @@ public enum BoxType {
         this.box = box;
     }
 
+    /**
+     * Gets Box.
+     *
+     * @return box
+     */
     public String getBox() {
         return box;
     }

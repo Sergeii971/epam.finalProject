@@ -14,6 +14,12 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The type registration email confirmation command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class RegistrationEmailConfirmationCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(RegistrationEmailConfirmationCommand.class);
 

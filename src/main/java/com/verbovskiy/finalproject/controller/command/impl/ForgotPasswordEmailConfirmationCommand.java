@@ -14,6 +14,12 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The type forgot password email confirmation command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class ForgotPasswordEmailConfirmationCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(ForgotPasswordEmailConfirmationCommand.class);
 

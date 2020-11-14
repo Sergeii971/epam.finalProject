@@ -2,6 +2,13 @@ package com.verbovskiy.finalproject.model.entity;
 
 import java.time.LocalDate;
 
+/**
+ * The type Car.
+ * Is the subject area of the store.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class Car extends Entity {
     private long carId;
     private CarBrand brand;
@@ -32,98 +39,218 @@ public class Car extends Entity {
         this.engineType = engineType;
     }
 
+    /**
+     * Gets car id.
+     *
+     * @return the car id
+     */
     public long getCarId() {
         return carId;
     }
 
+    /**
+     * Sets car id.
+     *
+     * @param carId the car id
+     */
     public void setCarId(long carId) {
         this.carId = carId;
     }
 
+    /**
+     * set brand.
+     *
+     * @param brand the brand
+     */
     public void setBrand(CarBrand brand) {
         this.brand = brand;
     }
 
+    /**
+     * Gets price.
+     *
+     * @return the price
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * set price.
+     *
+     * @param price the price
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * set description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets image name.
+     *
+     * @return the image name
+     */
     public String getImageName() {
         return imageName;
     }
 
+    /**
+     * set imageName.
+     *
+     * @param imageName the image name
+     */
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
 
+    /**
+     * Gets available status.
+     *
+     * @return boolean
+     */
     public boolean getIsAvailable() {
         return isAvailable;
     }
 
+    /**
+     * set available.
+     *
+     * @param available  the available
+     */
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
 
+    /**
+     * Gets addded date.
+     *
+     * @return the added date
+     */
     public LocalDate getAddedDate() {
         return addedDate;
     }
 
+    /**
+     * set added data.
+     *
+     * @param addedDate the added date
+     */
     public void setAddedDate(LocalDate addedDate) {
         this.addedDate = addedDate;
     }
 
+    /**
+     * Gets model.
+     *
+     * @return the model
+     */
     public String getModel() {
         return model;
     }
 
+    /**
+     * Sets model.
+     *
+     * @param model the model
+     */
     public void setModel(String model) {
         this.model = model;
     }
 
+    /**
+     * Gets manufacture year.
+     *
+     * @return the manufacture year
+     */
     public int getManufactureYear() {
         return manufactureYear;
     }
 
+    /**
+     * set manufacture year.
+     *
+     * @param manufactureYear the manufacture year
+     */
     public void setManufactureYear(int manufactureYear) {
         this.manufactureYear = manufactureYear;
     }
 
+    /**
+     * Gets brand.
+     *
+     * @return the brand
+     */
     public CarBrand getBrand() {
         return brand;
     }
 
+    /**
+     * Gets color.
+     *
+     * @return the color
+     */
     public CarColor getColor() {
         return color;
     }
 
+    /**
+     * set color.
+     *
+     * @param color the color
+     */
     public void setColor(CarColor color) {
         this.color = color;
     }
 
+    /**
+     * Gets box type.
+     *
+     * @return the box type
+     */
     public BoxType getBoxType() {
         return boxType;
     }
 
+    /**
+     * set box type.
+     *
+     * @param boxType the box type
+     */
     public void setBoxType(BoxType boxType) {
         this.boxType = boxType;
     }
 
+    /**
+     * Gets engine type.
+     *
+     * @return the engine type
+     */
     public CarEngine getEngineType() {
         return engineType;
     }
 
+    /**
+     * set engine type.
+     *
+     * @param engineType the engine type
+     */
     public void setEngineType(CarEngine engineType) {
         this.engineType = engineType;
     }

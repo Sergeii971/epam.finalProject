@@ -17,12 +17,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Order dao.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class OrderDaoImpl implements OrderDao {
     private static OrderDao instance;
 
     private OrderDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static OrderDao getInstance() {
         if (instance == null) {
             instance = new OrderDaoImpl();

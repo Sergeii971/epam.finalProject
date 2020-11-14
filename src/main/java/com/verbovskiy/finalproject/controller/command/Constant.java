@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.controller.command;
 
+/**
+ * The type constant
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class Constant {
     private Constant() {
     }

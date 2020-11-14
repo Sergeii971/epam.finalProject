@@ -12,6 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * The type Mail sender.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class MailSender {
     private MimeMessage message;
     private final String sendToEmail;

@@ -14,6 +14,12 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The type authentication command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class AuthenticationCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(AuthenticationCommand.class);
 

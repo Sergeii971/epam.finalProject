@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The type delete not confirmed user command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class DeleteNotConfirmedUserCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(DeleteNotConfirmedUserCommand.class);
 
@@ -43,7 +49,7 @@ public class DeleteNotConfirmedUserCommand implements ActionCommand {
             }
             page = PageType.USER_MANAGEMENT.getPath();
         } catch (ServiceException e) {
-            logger.log(Level.ERROR, "Error while updating user status", e);
+            logger.log(Level.ERROR,  e);
         }
         return page;
     }

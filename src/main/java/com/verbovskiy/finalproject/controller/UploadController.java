@@ -17,6 +17,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+/**
+ * The {@code UploadController} class represents file upload controller.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 @WebServlet(urlPatterns = "/upload_controller", name = "uploadController")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class UploadController extends HttpServlet {

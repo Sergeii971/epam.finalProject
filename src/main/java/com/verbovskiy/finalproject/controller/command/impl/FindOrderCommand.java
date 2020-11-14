@@ -18,6 +18,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type find order command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class FindOrderCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(FindCarCommand.class);
 

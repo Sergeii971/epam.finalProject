@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.controller;
 
+/**
+ * The type Attribute key.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class AttributeKey {
     private AttributeKey() {
     }

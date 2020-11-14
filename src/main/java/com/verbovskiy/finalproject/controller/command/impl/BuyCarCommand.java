@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 
+/**
+ * The type buy car command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class BuyCarCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(BuyCarCommand.class);
 

@@ -7,6 +7,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The type User validator.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class UserValidator {
     private static final String EMAIL_PATTERN = "^([a-zA-Z0-9_\\-\\.]+)@+\\p{Alnum}+\\.\\p{Alpha}{2,4}$";
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,120}$";
@@ -15,6 +21,15 @@ public class UserValidator {
     private UserValidator() {
     }
 
+    /**
+     * Validate client parameters boolean.
+     *
+     * @param email  the email
+     * @param password the password
+     * @param name the name
+     * @param surname the surname
+     * @return incorrect parameters
+     */
     public static Map<String, Boolean> validateUserData(String email, String password, String name, String surname) {
         Map<String, Boolean> incorrectParameters = new HashMap<>();
         if (!validateEmail(email)) {
@@ -32,6 +47,12 @@ public class UserValidator {
         return incorrectParameters;
     }
 
+    /**
+     * Validate email.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public static boolean validateEmail(String email) {
         boolean isEmailCorrect = false;
 
@@ -43,6 +64,12 @@ public class UserValidator {
         return isEmailCorrect;
     }
 
+    /**
+     * Validate password.
+     *
+     * @param password the password
+     * @return the boolean
+     */
     public static boolean validatePassword(String password) {
         boolean isPasswordCorrect = false;
 
@@ -54,6 +81,13 @@ public class UserValidator {
         return isPasswordCorrect;
     }
 
+    /**
+     * Validate passwords.
+     *
+     * @param password        the password
+     * @param passwordConfirmation the confirmation password
+     * @return the boolean
+     */
     public static boolean validatePasswords(String password, String passwordConfirmation) {
         boolean isPasswordsCorrect = false;
         if ((password != null) && (!password.isEmpty()) && (password.equals(passwordConfirmation))) {
@@ -64,6 +98,12 @@ public class UserValidator {
         return isPasswordsCorrect;
     }
 
+    /**
+     * Validate name.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     public static boolean validateName(String name) {
         boolean isNameCorrect = false;
 

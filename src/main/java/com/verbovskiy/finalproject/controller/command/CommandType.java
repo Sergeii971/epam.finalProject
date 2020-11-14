@@ -3,6 +3,12 @@ package com.verbovskiy.finalproject.controller.command;
 import com.verbovskiy.finalproject.controller.command.impl.*;
 import com.verbovskiy.finalproject.controller.command.impl.jump.*;
 
+/**
+ * The enum Command type.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public enum CommandType {
     ADD_USER(new AddUserCommand()),
     AUTHENTICATION(new AuthenticationCommand()),
@@ -48,6 +54,11 @@ public enum CommandType {
         this.command = command;
     }
 
+    /**
+     * Gets command.
+     *
+     * @return the command
+     */
     public ActionCommand getCommand() {
         return command;
     }

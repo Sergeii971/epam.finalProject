@@ -5,9 +5,20 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * The type Proxy connection.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class ProxyConnection implements Connection {
     private Connection connection;
 
+    /**
+     * Instantiates a new Proxy connection.
+     *
+     * @param connection the connection
+     */
     ProxyConnection(Connection connection) {
         this.connection = connection;
     }

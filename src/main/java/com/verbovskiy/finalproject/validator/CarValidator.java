@@ -8,6 +8,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The type Car validator.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class CarValidator {
     private static final String MODEL_PATTERN = "^[0-9a-zA-Z-_]{1,50}$";
     private static final String PRICE_PATTERN = "^[0-9]{1,15}$";
@@ -18,6 +24,15 @@ public class CarValidator {
     private CarValidator() {
     }
 
+    /**
+     * Validate car data.
+     *
+     * @param price the price
+     * @param description the description
+     * @param model the model
+     * @param manufactureYear the manufacture year
+     * @return incorrect parameters
+     */
     public static Map<String, Boolean> validateCarData(String price, String description,
                                                        String model, String manufactureYear) {
         Map<String, Boolean> incorrectParameters = new HashMap<>();
@@ -36,6 +51,12 @@ public class CarValidator {
         return incorrectParameters;
     }
 
+    /**
+     * Validate price.
+     *
+     * @param price the price
+     * @return the boolean
+     */
     public static boolean validatePrice(String price) {
         boolean isPriceCorrect = false;
 
@@ -47,6 +68,12 @@ public class CarValidator {
         return isPriceCorrect;
     }
 
+    /**
+     * Validate year.
+     *
+     * @param year the year
+     * @return the boolean
+     */
     public static boolean validateManufactureYear(String year) {
         boolean isYearCorrect = false;
 
@@ -63,6 +90,12 @@ public class CarValidator {
         return isYearCorrect;
     }
 
+    /**
+     * Validate description.
+     *
+     * @param description the description
+     * @return the boolean
+     */
     public static boolean validateDescription(String description) {
         boolean isDescriptionCorrect = true;
 
@@ -74,6 +107,12 @@ public class CarValidator {
         return isDescriptionCorrect;
     }
 
+    /**
+     * Validate model.
+     *
+     * @param model the model
+     * @return the boolean
+     */
     public static boolean validateModel(String model) {
         boolean isModelCorrect = false;
 

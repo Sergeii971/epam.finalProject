@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The type change car available status command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class ChangeCarAvailableStatusCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(ChangeCarAvailableStatusCommand.class);
 

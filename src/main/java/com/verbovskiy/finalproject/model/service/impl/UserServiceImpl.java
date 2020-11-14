@@ -21,6 +21,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The type User service.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class UserServiceImpl implements UserService {
     private final UserDao userDao = UserDaoImpl.getInstance();
     private final AccountDao accountDao = AccountDaoImpl.getInstance();
@@ -220,7 +226,7 @@ public class UserServiceImpl implements UserService {
                 users = userDao.findBlockedStatusUsers();
             } else {
                 if (userStatus.equals(RequestParameter.IS_CONFIRMED)) {
-                    users = userDao.findNotConfirmedStatusUsers();
+                    users = userDao.findNotConfirmedUsers();
                 } else {
                     users = userDao.findAll();
                 }
@@ -252,7 +258,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findNotConfirmedUsers() throws ServiceException {
         try {
-            return userDao.findNotConfirmedStatusUsers();
+            return userDao.findNotConfirmedUsers();
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }

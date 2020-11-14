@@ -16,6 +16,12 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Map;
 
+/**
+ * The type add car page command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class AddCarCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(AddUserCommand.class);
 

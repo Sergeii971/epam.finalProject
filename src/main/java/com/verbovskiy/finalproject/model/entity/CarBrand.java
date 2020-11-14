@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.model.entity;
 
+/**
+ * The enum Car brand.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public enum CarBrand {
     AUDI("Audi"),
     BMW("BMW"),
@@ -17,6 +23,11 @@ public enum CarBrand {
         this.brand = brand;
     }
 
+    /**
+     * Gets Brand.
+     *
+     * @return the Brand
+     */
     public String getBrand() {
         return brand;
     }

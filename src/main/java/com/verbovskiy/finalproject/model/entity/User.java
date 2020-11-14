@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.model.entity;
 
+/**
+ * The type User.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class User extends Entity {
     private String email;
     private String name;
@@ -13,34 +19,74 @@ public class User extends Entity {
         this.surname = surname;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * set email.
+     *
+     * @param email the email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * set name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets surname.
+     *
+     * @return the surname
+     */
     public String getSurname() {
         return surname;
     }
 
+    /**
+     * set surname.
+     *
+     * @param surname the surname
+     */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    /**
+     * set account.
+     *
+     * @param account the account
+     */
     public void setAccount(Account account) {
         this.account = account;
     }
 
+    /**
+     * Gets account.
+     *
+     * @return the account
+     */
     public Account getAccount() {
         return account;
     }

@@ -15,12 +15,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type account dao.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class AccountDaoImpl implements AccountDao {
     private static AccountDao instance;
 
     private AccountDaoImpl() {
     }
 
+    /**
+     * Get instance account dao.
+     *
+     * @return the account dao
+     */
     public static AccountDao getInstance() {
         if (instance == null) {
             instance = new AccountDaoImpl();

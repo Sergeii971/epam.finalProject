@@ -19,12 +19,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Car dao.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class CarDaoImpl implements CarDao {
     private static CarDao instance;
 
     private CarDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static CarDao getInstance() {
         if (instance == null) {
             instance = new CarDaoImpl();

@@ -17,6 +17,12 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type admin delete order page command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class AdminDeleteOrderCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(AdminDeleteOrderCommand.class);
 

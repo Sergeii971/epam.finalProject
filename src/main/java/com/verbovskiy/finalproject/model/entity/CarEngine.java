@@ -1,5 +1,11 @@
 package com.verbovskiy.finalproject.model.entity;
 
+/**
+ * The enum Car engine.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public enum CarEngine {
     DIESEL("diesel"),
     PETROL("petrol");
@@ -10,6 +16,11 @@ public enum CarEngine {
         this.engine = engine;
     }
 
+    /**
+     * Gets engine.
+     *
+     * @return the engine
+     */
     public String getEngine() {
         return engine;
     }

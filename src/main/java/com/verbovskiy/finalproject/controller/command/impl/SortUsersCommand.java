@@ -17,6 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The type sort users command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class SortUsersCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(SortUsersCommand.class);
 

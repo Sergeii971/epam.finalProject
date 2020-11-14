@@ -17,6 +17,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * The type user management table.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class UserManagementTable extends BodyTagSupport {
     private static final Logger logger = LogManager.getLogger(UserManagementTable.class);

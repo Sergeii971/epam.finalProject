@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The type order previous page command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class OrderPreviousPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

@@ -17,6 +17,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type user delete order command.
+ *
+ * @author Verbovskiy Sergei
+ * @version 1.0
+ */
 public class UserDeleteOrderCommand implements ActionCommand {
     private final Logger logger = LogManager.getLogger(UserDeleteOrderCommand.class);
 
