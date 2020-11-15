@@ -146,7 +146,7 @@ public class UserDaoImpl implements UserDao {
             }
             return users;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding user by blocked status from database", e);
+            throw new DaoException("Error while finding users by blocked status in database", e);
         }
     }
 
@@ -164,7 +164,7 @@ public class UserDaoImpl implements UserDao {
             }
             return user;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding user by email from database", e);
+            throw new DaoException("Error while finding user by email in database", e);
         }
     }
 
@@ -184,7 +184,7 @@ public class UserDaoImpl implements UserDao {
             }
             return users;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding user by blocked status from database", e);
+            throw new DaoException("Error while finding not confirmed users in database", e);
         }
     }
 
@@ -203,7 +203,7 @@ public class UserDaoImpl implements UserDao {
             }
             return users;
         } catch (SQLException e) {
-            throw new DaoException("Error while search users by parameter from database", e);
+            throw new DaoException("Error while search users by parameter in database", e);
         }
     }
 

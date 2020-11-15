@@ -109,7 +109,7 @@ public class CarDaoImpl implements CarDao {
             statement.setLong(2, carId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("Error during changing user block status in database", e);
+            throw new DaoException("Error during changing car available status in database", e);
         }
     }
 
@@ -135,7 +135,7 @@ public class CarDaoImpl implements CarDao {
             }
             return cars;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding cars by search parameters from database", e);
+            throw new DaoException("Error while finding cars by search parameters in database", e);
         }
     }
 
@@ -155,7 +155,7 @@ public class CarDaoImpl implements CarDao {
             }
             return cars;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding available car from database", e);
+            throw new DaoException("Error while finding available car in database", e);
         }
     }
 
@@ -182,7 +182,7 @@ public class CarDaoImpl implements CarDao {
             }
             return cars;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding imageName by carId from database", e);
+            throw new DaoException("Error while finding car by search parameters in database", e);
         }
     }
 
@@ -200,7 +200,7 @@ public class CarDaoImpl implements CarDao {
             }
             return imageName;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding imageName by carId from database", e);
+            throw new DaoException("Error while finding imageName by carId in database", e);
         }
     }
 
@@ -218,7 +218,7 @@ public class CarDaoImpl implements CarDao {
             }
             return car;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding imageName by carId from database", e);
+            throw new DaoException("Error while finding car by carId in database", e);
         }
     }
 

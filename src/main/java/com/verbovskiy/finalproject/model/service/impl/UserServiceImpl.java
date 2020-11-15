@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findAll();
         } catch (DaoException e) {
-            throw new ServiceException("error while find information about user", e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
         try {
               return accountDao.findByLogin(login);
         } catch (DaoException e) {
-            throw new ServiceException("error while find information about user", e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService {
             }
             return admin;
         } catch (DaoException e) {
-            throw new ServiceException("error while find information about user", e);
+            throw new ServiceException(e.getMessage());
         }
     }
 

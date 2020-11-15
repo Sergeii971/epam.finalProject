@@ -122,7 +122,7 @@ public class OrderDaoImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException e) {
-            throw new DaoException("Error while get all users from database", e);
+            throw new DaoException("Error while get all orders from database", e);
         }
     }
 

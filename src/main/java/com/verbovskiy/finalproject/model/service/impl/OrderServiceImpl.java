@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             dao.remove(orderId);
         } catch (DaoException e) {
-            throw new ServiceException("error while remove order", e);
+            throw new ServiceException(e.getMessage());
         }
 
     }

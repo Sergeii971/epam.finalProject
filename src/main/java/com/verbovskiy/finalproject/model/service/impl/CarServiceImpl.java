@@ -77,7 +77,7 @@ public class CarServiceImpl implements CarService {
             }
             return car.get();
         } catch (DaoException e) {
-            throw new ServiceException("error while find information about car by id", e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ public class CarServiceImpl implements CarService {
         try {
             return carDao.findAll();
         } catch (DaoException e) {
-            throw new ServiceException("error while find information about cars", e);
+            throw new ServiceException(e.getMessage());
         }
     }
 

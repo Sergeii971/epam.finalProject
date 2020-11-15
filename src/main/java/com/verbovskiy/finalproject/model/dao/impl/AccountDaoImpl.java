@@ -52,7 +52,7 @@ public class AccountDaoImpl implements AccountDao {
                 }
             return accounts;
         } catch (SQLException e) {
-            throw new DaoException("Error while get all users from database", e);
+            throw new DaoException("Error while get all accounts from database", e);
         }
     }
 
@@ -66,7 +66,7 @@ public class AccountDaoImpl implements AccountDao {
             statement.setString(2, login);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("Error during changing user block status in database", e);
+            throw new DaoException("Error during changing account block status in database", e);
         }
     }
 
@@ -84,7 +84,7 @@ public class AccountDaoImpl implements AccountDao {
             }
             return account;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding user by login from database", e);
+            throw new DaoException("Error while finding accont by login from database", e);
         }
     }
 
@@ -104,7 +104,7 @@ public class AccountDaoImpl implements AccountDao {
             }
             return account;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding user by login and password from database", e);
+            throw new DaoException("Error while finding account by login and password from database", e);
         }
     }
 
@@ -118,7 +118,7 @@ public class AccountDaoImpl implements AccountDao {
             statement.setString(2, login);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("Error during changing user password in database", e);
+            throw new DaoException("Error during changing account password in database", e);
         }
     }
 
@@ -132,7 +132,7 @@ public class AccountDaoImpl implements AccountDao {
             statement.setString(2, login);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("Error during changing user password in database", e);
+            throw new DaoException("Error during changing account password in database", e);
         }
     }
 
