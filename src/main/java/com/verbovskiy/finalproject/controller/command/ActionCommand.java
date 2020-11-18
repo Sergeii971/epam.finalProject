@@ -44,7 +44,7 @@ public interface ActionCommand {
     default void removeComeBackPagePath(HttpSession session, String currentPage) {
         Map<String, String> pages = (Map<String, String>) session.getAttribute(AttributeKey.COME_BACK_PAGES);
         pages.clear();
-        pages.put(currentPage, PageType.AUTHORIZATION.getPath());
+        pages.put(currentPage, PageType.HOME.getPath());
     }
 }
 

@@ -4,6 +4,6 @@
     <title></title></head>
 <body>
 
-<jsp:forward page="controller?command=MOVE_AUTHORIZATION_PAGE"></jsp:forward>
+<jsp:forward page="controller?command=MOVE_HOME_PAGE"></jsp:forward>
 </body>
 </html>

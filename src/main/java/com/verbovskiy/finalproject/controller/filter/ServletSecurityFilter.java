@@ -37,12 +37,12 @@ public class ServletSecurityFilter implements Filter {
         }
         if (!result) {
             HttpSession session = request.getSession();
-            session.setAttribute(AttributeKey.CURRENT_PAGE, PageType.AUTHORIZATION.getPath());
+            session.setAttribute(AttributeKey.CURRENT_PAGE, PageType.HOME.getPath());
             session.setAttribute(RequestParameter.EMAIL, RequestParameter.EMPTY_VALUE);
             session.setAttribute(RequestParameter.IS_ADMIN, false);
             session.setAttribute(AttributeKey.COME_BACK_PAGES, new HashMap<>());
             RequestDispatcher dispatcher = request.getServletContext().
-                    getRequestDispatcher(PageType.AUTHORIZATION.getPath());
+                    getRequestDispatcher(PageType.HOME.getPath());
             dispatcher.forward(request, response);
         }
         if (!response.isCommitted()) {

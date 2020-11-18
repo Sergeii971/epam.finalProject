@@ -14,7 +14,7 @@ public enum CommandType {
     AUTHENTICATION(new AuthenticationCommand()),
     EMAIL_CONFIRMATION(new RegistrationEmailConfirmationCommand()),
     FORGOT_PASSWORD_EMAIL_CONFIRMATION(new ForgotPasswordEmailConfirmationCommand()),
-    MOVE_AUTHORIZATION_PAGE(new AuthorizationPageCommand()),
+    MOVE_HOME_PAGE(new HomePageCommand()),
     MOVE_FORGOT_PASSWORD_PAGE(new ForgotPasswordPageCommand()),
     USER_MANAGEMENT_PAGE(new UserManagementPageCommand()),
     SWITCH_LOCALE(new SwitchLocaleCommand()),

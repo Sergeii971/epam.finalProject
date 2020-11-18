@@ -30,7 +30,7 @@ public class PageRedirectSecurityFilter implements Filter {
         Optional<PageType> page = PageType.findByPath(currentPage);
 
         if ((!httpResponse.isCommitted()) && ((!page.isPresent()) || (!page.get().isLinkAvailable()))) {
-            String jumpPage = PageType.AUTHORIZATION.getPath();
+            String jumpPage = PageType.HOME.getPath();
             session.setAttribute(AttributeKey.CURRENT_PAGE, jumpPage);
             session.setAttribute(AttributeKey.COME_BACK_PAGES, new HashMap<>());
             session.setAttribute(AttributeKey.LOCALE, AttributeKey.DEFAULT_LOCALE);

@@ -9,7 +9,7 @@ import java.util.Optional;
  * @version 1.0
  */
 public enum PageType {
-    AUTHORIZATION("/jsp/authorization.jsp", true),
+    HOME("/jsp/home.jsp", true),
     INDEX("/index.jsp", true),
     REGISTRATION("/jsp/registration.jsp", true),
     ERROR("/jsp/error/error500.jsp", false),

@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Verbovskiy Sergei
  * @version 1.0
  */
-public class AuthorizationPageCommand implements ActionCommand {
+public class HomePageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -26,6 +26,6 @@ public class AuthorizationPageCommand implements ActionCommand {
         session.setAttribute(AttributeKey.LOCALE, AttributeKey.DEFAULT_LOCALE);
         Map<String, String> pages = new HashMap<>();
         session.setAttribute(AttributeKey.COME_BACK_PAGES, pages);
-        return PageType.AUTHORIZATION.getPath();
+        return PageType.HOME.getPath();
     }
 }

@@ -29,7 +29,7 @@
         </button>
     </form>
     <form action="${pageContext.request.contextPath}/controller" method="post">
-        <input type="hidden" name="command" value="MOVE_AUTHORIZATION_PAGE"/>
+        <input type="hidden" name="command" value="MOVE_HOME_PAGE"/>
             <button>
                 <fmt:message key="button.come_back"/>
             </button>

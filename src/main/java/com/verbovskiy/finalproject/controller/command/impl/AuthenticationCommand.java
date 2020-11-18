@@ -46,12 +46,12 @@ public class AuthenticationCommand implements ActionCommand {
                 } else {
                        request.setAttribute(RequestParameter.LOGIN, email);
                        request.setAttribute(AttributeKey.SUCCESSFUL_ACTIVATION, false);
-                       page = PageType.AUTHORIZATION.getPath();
+                       page = PageType.HOME.getPath();
                 }
             } else {
                 request.setAttribute(RequestParameter.LOGIN, email);
                 request.setAttribute(AttributeKey.SUCCESSFUL_AUTHENTICATION, false);
-                page = PageType.AUTHORIZATION.getPath();
+                page = PageType.HOME.getPath();
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
