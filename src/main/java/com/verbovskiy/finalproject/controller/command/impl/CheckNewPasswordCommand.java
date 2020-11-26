@@ -34,7 +34,6 @@ public class CheckNewPasswordCommand implements ActionCommand {
 
         try {
             if (service.updatePassword(email, password, passwordConfirmation)) {
-                session.removeAttribute(RequestParameter.EMAIL);
                 if (service.isAdmin(email)) {
                     removeComeBackPagePath(session, PageType.ADMIN_INTERFACE.getPath());
                     page = PageType.ADMIN_INTERFACE.getPath();

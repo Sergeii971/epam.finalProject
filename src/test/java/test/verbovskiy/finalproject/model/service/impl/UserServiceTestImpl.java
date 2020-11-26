@@ -3,32 +3,49 @@ package test.verbovskiy.finalproject.model.service.impl;
 import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.dao.impl.AccountDaoImpl;
+import com.verbovskiy.finalproject.model.dao.impl.OrderDaoImpl;
 import com.verbovskiy.finalproject.model.dao.impl.UserDaoImpl;
 import com.verbovskiy.finalproject.model.entity.Account;
 import com.verbovskiy.finalproject.model.entity.User;
+import com.verbovskiy.finalproject.model.service.UserService;
 import com.verbovskiy.finalproject.model.service.impl.UserServiceImpl;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.testng.PowerMockObjectFactory;
+import org.testng.IObjectFactory;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.ObjectFactory;
 import org.testng.annotations.Test;
 
 import java.util.Optional;
 
 import static org.testng.Assert.*;
 
+@PowerMockIgnore({"com.sun.org.apache.xerces.*", "javax.xml.*", "org.xml.*", "org.w3c.*",
+        "com.sun.org.apache.xalan.*", "javax.management.*"})
+@PrepareForTest({UserDaoImpl.class, AccountDaoImpl.class})
 public class UserServiceTestImpl {
-    @InjectMocks
-    UserServiceImpl userService;
-    @Mock
     UserDaoImpl userDao;
-    @Mock
     AccountDaoImpl accountDao;
+
+    @ObjectFactory
+    public IObjectFactory setObjectFactory() {
+        return new PowerMockObjectFactory();
+    }
 
     @BeforeMethod
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        PowerMockito.mockStatic(UserDaoImpl.class);
+        userDao = Mockito.mock(UserDaoImpl.class);
+        Mockito.when(UserDaoImpl.getInstance()).thenReturn(userDao);
+        PowerMockito.mockStatic(AccountDaoImpl.class);
+        accountDao = Mockito.mock(AccountDaoImpl.class);
+        Mockito.when(AccountDaoImpl.getInstance()).thenReturn(accountDao);
     }
 
     @Test
@@ -41,6 +58,7 @@ public class UserServiceTestImpl {
         boolean isConfirmed = true;
         Optional<Account> expected = Optional.of(new Account(login, isAdmin, isBlocked, isConfirmed));
         Mockito.when(accountDao.findByLoginPassword(Mockito.anyString(), Mockito.anyString())).thenReturn(expected);
+        UserService userService = new UserServiceImpl();
         boolean actual =  userService.verifyAccount(login, "S12345678s&");
         assertTrue(actual);
     }
@@ -55,6 +73,7 @@ public class UserServiceTestImpl {
         boolean isConfirmed = true;
         Optional<Account> expected = Optional.of(new Account(login, isAdmin, isBlocked, isConfirmed));
         Mockito.when(accountDao.findByLoginPassword(Mockito.anyString(), Mockito.anyString())).thenReturn(expected);
+        UserService userService = new UserServiceImpl();
         boolean actual =  userService.verifyAccount(login, password);
         assertFalse(actual);
     }
@@ -67,6 +86,7 @@ public class UserServiceTestImpl {
         boolean isConfirmed = true;
         Optional<Account> account = Optional.of(new Account(login, isAdmin, isBlocked, isConfirmed));
         Mockito.when(accountDao.findByLogin(Mockito.anyString())).thenReturn(account);
+        UserService userService = new UserServiceImpl();
         userService.verifyAccount(null, null);
     }
 
@@ -78,6 +98,7 @@ public class UserServiceTestImpl {
         boolean isConfirmed = true;
         Optional<Account> expected = Optional.of(new Account(login, isAdmin, isBlocked, isConfirmed));
         Mockito.when(accountDao.findByLogin(Mockito.anyString())).thenReturn(expected);
+        UserService userService = new UserServiceImpl();
         Optional<Account> actual =  userService.findByLogin(login);
         assertEquals(actual, expected);
     }
@@ -91,6 +112,7 @@ public class UserServiceTestImpl {
         Optional<Account> account = Optional.of(new Account(login, isAdmin, isBlocked, isConfirmed));
         Optional<Account> expected = Optional.of(new Account(login, isAdmin, isBlocked, false));
         Mockito.when(accountDao.findByLogin(Mockito.anyString())).thenReturn(account);
+        UserService userService = new UserServiceImpl();
         Optional<Account> actual =  userService.findByLogin("");
         assertNotEquals(actual, expected);
     }
@@ -107,6 +129,7 @@ public class UserServiceTestImpl {
         Optional<User> user = Optional.of(new User(account, login, name, surname));
         Optional<User> expected = Optional.of(new User(account, login, name, surname));
         Mockito.when(userDao.findByEmail(Mockito.anyString())).thenReturn(user);
+        UserService userService = new UserServiceImpl();
         Optional<User> actual =  userService.findAdminByEmail(login);
         assertEquals(actual, expected);
     }
@@ -123,6 +146,7 @@ public class UserServiceTestImpl {
         Optional<User> user = Optional.of(new User(account, login, name, surname));
         Optional<User> expected = Optional.of(new User(account, login, name, ""));
         Mockito.when(userDao.findByEmail(Mockito.anyString())).thenReturn(user);
+        UserService userService = new UserServiceImpl();
         Optional<User> actual =  userService.findAdminByEmail(login);
         assertNotEquals(actual, expected);
     }
@@ -138,6 +162,7 @@ public class UserServiceTestImpl {
         String surname = "Verbovskiy";
         Optional<User> user = Optional.of(new User(account, login, name, surname));
         Mockito.when(userDao.findByEmail(Mockito.anyString())).thenReturn(user);
+        UserService userService = new UserServiceImpl();
         Optional<User> actual =  userService.findAdminByEmail(null);
     }
 
@@ -149,18 +174,20 @@ public class UserServiceTestImpl {
         boolean isConfirmed = true;
         Optional<Account> account = Optional.of(new Account(login, isAdmin, isBlocked, isConfirmed));
         Mockito.when(accountDao.findByLogin(Mockito.anyString())).thenReturn(account);
+        UserService userService = new UserServiceImpl();
         boolean actual =  userService.isAdmin(login);
         assertTrue(actual);
     }
 
     @Test
     public void isAdminNegativeTest() throws DaoException, ServiceException {
-        String login = "epam.online.store@gmail.com";
-        boolean isAdmin = true;
+        String login = "sergeiverbovskiy4@gmail.com";
+        boolean isAdmin = false;
         boolean isBlocked = false;
         boolean isConfirmed = true;
         Optional<Account> account = Optional.of(new Account(login, isAdmin, isBlocked, isConfirmed));
         Mockito.when(accountDao.findByLogin(login)).thenReturn(account);
+        UserService userService = new UserServiceImpl();
         boolean actual =  userService.isAdmin("sergeiverbovskiy4@gmail.com");
         assertFalse(actual);
     }

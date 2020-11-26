@@ -52,6 +52,7 @@ public class AddUserCommand implements ActionCommand {
                 MailSender sender = new MailSender(email,RequestParameter.EMPTY_VALUE, confirmationKey);
                 sender.send();
                 addComeBackPagePath(session, PageType.CONFIRMATION.getPath());
+                session.setAttribute(RequestParameter.EMAIL, email);
                 page = PageType.CONFIRMATION.getPath();
             } else {
                 request.setAttribute(RequestParameter.EMAIL, email);
