@@ -20,7 +20,7 @@ public class ComeBackCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute(RequestParameter.EMAIL);
-        if (email == null || email.isEmpty()) {
+        if (email != null && !email.isEmpty()) {
             session.removeAttribute(RequestParameter.EMAIL);
         }
         Map<String, String> pages = (Map<String, String>) session.getAttribute(AttributeKey.COME_BACK_PAGES);
