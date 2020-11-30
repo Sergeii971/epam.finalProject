@@ -147,7 +147,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Optional<UserOrder> findByCarId(long carId) throws DaoException {
+    public Optional<UserOrder> isCarInOrderList(long carId) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         try (Connection connection = connectionPool.getConnection();

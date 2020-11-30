@@ -8,6 +8,7 @@ import com.verbovskiy.finalproject.exception.ServiceException;
 import com.verbovskiy.finalproject.model.entity.Car;
 import com.verbovskiy.finalproject.model.entity.UserOrder;
 import com.verbovskiy.finalproject.model.service.CarService;
+import com.verbovskiy.finalproject.model.service.OrderService;
 import com.verbovskiy.finalproject.model.service.impl.CarServiceImpl;
 import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.apache.log4j.Level;
@@ -36,7 +37,7 @@ public class DeleteCarCommand implements ActionCommand {
         String page = PageType.ERROR.getPath();
 
         try {
-            OrderServiceImpl orderService = new OrderServiceImpl();
+            OrderService orderService = new OrderServiceImpl();
             Optional<UserOrder> order =orderService.findByCarId(carId);
             if (order.isPresent()) {
                 request.setAttribute(RequestParameter.IN_ORDER_LIST, true);

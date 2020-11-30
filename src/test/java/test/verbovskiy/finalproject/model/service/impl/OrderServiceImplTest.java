@@ -2,10 +2,8 @@ package test.verbovskiy.finalproject.model.service.impl;
 
 import com.verbovskiy.finalproject.exception.DaoException;
 import com.verbovskiy.finalproject.exception.ServiceException;
-import com.verbovskiy.finalproject.model.dao.impl.CarDaoImpl;
 import com.verbovskiy.finalproject.model.dao.impl.OrderDaoImpl;
 import com.verbovskiy.finalproject.model.entity.*;
-import com.verbovskiy.finalproject.model.service.CarService;
 import com.verbovskiy.finalproject.model.service.OrderService;
 import com.verbovskiy.finalproject.model.service.impl.OrderServiceImpl;
 import org.mockito.Mockito;
@@ -69,7 +67,7 @@ public class OrderServiceImplTest {
         User user = new User(account, login, name, surname);
         Optional<UserOrder> order = Optional.of(new UserOrder(12, LocalDate.now(), user, car, false));
         Optional<UserOrder> expected = Optional.of(new UserOrder(12, LocalDate.now(), user, car, false));
-        Mockito.when(orderDao.findByCarId(Mockito.anyLong())).thenReturn(order);
+        Mockito.when(orderDao.isCarInOrderList(Mockito.anyLong())).thenReturn(order);
         OrderService service = new OrderServiceImpl();
         Optional<UserOrder> actual = service.findByCarId(41);
 
@@ -102,7 +100,7 @@ public class OrderServiceImplTest {
         User user = new User(account, login, name, surname);
         Optional<UserOrder> order = Optional.of(new UserOrder(12, LocalDate.now(), user, car, false));
         Optional<UserOrder> expected = Optional.of(new UserOrder(12, LocalDate.now(), user, car, true));
-        Mockito.when(orderDao.findByCarId(Mockito.anyLong())).thenReturn(order);
+        Mockito.when(orderDao.isCarInOrderList(Mockito.anyLong())).thenReturn(order);
         OrderService service = new OrderServiceImpl();
         Optional<UserOrder> actual = service.findByCarId(41);
 

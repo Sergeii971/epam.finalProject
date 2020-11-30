@@ -191,7 +191,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> searchUsers(String searchParameter) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
-
+        
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(DatabaseQuery.SEARCH_USER)) {
             List<User> users = new ArrayList<>();

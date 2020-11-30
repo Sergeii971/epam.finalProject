@@ -79,5 +79,5 @@ public interface OrderDao {
      * @return optional
      * @throws DaoException the dao exception
      */
-    Optional<UserOrder> findByCarId(long carId) throws DaoException;
+    Optional<UserOrder> isCarInOrderList(long carId) throws DaoException;
 }

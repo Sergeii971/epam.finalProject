@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Optional<UserOrder> findByCarId(long carId) throws ServiceException {
         try {
-            return dao.findByCarId(carId);
+            return dao.isCarInOrderList(carId);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
