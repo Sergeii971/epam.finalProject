@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * @author Verbovskiy Sergei
  * @version 1.0
  */
-public class Car extends Entity {
+public class Car implements Entity {
     private long carId;
     private CarBrand brand;
     private String model;

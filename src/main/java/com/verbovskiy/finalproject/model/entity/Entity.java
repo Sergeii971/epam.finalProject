@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author Verbovskiy Sergei
  * @version 1.0
  */
-public abstract class Entity implements Serializable, Cloneable {
+public interface Entity extends Serializable, Cloneable {
 }

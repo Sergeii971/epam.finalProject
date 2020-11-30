@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * @author Verbovskiy Sergei
  * @version 1.0
  */
-public class UserOrder extends Entity {
+public class UserOrder implements Entity {
     private long orderId;
     private LocalDate date;
     private final User user;

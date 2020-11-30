@@ -6,7 +6,7 @@ package com.verbovskiy.finalproject.model.entity;
  * @author Verbovskiy Sergei
  * @version 1.0
  */
-public class User extends Entity {
+public class User implements Entity {
     private String email;
     private String name;
     private String surname;

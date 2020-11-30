@@ -6,7 +6,7 @@ package com.verbovskiy.finalproject.model.entity;
  * @author Verbovskiy Sergei
  * @version 1.0
  */
-public class Account extends Entity{
+public class Account implements Entity {
     private String login;
     private boolean isBlocked;
     private boolean isAdmin;
